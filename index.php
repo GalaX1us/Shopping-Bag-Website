@@ -1,0 +1,1 @@
+<?php require 'Views/vueAccueil.php';
