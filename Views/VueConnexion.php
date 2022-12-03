@@ -1,14 +1,21 @@
 <?php $title = "Page de connexion"; ?>
 
 <?php ob_start(); ?>
+
     <h1> Identification client </h1>
     <p> Merci d'entrer votre identifiant et votre mot de passe pour accéder à votre espace client.
         Si vous n'avez pas de compte client, vous pouvez en créer un ici gratuitement ici ! Enregistrement </p>
 
-        <p><input type="text" name="identifiant" placeholder ="ìdentifiant"/></p>
-        <p><input type="text" name="MotDePasse" placeholder ="Mot de passe"/></p> </p>
+    <form method="post" action="../Controllers/connexion.php"> <!-- bien creer le fichier au bon endroit -->
+      <div class="mb-3">
+        <input type="identifiant" placeholder="Entrez votre identifiant" class="form-control"  aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <input type="password" placeholder="Entrez votre mot de passe" class="form-control" >
+      </div>
+      <button type="submit" class="btn btn-primary">Valider</button>
+  </form>
 
-        <p><input type="button" value="Continuer"></p>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('VueTemplate.php') ?>
