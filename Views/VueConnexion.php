@@ -13,7 +13,7 @@
       <div class="mb-3">
         <input type="password" placeholder="Entrez votre mot de passe" class="form-control" >
       </div>
-      <button type="submit" class="btn btn-primary">Valider</button>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Valider</button>
   </form>
 
 
