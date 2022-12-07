@@ -1,1 +1,1 @@
-<?php require 'Views/vueAccueil.php';
+<?php require 'Views/Gabarit.php';
