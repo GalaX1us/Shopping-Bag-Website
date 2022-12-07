@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="Style/bootstrap-5.2.3-dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="Style/Style.css" />
+    <link rel="stylesheet" href="../Style/bootstrap-5.2.3-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../Style/Style.css" />
     <title>Isi Web 4 Shop</title>
 </head>
 
