@@ -1,0 +1,11 @@
+.image_produit {
+    display: inline;
+}
+.description_produit {
+    display: inline;
+    float: left;
+    background-color: aqua;
+}
+body {
+    background-color: aquamarine;
+}
