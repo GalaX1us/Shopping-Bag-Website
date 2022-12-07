@@ -6,6 +6,36 @@
     float: left;
     background-color: aqua;
 }
-body {
+.container-fluid {
     background-color: aquamarine;
+    text-align: center;
 }
+
+/* Small devices */
+@media (min-width: 576px) {
+    .container-fluid {
+      width: 100%;
+    }
+  }
+  
+  /* Medium devices */
+  @media (min-width: 768px) {
+    .container-fluidody {
+      width: 100%;
+    }
+  }
+  
+  /* Large devices */
+  @media (min-width: 992px) {
+    .container-fluid {
+      width: 80%;
+    }
+  }
+  
+  /* Extra large devices */
+  @media (min-width: 1200px) {
+    .container-fluid {
+      width: 60%;
+    }
+  
+  }
