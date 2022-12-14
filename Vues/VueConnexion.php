@@ -6,12 +6,12 @@
     <p> Merci d'entrer votre identifiant et votre mot de passe pour accéder à votre espace client.
         Si vous n'avez pas de compte client, vous pouvez en créer un ici gratuitement ici ! Enregistrement </p>
 
-    <form method="post" action="../Controllers/connexion.php"> <!-- bien creer le fichier au bon endroit -->
+    <form method="post" action="../Controlleur/ControlleurConnexion.php"> <!-- bien creer le fichier au bon endroit -->
       <div class="mb-3">
-        <input type="identifiant" placeholder="Entrez votre identifiant" class="form-control"  aria-describedby="emailHelp">
+        <input type="identifiant" name="username" placeholder="Entrez votre identifiant" class="form-control"  aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
-        <input type="password" placeholder="Entrez votre mot de passe" class="form-control" >
+        <input type="password" name="password" placeholder="Entrez votre mot de passe" class="form-control" >
       </div>
       <button type="submit" class="btn btn-primary btn-lg btn-block">Valider</button>
   </form>

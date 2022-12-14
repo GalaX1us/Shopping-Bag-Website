@@ -1,4 +1,4 @@
-<?php abstract class Modele
+<?php class Modele
 {
     // Objet PDO d'accès à la BD
     private $bdd;
