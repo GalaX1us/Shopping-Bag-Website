@@ -1,22 +1,13 @@
-<?php require_once 'Modele/Modele.php';
+<?php 
+require_once '../Modeles/Modele.php';
 class Login extends Modele
 {
-    // Renvoie la liste des logins du blog
-    public function getLogins()
+    //renvoie les infos sur un login
+    public function getLogin($username, $password)
     {
-        $sql = 'select id, username, password from logins'
-            . ' order by BIL_ID desc';
-        $logins = $this->executerRequete($sql);
-        return $logins;
+        $sql = 'SELECT * FROM login WHERE username = ? AND password = ?';
+        $login = $this->executerRequete($sql, array($username, $password));
+        return $login->fetch();  // Accès à la première ligne de résultat
     }
-    // Renvoie les informations sur un login
-    public function getLogin($idLogin)
-    {
-        $sql = 'select id, username, password from logins'
-            . ' where id=?';
-        $login = $this->executerRequete($sql, array($idLogin));
-        if ($login->rowCount() == 1) return $login->fetch();
-        // Accès à la première ligne de résultat
-        else throw new Exception("Aucun login ne correspond à l'identifiant '$idLogin'");
-    }
+
 }

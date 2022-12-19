@@ -4,12 +4,18 @@
 $username = $_POST['username'];
 $password = $_POST['password'];
 
+require_once '../Modeles/Logins.php';
+
+
+
 echo $username; //debug
 echo $password; //debug
 
 echo "toto"; //debug
 
 require_once '../Modeles/Logins.php';
+
+
 
 // // Connexion à la base de données
 // $db = new PDO('mysql:host=localhost;dbname=mydb', 'user', 'password');
