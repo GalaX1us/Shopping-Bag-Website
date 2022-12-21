@@ -36,5 +36,5 @@
         } else {
             throw new Exception("Fichier '$fichier' introuvable.");
         }
-    }
+    }   
 }

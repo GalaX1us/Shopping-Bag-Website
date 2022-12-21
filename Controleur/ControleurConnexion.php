@@ -10,7 +10,7 @@ class ControleurConnexion
     public function connexion()
     {
         $vue = new Vue("Connexion");
-        $vue->generer(array());
+        $vue->generer(array()); 
     }
     // Affiche une erreur
     private function erreur($msgErreur)

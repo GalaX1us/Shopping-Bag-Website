@@ -12,9 +12,7 @@ class Modele
   public function connect() {
     try 
     {
-        $this->bdd = new PDO("mysql:host=localhost;dbname=web4shop;charset=utf8", $this->user, $this->pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); 
-        echo "Connexion réussie ";
-    }
+        $this->bdd = new PDO("mysql:host=localhost;dbname=web4shop;charset=utf8", $this->user, $this->pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));     }
     catch (Exception $e) {
         echo "Connexion échouée ";
         die('Erreur fatale : ' . $e->getMessage());
@@ -30,6 +28,9 @@ class Modele
     else {
       $resultat = $this->bdd->prepare($sql);  // requête préparée
       $resultat->execute($params);
+    }
+    if (empty($resultat)) {
+    throw new Exception("La requête SQL n'a pas de résultat");
     }
     return $resultat;
     }
