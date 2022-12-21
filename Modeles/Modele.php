@@ -4,7 +4,7 @@ class Modele
 {
   // Définir les propriétés de la classe
   private $user = "root";
-  private $pass = "root";
+  private $pass = "root"; // attention selon la config il faut mettre root ou rien
   private $dbname = "web4shop";
   private $bdd = null;
 
@@ -21,7 +21,7 @@ class Modele
   }
 
   // Méthode pour exécuter une requête sur la base de données
-  public function executeQuerie($sql, $params = null) {
+  public function executerRequete($sql, $params = null) {
     if ($params == null) {
       $resultat = $this->bdd->query($sql);    // exécution directe
     }
