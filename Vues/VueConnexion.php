@@ -1,4 +1,4 @@
-<?php $title = "Page de connexion"; ?>
+<?php $titre = "Page de connexion"; ?>
 
 <?php ob_start(); ?>
 
@@ -17,5 +17,4 @@
   </form>
 
 
-<?php $content = ob_get_clean(); ?>
-<?php require('VueTemplate.php') ?>
+<?php $contenu = ob_get_clean(); ?>

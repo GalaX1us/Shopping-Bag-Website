@@ -1,1 +1,3 @@
-<?php require 'Views/Gabarit.php';
+<?php require 'Controleur/Routeur.php';
+$routeur = new Routeur();
+$routeur->routerRequete();
