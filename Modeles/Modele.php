@@ -1,29 +1,46 @@
-<?php class Modele
+<?php
+
+class Modele 
 {
-    // Objet PDO d'accès à la BD
-    private $bdd;
-    // Exécute une requête SQL éventuellement paramétrée
-    protected function executerRequete($sql, $params = null)
+  // Définir les propriétés de la classe
+  private $user = "root";
+  private $pass = "root";
+  private $dbname = "web4shop";
+  private $bdd = null;
+
+  // Méthode pour établir une connexion à la base de données
+  public function connect() {
+    try 
     {
-        if ($params == null) {
-            $resultat = $this->getBdd()->query($sql); // exécution directe
-        } else {
-            $resultat = $this->getBdd()->prepare($sql); // requête préparée
-            $resultat->execute($params);
-        }
-        return $resultat;
+        $this->bdd = new PDO("mysql:host=localhost;dbname=web4shop;charset=utf8", $this->user, $this->pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); 
+        echo "Connexion réussie ";
     }
-    // Renvoie un objet de connexion à la BD en initialisant la connexion au besoin
-    private function getBdd()
-    {
-        if ($this->bdd == null) { // Création de la connexion
-            $this->bdd = new PDO(
-                'mysql:host=localhost;dbname=monblog;charset=utf8',
-                'root',
-                '',
-                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-            );
-        }
-        return $this->bdd;
+    catch (Exception $e) {
+        echo "Connexion échouée ";
+        die('Erreur fatale : ' . $e->getMessage());
     }
+    
+  }
+
+  // Méthode pour exécuter une requête sur la base de données
+  public function executeQuerie($sql, $params = null) {
+    if ($params == null) {
+      $resultat = $this->bdd->query($sql);    // exécution directe
+    }
+    else {
+      $resultat = $this->bdd->prepare($sql);  // requête préparée
+      $resultat->execute($params);
+    }
+    return $resultat;
+    }
+
+    public function close() {
+        $this->bdd = null;
+    }
+
+
+  // Méthode pour fermer la connexion à la base de données
+  
 }
+
+
