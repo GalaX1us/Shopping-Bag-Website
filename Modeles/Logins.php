@@ -1,5 +1,5 @@
 <?php 
-require_once '../Modeles/Modele.php';
+require_once 'Modele.php';
 
 class Logins extends Modele
 {
