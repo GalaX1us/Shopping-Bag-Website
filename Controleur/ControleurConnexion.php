@@ -1,7 +1,6 @@
 <?php 
 require_once 'Vues/Vue.php';
 require_once 'Modeles/Logins.php';
-
 class ControleurConnexion
 {
     public function __construct()
@@ -17,15 +16,18 @@ class ControleurConnexion
             $password = $_POST['password'];
             $this->connecter($username,$password);
         }
+        //$this->connexion();
         
 
     }
 
-    // Affiche la page d'accueil du blog
+    // Affiche la page de connexion du blog
     public function connexion()
     {
         $vue = new Vue("Connexion");
-        $vue->generer(array()); 
+        $connecte = $this->est_connecte();
+        $donnees = array ('connecte' => $connecte); 
+        $vue->generer($donnees); 
     }
     // Affiche une erreur
     private function erreur($msgErreur)
@@ -39,8 +41,12 @@ class ControleurConnexion
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        return !empty($_SESSION['connecte']); 
-    }
+        if (isset($_SESSION['estConnecte'])) {
+            return $_SESSION['estConnecte'];
+        } else {
+            return false;
+        }
+      }
     public function connecter($username, $password)
     {
         $login = new Logins();
@@ -59,7 +65,6 @@ class ControleurConnexion
                     echo "Vous êtes connecté";
                     $_SESSION['estConnecte'] = true;
                     $_SESSION['username'] = $donnees['id'];
-                    header('Location: index.php?action=connecte');
                 } 
                 else {
                     echo "identifiant ou mot de passe incorrect";

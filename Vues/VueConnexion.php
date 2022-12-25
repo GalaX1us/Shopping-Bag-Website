@@ -1,18 +1,18 @@
 <?php $titre = "Page de connexion"; 
 require_once 'Controleur/ControleurConnexion.php';
-
-//--------------------
-if (session_status() == PHP_SESSION_NONE) {
-   session_start();
-}
-$connecte = $_SESSION['connecte']; 
-//----- à remplacer par le tableau qui passe par le routeur---
 ?>
 
 <?php ob_start(); ?>
 
-
-
+  <?php 
+    echo '<p> $connecte = ' . $connecte . '</p>'; //debbug
+    if ($connecte)
+    {
+      echo '<p> Vous êtes déjà connecté ! </p>'; //debbug
+    }
+    else
+    {
+  ?>
 
     <h1> Identification client </h1>
     <p> Merci d'entrer votre identifiant et votre mot de passe pour accéder à votre espace client.
@@ -27,6 +27,10 @@ $connecte = $_SESSION['connecte'];
       </div>
       <button type="submit" class="btn btn-primary btn-lg btn-block">Valider</button>
   </form>
+
+  <?php
+    }
+  ?> 
 
 
 <?php $contenu = ob_get_clean(); ?>
