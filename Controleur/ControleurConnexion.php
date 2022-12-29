@@ -3,8 +3,7 @@ require_once 'Vues/Vue.php';
 require_once 'Modeles/Logins.php';
 class ControleurConnexion
 {
-    private $erreur = false; 
-    private $msagErreur = "";
+    private $msg = "";
     public function __construct()
     {
         if (session_status() == PHP_SESSION_NONE) {
@@ -15,7 +14,7 @@ class ControleurConnexion
         {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $this->connecter($username,$password);
+            $this->msg = $this->connecter($username,$password);
         }
         if (isset($_POST['bouton'])&& $_POST['bouton'] == "deconnexion") 
         {
@@ -31,8 +30,7 @@ class ControleurConnexion
         $vue = new Vue("Connexion");
         $connecte = $this->est_connecte();
         $nom = $this->get_nom();
-        echo $this->msagErreur;
-        $donnees = array ('connecte' => $connecte, 'nom' => $nom); 
+        $donnees = array ('connecte' => $connecte, 'nom' => $nom, 'msgErreur' => $this->msg); 
         $vue->generer($donnees); 
     }
     // Affiche une erreur
@@ -94,14 +92,14 @@ class ControleurConnexion
 
     }
     public function connecter($username, $password)
-    {
+    {   
+        $msg = "";
         $login = new Logins();
         $login->connect();
-        try {
-            $result = $login->getLogin($username);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+        // faut faire un try catch ici ? 
+        $result = $login->getLogin($username);
+        
+
 
         if (!empty($result))
         {
@@ -109,18 +107,23 @@ class ControleurConnexion
             {
                 if ($donnees['password'] == $password) {
                     $_SESSION['estConnecte'] = true;
-                    $_SESSION['id'] = $donnees['id'];
+                    $_SESSION['id'] = $donnees['id']; 
                 } 
                 else {
-                    $this->erreur = true;
-                    $this->msagErreur = "identifiant ou mot de passe incorrect";
-                    echo $this->msagErreur;
+                    $msg = "identifiant ou mot de passe incorrect";;
                 }
              
             }
             
 
         }
+        else
+        {
+            $msg = "identifiant ou mot de passe incorrect";
+        }
+
+        return $msg;
+
         
     }
 }

@@ -5,7 +5,7 @@ require_once 'Controleur/ControleurConnexion.php';
 <?php ob_start(); ?>
 
   <?php 
-    if ($connecte)
+  if ($connecte)
     {
       echo '<h2> Bonjour ' . $nom . ' :) </h2>'; 
       ?>
@@ -22,6 +22,13 @@ require_once 'Controleur/ControleurConnexion.php';
     <h1> Identification client </h1>
     <p> Merci d'entrer votre identifiant et votre mot de passe pour accéder à votre espace client.
         Si vous n'avez pas de compte client, vous pouvez en créer un ici gratuitement ici ! Enregistrement </p>
+
+    
+    <?php if ($msgErreur != "") { ?>
+      <div class="alert alert-danger" role="alert">
+      <?php echo $msgErreur; ?>
+      </div>
+    <?php } ?>
 
     <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
       <div class="mb-3">
