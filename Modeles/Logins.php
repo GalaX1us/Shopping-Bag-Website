@@ -20,4 +20,14 @@ class Logins extends Modele
         // Accès à la première ligne de résultat
         else throw new Exception("Aucun login ne correspond à l'identifiant '$user'");
     }
+
+    public function getNomById($id)
+    {
+        $sql = 'select forname from customers'
+            . ' where id=?';
+        $login = $this->executerRequete($sql, array($id));
+        if ($login->rowCount() == 1) return $login;
+        // Accès à la première ligne de résultat
+        else throw new Exception("Aucun login ne correspond à l'identifiant '$id'");
+    }
 }

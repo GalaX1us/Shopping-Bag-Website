@@ -3,12 +3,13 @@ require_once 'Vues/Vue.php';
 require_once 'Modeles/Logins.php';
 class ControleurConnexion
 {
+    private $erreur = false; 
+    private $msagErreur = "";
     public function __construct()
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $_SESSION['connecte'] = FALSE; // à remplacer par le tableau qui passe par le routeur avec la focntion est_connecte
 
         if (isset($_POST['username']) && isset($_POST['password'])) 
         {
@@ -16,17 +17,22 @@ class ControleurConnexion
             $password = $_POST['password'];
             $this->connecter($username,$password);
         }
-        //$this->connexion();
-        
+        if (isset($_POST['bouton'])&& $_POST['bouton'] == "deconnexion") 
+        {
+            $this->deconnecter();
+        }
 
     }
 
     // Affiche la page de connexion du blog
     public function connexion()
     {
+
         $vue = new Vue("Connexion");
         $connecte = $this->est_connecte();
-        $donnees = array ('connecte' => $connecte); 
+        $nom = $this->get_nom();
+        echo $this->msagErreur;
+        $donnees = array ('connecte' => $connecte, 'nom' => $nom); 
         $vue->generer($donnees); 
     }
     // Affiche une erreur
@@ -35,6 +41,13 @@ class ControleurConnexion
         $vue = new Vue("Erreur");
         $vue->generer(array('msgErreur' => $msgErreur));
     }
+    
+    private function deconnecter()
+    {
+        $_SESSION['connecte'] = FALSE;
+        //detruire la session 
+        session_destroy();
+        }
 
     public function est_connecte(): bool // fonction qui vérifie si l'utilisateur est connecté
     {
@@ -47,6 +60,39 @@ class ControleurConnexion
             return false;
         }
       }
+    public function get_nom() 
+    {
+        if($this->est_connecte() == false)
+        {
+            return "Vous n'êtes pas connecté";
+        }
+        else
+        {
+            $login = new Logins();
+            $login->connect();
+            try
+            {
+                if (isset($_SESSION['id']))
+                {
+                    $result = $login->getNomById($_SESSION['id']);
+                }
+                else
+                {
+                    $result = "Vous n'êtes pas connecté";
+                }
+            }
+            catch (Exception $e)
+            {
+                echo $e->getMessage();
+            }
+            foreach($result as $donnees)
+            {
+                return $donnees['forname'];
+            }
+        }
+        
+
+    }
     public function connecter($username, $password)
     {
         $login = new Logins();
@@ -62,13 +108,13 @@ class ControleurConnexion
             foreach ($result as $donnees) // c'est bizarre d'utiliser un foreach pour un seul résultat mais ça enlève un bug, à revenir dessus
             {
                 if ($donnees['password'] == $password) {
-                    echo "Vous êtes connecté";
                     $_SESSION['estConnecte'] = true;
-                    $_SESSION['username'] = $donnees['id'];
+                    $_SESSION['id'] = $donnees['id'];
                 } 
                 else {
-                    echo "identifiant ou mot de passe incorrect";
-                    echo $donnees['password'];
+                    $this->erreur = true;
+                    $this->msagErreur = "identifiant ou mot de passe incorrect";
+                    echo $this->msagErreur;
                 }
              
             }

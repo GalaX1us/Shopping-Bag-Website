@@ -5,10 +5,15 @@ require_once 'Controleur/ControleurConnexion.php';
 <?php ob_start(); ?>
 
   <?php 
-    echo '<p> $connecte = ' . $connecte . '</p>'; //debbug
     if ($connecte)
     {
-      echo '<p> Vous êtes déjà connecté ! </p>'; //debbug
+      echo '<h2> Bonjour ' . $nom . ' :) </h2>'; 
+      ?>
+      <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
+        <button name="bouton" value="deconnexion" class="btn btn-primary btn-lg btn-block">Se déconnecter</button>
+      </form>
+
+  <?php
     }
     else
     {
