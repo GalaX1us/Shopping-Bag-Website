@@ -14,7 +14,7 @@ class ControleurConnexion
         {
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $this->msg = $this->connecter($username,$password);
+            $this->connecter($username,$password);
         }
         if (isset($_POST['bouton'])&& $_POST['bouton'] == "deconnexion") 
         {
@@ -107,10 +107,11 @@ class ControleurConnexion
             {
                 if ($donnees['password'] == $password) {
                     $_SESSION['estConnecte'] = true;
-                    $_SESSION['id'] = $donnees['id']; 
+                    $_SESSION['id'] = $donnees['id'];
+                    $this->msg ="";
                 } 
                 else {
-                    $msg = "identifiant ou mot de passe incorrect";;
+                    $this->msg = "identifiant ou mot de passe incorrect";;
                 }
              
             }
@@ -119,10 +120,8 @@ class ControleurConnexion
         }
         else
         {
-            $msg = "identifiant ou mot de passe incorrect";
+            $this->msg = "identifiant ou mot de passe incorrect";
         }
-
-        return $msg;
 
         
     }

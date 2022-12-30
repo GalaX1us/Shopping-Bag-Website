@@ -5,7 +5,7 @@ require_once 'ControleurBiscuits.php';
 require_once 'ControleurFruitsSecs.php';
 require_once 'ControleurConnexion.php';
 require_once 'ControleurPanier.php';
-
+require_once 'ControleurCreerCompte.php';
 require_once 'Vues/Vue.php';
 
 class Routeur
@@ -16,6 +16,7 @@ class Routeur
     private $ctrlFruitsSecs;
     private $ctrlConnexion;
     private $ctrlPanier;
+    private $ctrlCreerCompte;
 
     public function __construct()
     {
@@ -25,6 +26,7 @@ class Routeur
         $this->ctrlFruitsSecs = new ControleurFruitsSecs();
         $this->ctrlConnexion = new ControleurConnexion();
         $this->ctrlPanier = new ControleurPanier();
+        $this->ctrlCreerCompte = new ControleurCreerCompte();
     }
     // Traite une requête entrante
     public function routerRequete()
@@ -39,6 +41,9 @@ class Routeur
                         break;
                     case 'Biscuits':
                         $this->ctrlBiscuits->biscuits();
+                        break;
+                    case 'CreerCompte':
+                        $this->ctrlCreerCompte->connexion();
                         break;
                     case 'FruitsSecs':
                         $this->ctrlFruitsSecs->fruitsSecs();

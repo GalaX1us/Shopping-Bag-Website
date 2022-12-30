@@ -85,9 +85,11 @@ class Login extends Modele
 
 
 // pour accèder à une variable de session 
-if (session_status() == PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) { //verifie si la session est active
   session_start();
 }
-echo '<p> vous êtes l identifiant'. $_SESSION['username']. '</p>'; //debbug
+// traitement sur les variables de session
+//par exemple : 
+echo '<p> vous êtes l identifiant'. $_SESSION['username']. '</p>';
 
 

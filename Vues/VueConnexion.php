@@ -1,7 +1,4 @@
-<?php $titre = "Page de connexion"; 
-require_once 'Controleur/ControleurConnexion.php';
-?>
-
+<?php $titre = "Page de connexion"; ?>
 <?php ob_start(); ?>
 
   <?php 
@@ -21,7 +18,7 @@ require_once 'Controleur/ControleurConnexion.php';
 
     <h1> Identification client </h1>
     <p> Merci d'entrer votre identifiant et votre mot de passe pour accéder à votre espace client.
-        Si vous n'avez pas de compte client, vous pouvez en créer un ici gratuitement ici ! Enregistrement </p>
+        Si vous n'avez pas de compte client, vous pouvez en créer un ici gratuitement ici ! <a href = index.php?action=CreerCompte> Enregistrement </a> </p>
 
     
     <?php if ($msgErreur != "") { ?>
@@ -30,7 +27,7 @@ require_once 'Controleur/ControleurConnexion.php';
       </div>
     <?php } ?>
 
-    <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
+    <form method="post" action="index.php?action=Connexion"> 
       <div class="mb-3">
         <input type="identifiant" name="username" placeholder="Entrez votre identifiant" class="form-control"  aria-describedby="emailHelp">
       </div>
