@@ -12,7 +12,10 @@ class Modele
   public function connect() {
     try 
     {
-        $this->bdd = new PDO("mysql:host=localhost;dbname=web4shop;charset=utf8", $this->user, $this->pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));     }
+        $this->bdd = new PDO("mysql:host=localhost;dbname=web4shop;charset=utf8", $this->user, $this->pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));    
+        //echo "Connexion réussie"; //debbug 
+      }
+        
     catch (Exception $e) {
         echo "Connexion échouée ";
         die('Erreur fatale : ' . $e->getMessage());
@@ -34,14 +37,7 @@ class Modele
     }
     return $resultat;
     }
-
-    public function close() {
-        $this->bdd = null;
-    }
-
-
-  // Méthode pour fermer la connexion à la base de données
   
+    
 }
-
-
+ 
