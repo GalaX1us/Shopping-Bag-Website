@@ -43,7 +43,7 @@ class Routeur
                         $this->ctrlBiscuits->biscuits();
                         break;
                     case 'CreerCompte':
-                        $this->ctrlCreerCompte->connexion();
+                        $this->ctrlCreerCompte->creerCompte();
                         break;
                     case 'FruitsSecs':
                         $this->ctrlFruitsSecs->fruitsSecs();

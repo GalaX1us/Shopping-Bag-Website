@@ -1,4 +1,8 @@
 <?php 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once 'Vues/Vue.php';
 require_once 'Modeles/Logins.php';
 class ControleurConnexion
@@ -6,10 +10,13 @@ class ControleurConnexion
     private $msg = "";
     public function __construct()
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
 
+    }
+
+    // Affiche la page de connexion du blog
+    public function connexion()
+    {
+      
         if (isset($_POST['username']) && isset($_POST['password'])) 
         {
             $username = $_POST['username'];
@@ -20,12 +27,6 @@ class ControleurConnexion
         {
             $this->deconnecter();
         }
-
-    }
-
-    // Affiche la page de connexion du blog
-    public function connexion()
-    {
 
         $vue = new Vue("Connexion");
         $connecte = $this->est_connecte();
@@ -83,10 +84,7 @@ class ControleurConnexion
             {
                 echo $e->getMessage();
             }
-            foreach($result as $donnees)
-            {
-                return $donnees['forname'];
-            }
+            // voir si on essaye d'afficher le nom de l'utilisateur comme avant 
         }
         
 
@@ -96,14 +94,13 @@ class ControleurConnexion
         $msg = "";
         $login = new Logins();
         $login->connect();
-        // faut faire un try catch ici ? 
         $result = $login->getLogin($username);
         
 
 
         if (!empty($result))
         {
-            foreach ($result as $donnees) // c'est bizarre d'utiliser un foreach pour un seul résultat mais ça enlève un bug, à revenir dessus
+            foreach ($result as $donnees) // c'est bizarre d'utiliser un foreach pour un seul résultat mais ça enlève un bug    
             {
                 if ($donnees['password'] == $password) {
                     $_SESSION['estConnecte'] = true;
@@ -111,7 +108,7 @@ class ControleurConnexion
                     $this->msg ="";
                 } 
                 else {
-                    $this->msg = "identifiant ou mot de passe incorrect";;
+                    $this->msg = "identifiant ou mot de passe incorrect";
                 }
              
             }
