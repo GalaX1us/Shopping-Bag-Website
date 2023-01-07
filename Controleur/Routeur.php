@@ -1,8 +1,6 @@
 <?php 
 require_once 'ControleurAccueil.php';
-require_once 'ControleurBoissons.php';
-require_once 'ControleurBiscuits.php';
-require_once 'ControleurFruitsSecs.php';
+require_once 'ControleurProduitsMulti.php';
 require_once 'ControleurConnexion.php';
 require_once 'ControleurPanier.php';
 require_once 'ControleurCreerCompte.php';
@@ -11,9 +9,7 @@ require_once 'Vues/Vue.php';
 class Routeur
 {
     private $ctrlAccueil;
-    private $ctrlBoissons;
-    private $ctrlBiscuits;
-    private $ctrlFruitsSecs;
+    private $ctrlProduitsMulti;
     private $ctrlConnexion;
     private $ctrlPanier;
     private $ctrlCreerCompte;
@@ -21,9 +17,7 @@ class Routeur
     public function __construct()
     {
         $this->ctrlAccueil = new ControleurAccueil();
-        $this->ctrlBoissons = new ControleurBoissons();
-        $this->ctrlBiscuits = new ControleurBiscuits();
-        $this->ctrlFruitsSecs = new ControleurFruitsSecs();
+        $this->ctrlProduitsMulti = new ControleurProduitsMulti();
         $this->ctrlConnexion = new ControleurConnexion();
         $this->ctrlPanier = new ControleurPanier();
         $this->ctrlCreerCompte = new ControleurCreerCompte();
@@ -36,17 +30,11 @@ class Routeur
         try {
             if (isset($_GET['action'])) {
                 switch($_GET['action']) {
-                    case 'Boissons':
-                        $this->ctrlBoissons->boissons();
-                        break;
-                    case 'Biscuits':
-                        $this->ctrlBiscuits->biscuits();
+                    case 'Boissons': case 'Biscuits': case 'FruitsSecs':
+                        $this->ctrlProduitsMulti->ProduitsMulti($_GET['action']);
                         break;
                     case 'CreerCompte':
                         $this->ctrlCreerCompte->creerCompte();
-                        break;
-                    case 'FruitsSecs':
-                        $this->ctrlFruitsSecs->fruitsSecs();
                         break;
                     case 'Connexion':
                         $this->ctrlConnexion->connexion();
