@@ -9,6 +9,7 @@
 .container-fluid {
     background-color: aquamarine;
     text-align: center;
+    min-height: 100%;
 }
 
 /* Small devices */

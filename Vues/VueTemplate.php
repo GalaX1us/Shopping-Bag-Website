@@ -8,12 +8,15 @@
       <link rel="stylesheet" href="Style/Style.css" />
    </head>
 
-   <body>
-      <?php require('VueBarreNavigation.php');?>
-      
-      <?= $contenu ?>
+   <body class="d-flex min-vh-100">
 
-      <footer>
+      <?php require('VueBarreNavigation.php');?>
+
+      <main>
+         <?= $contenu ?>
+      </main>
+
+      <footer class="position-absolute bottom-0 start-50 translate-middle">
             Blog réalisé avec PHP, HTML5 et CSS.
       </footer>
 
