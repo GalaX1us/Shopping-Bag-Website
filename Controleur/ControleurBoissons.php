@@ -1,6 +1,7 @@
 <?php require_once './Vues/Vue.php';
+require_once 'Modeles/Boissons.php';
 class ControleurBoissons
-{
+{  
     public function __construct()
     {
 
@@ -10,7 +11,10 @@ class ControleurBoissons
     public function boissons()
     {
         $vue = new Vue("Boissons");
-        $vue->generer(array());
+        $boissons = new Boissons();
+        $boissons->connect();
+        $nbBoissons = $boissons->getBoissonsNb();
+        $vue->generer(array('nb'=>$nbBoissons));
     }
     // Affiche une erreur
     private function erreur($msgErreur)

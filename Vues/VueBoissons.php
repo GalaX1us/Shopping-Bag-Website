@@ -10,6 +10,7 @@
             <p>Sachet de thé de qualité supérieure. 200 sachets par boîte</p>
             <strong>Notre prix : 4.99€</strong>
             <a href="#">[Acheter]</a>
+            <?php echo '<h2> Nombre de boissons : ' . $nb . ' :) </h2>' ?>
         </div>
     </main>
 <?php $contenu = ob_get_clean(); ?> 

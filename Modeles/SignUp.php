@@ -22,7 +22,7 @@ class SignUp extends Modele
         $customer = $this->executerRequete($sql, array($name, $surname, $add1, $add2, $city, $code, $phone, $email));
         if ($customer->rowCount() == 1) return $customer->fetch();
         // Accès à la première ligne de résultat
-        else throw new Exception("Aucun login ne correspond à l'identifiant '$user'");
+        else throw new Exception("Aucun login ne correspond à l'identifiant '$username'");
     }
 
 }
