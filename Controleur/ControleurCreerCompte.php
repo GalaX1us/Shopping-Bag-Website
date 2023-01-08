@@ -4,6 +4,7 @@ require_once 'Modeles/SignUp.php';
 
 class ControleurCreerCompte
 {
+    private $compteCree = false; //variable pour savoir si le compte a été créé ou non
 
     
     public function __construct()
@@ -15,13 +16,14 @@ class ControleurCreerCompte
     public function creerCompte()
     {
         $vue = new Vue("CreerCompte");
-        $donnees = array();
-        $vue->generer($donnees);
+        
 
         if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['add1']) && isset($_POST['city']) && isset($_POST['code']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']))
         {
             $this->creationDecompte($_POST['name'], $_POST['surname'], $_POST['add1'], $_POST['add2'], $_POST['city'], $_POST['code'], $_POST['phone'], $_POST['email'], $_POST['username'], $_POST['password']);
         }
+        $donnees = array("compteCree" => $this->compteCree);
+        $vue->generer($donnees);
         
     }
     // Affiche une erreur
@@ -41,7 +43,13 @@ class ControleurCreerCompte
         $signUp->createAccount($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email);
         $signUp->createLog($id, $username, $password);
 
-        //on redirige vers la page de connexion
+        $this->compteCree = true;
+        $_SESSION['estConnecte'] = true;
+        $_SESSION['id'] = $id;
+
+        header('Location: index.php');
+        
+
     }
 
   
