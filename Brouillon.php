@@ -93,3 +93,49 @@ if (session_status() == PHP_SESSION_NONE) { //verifie si la session est active
 echo '<p> vous êtes l identifiant'. $_SESSION['username']. '</p>';
 
 
+
+<?php 
+require_once 'Vues/Vue.php';
+require_once 'Modeles/SignUp.php';
+
+class ControleurCreerCompte
+{
+
+    
+    public function __construct()
+    {
+        
+    }
+
+    // Affiche la page de connexion du blog
+    public function creerCompte()
+    {
+        if(isset($_POST['identifiant']) && isset($_POST['password']))
+        {
+            $this->creationDecompte($_POST['identifiant'], $_POST['password']);
+        }
+        $vue = new Vue("CreerCompte");
+        $donnees = array(); 
+        $vue->generer($donnees); 
+        
+
+        
+    }
+    // Affiche une erreur
+    private function erreur($msgErreur)
+    {
+        $vue = new Vue("Erreur");
+        $vue->generer(array('msgErreur' => $msgErreur));
+    }
+
+    private function creationDecompte($identifiant, $password)
+    {
+        $this->erreur("test");
+        $signUp = new SignUp();
+        $signUp->connect();
+        $signUp->createAccount($identifiant, $password);
+    }
+  
+}
+
+
