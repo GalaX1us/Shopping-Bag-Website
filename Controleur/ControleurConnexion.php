@@ -85,10 +85,15 @@ class ControleurConnexion
                 echo $e->getMessage();
             }
             // voir si on essaye d'afficher le nom de l'utilisateur comme avant 
+            foreach ($result as $donnees) // c'est bizarre d'utiliser un foreach pour un seul résultat mais ça enlève un bug    
+            {
+                return $donnees['forname'];
+            }
         }
         
 
     }
+
     public function connecter($username, $password)
     {   
         $msg = "";
