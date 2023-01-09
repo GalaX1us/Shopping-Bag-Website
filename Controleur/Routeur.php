@@ -43,6 +43,10 @@ class Routeur
                         if(isset($_GET['suppr_id'])) $this->ctrlPanier->suppr_produit($_GET['suppr_id']);
                         $this->ctrlPanier->panier();
                         break;
+                    case 'Produit':
+                        if(isset($_GET['prod_id'])) $this->ctrlProduitsMulti->ProduitsMulti($_GET['prod_id']); //a modif
+                        else throw new Exception("Produit non valide.");
+                        break;
                     default:
                         throw new Exception("Action non valide.");
                 }
