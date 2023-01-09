@@ -14,12 +14,12 @@ class SignUp extends Modele
         $sql = 'INSERT INTO customers (id, forname, surname, add1, add2, add3, postcode, phone, email, registered) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
         $this->executerRequete($sql, array($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email));
     }
-    public function nbCompte()
+    public function maxId()
     {
-        $sql = 'SELECT COUNT(*) FROM customers';
+        $sql = 'SELECT MAX(id) FROM customers';
         $result = $this->executerRequete($sql);
-        $nbCompte = $result->fetchColumn();
-        return $nbCompte;
+        $maxId = $result->fetchColumn();
+        return $maxId;
     }
 
 }

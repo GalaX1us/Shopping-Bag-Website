@@ -39,7 +39,7 @@ class ControleurCreerCompte
         //si tout est ok, on crée le compte
         $signUp = new SignUp();
         $signUp->connect();
-        $id = $signUp->nbCompte()+1;
+        $id = $signUp->maxId()+1;
         $signUp->createAccount($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email);
         $signUp->createLog($id, $username, $password);
 
