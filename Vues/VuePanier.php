@@ -7,7 +7,7 @@ if (empty($donnees)) {
     echo '<br/><h2> Votre panier est vide :( </h2>';
 } else { ?>
 <br><h2> Votre panier :</h2>
-<table class="table table-borderless table-responsive card-1 p-4 mt-3">
+<table class="table table-borderless table-responsive card-1  p-4 mt-3">
     <thead>
         <tr class="border-bottom">
             <th colspan="2"><span class="ml-2">Produit</span></th>
@@ -39,7 +39,7 @@ if (empty($donnees)) {
             /////////////////////////////////
 
             ?>
-            <tr class="border-bottom">
+            <tr class="border-bottom" name="produit">
 
                 <td class="align-middle">
                     <?= $i  ?>
@@ -47,24 +47,24 @@ if (empty($donnees)) {
 
                 <td class="align-middle">
                     <div class="img-fluid">
-                        <a href="index.php?action=produit&nom=<?= $nom ?>">
+                        <a href="index.php?action=produit&prod_id=<?= $nom ?>">
                             <img src="assets/<?= $nom ?>.jpg" width="100" height="100" alt="<?= $nom ?>">
                         </a>
                     </div>
-                    <a href="index.php?action=produit&nom=<?= $nom ?>"><?= $nom_affichage?></a>
+                    <a href="index.php?action=produit&prod_id=<?= $nom ?>" class="text-white"><?= $nom_affichage?></a>
                 </td>
 
                 <td class="align-middle">
-                    <?= $prix_str ?>&euro;
+                    <div class="prix" value="<?= $prix ?>"><?= $prix_str ?>&euro;</div>
                 </td>
 
                 <!-- Reste à gérer les modifications des totaux quand on modifie les quantités -->
                 <td class="align-middle"> 
-                    <input type="number" name="quantite-<?= $nom ?>" value="<?= $qte ?>" min="1" placeholder="Quantité" required>
+                    <input type="number" id="qte" name="quantite" value="<?= $qte ?>" min="1" placeholder="Qte" onchange="recalculerPanier()" required>
                 </td>
 
                 <td class="align-middle">
-                    <?= $total_str ?>&euro;
+                    <div class="total_prod"><?= $total_str ?>&euro;</div>
                 </td>
 
                 <td class="align-middle">
@@ -78,10 +78,13 @@ if (empty($donnees)) {
     </tbody>
 </table>
 
-<h3>Total de la commande : <?= str_replace(".", ",", $total_general) ?>&euro;</h3>
+<h3 id="total">Total de la commande : <?= str_replace(".", ",", $total_general) ?>&euro;</h3>
 
 <form method="post" action="index.php?action=Caisse">
     <button name="bouton" value="caisse" class="btn btn-primary btn-lg btn-block">Aller à la caisse</button>
 </form>
+
+
+<script type="text/javascript" src="Scripts/script_calcul_panier.js"></script>
 
 <?php $contenu = ob_get_clean(); ?>
