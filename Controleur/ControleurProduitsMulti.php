@@ -26,7 +26,8 @@ class ControleurProduitsMulti
                 $type = '3';
                 $name = 'Fruits secs';
                 break;  
-        }   
+        }
+           
         $vue = new Vue('ProduitsMulti');
         $products = new ProduitsMulti();
         $products->connect();

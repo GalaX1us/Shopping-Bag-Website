@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
     <?php
     foreach ($produitsInfos as $produit) {
-        echo '<main>
+        echo '<div class="produitMulti">
         <div class="image_produit">
             <img src="assets/' . $produit['image'] .'" alt="'. $produit['name'] .'">
         </div>
@@ -13,7 +13,7 @@
             <strong>Notre prix : '. $produit['price'] .'</strong>
             <a href="#">[Acheter]</a>
         </div>
-    </main>';
+    </div>';
     }
     
     ?>
