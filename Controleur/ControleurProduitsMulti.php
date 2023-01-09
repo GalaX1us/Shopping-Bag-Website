@@ -34,6 +34,16 @@ class ControleurProduitsMulti
         $results = $products->getProducts($type);
         $vue->generer(array('produitsInfos'=>$results, 'nomCategorie'=>$name));
     }
+
+    public function Produit($id)
+    {         
+        $vue = new Vue('Produit');
+        $product = new ProduitsMulti();
+        $product->connect();
+        $results = $product->getProduct($id);
+        $vue->generer(array('produitInfos'=>$results));
+    }
+
     // Affiche une erreur
     private function erreur($msgErreur)
     {

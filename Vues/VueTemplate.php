@@ -9,18 +9,18 @@
    </head>
    
    <body>
-      <div class="container-fluid d-flex flex-column min-vh-100">
+      <div class="d-flex flex-column min-vh-100">
 
          <?php require('VueBarreNavigation.php');?>
 
-         <main class="p-3 flex-grow-1" style="min-height:50vh">             
+         <main class="container-fluid p-3 flex-grow-1" style="min-height:50vh">             
             <?= $contenu ?>
          </main>
 
-         <footer class="page-footer font-small mt-auto  bg-primary">
-         <div class="text-align-left text-white py-3 px-3  d-flex justify-content-between">
+         <footer class="page-footer font-small mt-auto bg-primary">
+         <div class="text-white py-3 px-3 d-flex justify-content-between">
             Site web réalisé avec PHP, HTML5 et CSS.
-            <a href="#" class="ms-md-auto text-white">Retour en haut ↑</a>
+            <a href="#" class="text-white">Retour en haut ↑</a>
          </div>
          
          </footer>
