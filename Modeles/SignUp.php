@@ -21,5 +21,19 @@ class SignUp extends Modele
         $maxId = $result->fetchColumn();
         return $maxId;
     }
+    public function checkUsername ($username)
+    {
+        $sql = 'SELECT username FROM logins WHERE username = ?';
+        $result = $this->executerRequete($sql, array($username));
+        if ($result->rowCount() == 0)
+        {
+            $sameUsername = false;
+        }
+        else
+        {
+            $sameUsername = true;
+        }
+        return $sameUsername;
+    }
 
 }

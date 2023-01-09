@@ -33,6 +33,11 @@ else
         </div>
         <br>
         <div class="mb-3">
+       <?php if ($msg!="") { ?>
+          <div class="alert alert-danger" role="alert">
+          <?php echo $msg; ?>
+          </div>  
+      <?php } ?>
         <input type="identifiant" name="username" placeholder="Identifiant" class="form-control"  aria-describedby="emailHelp" aria-required="true" required>
           <input type="password" name="password" placeholder="Mot de passe" class="form-control"  aria-describedby="emailHelp" aria-required="true" required>
         </div>
