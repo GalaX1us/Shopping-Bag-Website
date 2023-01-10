@@ -1,5 +1,6 @@
 <?php require_once './Vues/Vue.php';
 require_once 'Modeles/ProduitsMulti.php';
+require_once 'Modeles/Reviews.php';
 class ControleurProduitsMulti
 {  
     public function __construct()
@@ -39,9 +40,12 @@ class ControleurProduitsMulti
     {         
         $vue = new Vue('Produit');
         $product = new ProduitsMulti();
+        $reviews = new Review();
+        $reviews->connect();
         $product->connect();
         $results = $product->getProduct($id);
-        $vue->generer(array('produitInfos'=>$results));
+        $results_rev = $reviews->getReview($id);
+        $vue->generer(array('produitInfos'=>$results, 'reviewsInfos'=>$results_rev));
     }
 
     // Affiche une erreur

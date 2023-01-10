@@ -1,0 +1,134 @@
+import random
+
+class Player:
+    def __init__(self,name, sym) -> None:
+        self.name = name
+        self.symbol = sym
+        self.score = 0
+        
+    
+
+class Game:
+    def __init__(self) -> None:
+        self.player1 = Player("Player 1", 'X')
+        self.player2 = Player("Player 2", 'O')
+        
+        self.currentPlayer = random.choice([self.player1,self.player2])
+        self.currPlayerMoves = 0
+        self.isOver = False
+        
+        #0 : free
+        #1 : player 1
+        #2 : player 2
+        self.grid = self.initGrid(5)
+        self.symbolsDisplayed = {
+            0:'-',
+            1:self.player1.symbol,
+            2:self.player2.symbol
+        }
+    
+    def initGrid(self, size):
+        return [[0 for i in range(size)] for i in range(size)]
+    
+    def displayGrid(self):
+        strGrid = "   | " + " | ".join(str(v + 1) for v in range(5)) + " | "
+        strGrid += "\n------------------------\n"
+        for idx, row in enumerate(self.grid):
+            strGrid += " " + str(idx + 1) + " |"
+            for val in row:
+                strGrid += " " + self.symbolsDisplayed[val] + " |"    
+            strGrid += "\n------------------------\n"
+
+        print(strGrid)
+    
+    def validateInput(self, coord):
+        if len(coord)!=2:
+            return (-1,-1)
+        l,c = -1, -1
+        try:
+            l = int(coord[0])-1
+            c = int(coord[1])-1
+        except:
+            return (-1,-1)
+        
+        if 0<=l<5 and  0<=c<5 and self.grid[l][c]==0:
+            return (l,c)
+        return (-1,-1)
+    
+        
+    def promptCoords(self):
+        print("Joueur actuel : ",self.currentPlayer.name,"\n")
+        print("Veuillez choisir une case (ligne,colonne), ex : 34 (ligne 3, colonne 4)\n")
+        coords = self.validateInput(input(">"))
+        while coords == (-1,-1):
+            print("Erreur : Case invalide ou déjà occupée !\n")
+            coords = self.validateInput(input(">"))
+            
+        return coords
+    
+    def makeMove(self, coords):
+        currentValue = 1 if self.currentPlayer==self.player1 else 2
+        self.currentPlayer.score+=1
+        self.grid[coords[0]][coords[1]] = currentValue
+        for nei in [(0,-1),(0,1),(-1,0),(1,0)]:
+            rowC = coords[0]+nei[0]
+            colC = coords[1]+nei[1]
+            if 0<=rowC<5 and 0<=colC<5 and self.grid[rowC][colC]==0:
+                self.currentPlayer.score+=1
+                self.grid[rowC][colC] = currentValue
+                
+    def checkFullGrid(self):
+        for i in range(5):
+            for j in range(5):
+                if(self.grid[i][j] == 0) :
+                    return
+        
+        self.isOver = True
+    
+    def basicAI(self):
+        liste = [(i,j) for i,row in enumerate(self.grid) for j,val in enumerate(row) if val==0]
+        
+        caseSurveilleeMax = 0
+        meilleurCoup = [(-1,-1)]
+        for case in liste:
+            nbCaseSurveillee = 1
+            
+            for nei in [(0,-1),(0,1),(-1,0),(1,0)]:
+                rowC = case[0]+nei[0]
+                colC = case[1]+nei[1]
+                if 0<=rowC<5 and 0<=colC<5 and self.grid[rowC][colC]==0:
+                    nbCaseSurveillee+=1
+            
+            if nbCaseSurveillee > caseSurveilleeMax:
+                caseSurveilleeMax = nbCaseSurveillee
+                meilleurCoup = [case]
+            if nbCaseSurveillee == caseSurveilleeMax:
+                meilleurCoup.append(case)
+                
+        return random.choice(meilleurCoup)
+
+    def start(self):
+        while not self.isOver:
+            self.displayGrid()
+            # coords = self.promptCoords()
+            coords = self.basicAI()
+            self.makeMove(coords)
+            self.currPlayerMoves+=1
+            
+            if self.currPlayerMoves == 2:
+                self.currPlayerMoves = 0
+                self.currentPlayer = self.player1 if self.currentPlayer == self.player2 else self.player2
+            
+            self.checkFullGrid()
+        
+        winner = self.player1 if self.player1.score>self.player2.score else self.player2
+        
+        print("\n========================")
+        print("Congratulation TO {} who is the WINNER !".format(winner.name))
+        print("{} covered {} tiles".format(self.player1.name,self.player1.score))
+        print("{} covered {} tiles".format(self.player2.name,self.player2.score))
+        print("========================\n")
+        self.displayGrid()
+        
+g = Game()
+g.start()

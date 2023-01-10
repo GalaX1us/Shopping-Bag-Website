@@ -1,27 +1,16 @@
-
-
-
-<?php require_once 'Modele/Modele.php';
+<?php require_once 'Modele.php';
 
 ///////////////////////////////////////////////////////////// A MODIFIER
 class Review extends Modele
 {
-    // Renvoie la liste des avis du blog
-    public function getReviews()
+    // Renvoie les review d'un produit
+    public function getReview($idProduct)
     {
-        $sql = 'select id, username, password from reviews'
-            . ' order by BIL_ID desc';
-        $reviews = $this->executerRequete($sql);
-        return $reviews;
-    }
-    // Renvoie les informations sur un avis
-    public function getReview($idReview)
-    {
-        $sql = 'select id, username, password from reviews'
-            . ' where id=?';
-        $review = $this->executerRequete($sql, array($idReview));
-        if ($review->rowCount() == 1) return $review->fetch();
+        $sql = 'select * from reviews'
+            . ' where id_product=?';
+        $review = $this->executerRequete($sql, array($idProduct));
+        if ($review->rowCount() >= 1) return $review->fetchAll();
         // Accès à la première ligne de résultat
-        else throw new Exception("Aucun avis ne correspond à l'identifiant '$idReview'");
+        else throw new Exception("Aucun avis ne correspond au produit d'ID : '$idProduct'");
     }
 }

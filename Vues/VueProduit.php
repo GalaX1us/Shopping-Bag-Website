@@ -17,5 +17,28 @@
             </form>
         </div>
     </div>
+
+    <?php foreach ($reviewsInfos as $review) { ?>
+        <div class="card text-white bg-primary mb-3">
+            
+            <div class="card-header">
+                <div class="float-start">
+                    <img class="rounded" style="height: 8vh" src="assets/<?= $review['photo_user']?>" alt="<?= $review['photo_user']?>">
+                <?= $review['name_user']?>
+                <?php
+                    $etoile = '';
+                    for ($i = 0; $i < $review['stars']; $i++) {
+                        $etoile = $etoile . '⭐';
+                    }
+                    echo $etoile
+                ?>
+                </div>
+        </div>
+            <div class="card-body">
+                <h4 class="card-title"><?= $review['title']?></h4>
+                <p class="card-text"><?= $review['description']?></div>
+        </div>
+    <?php }?>
+    
      
 <?php $contenu = ob_get_clean(); ?> 
