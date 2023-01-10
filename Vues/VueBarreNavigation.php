@@ -1,3 +1,6 @@
+<?php if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        } ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-2">
     <a class="navbar-brand" href="index.php">ISIWEB4SHOP</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +22,18 @@
         </ul>
         <ul class="navbar-nav ms-md-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.php?action=Connexion">Connexion</a>
+                <?php 
+                    if(isset($_SESSION['estConnecte']) && $_SESSION['estConnecte'] )
+                    {
+                        $message = "Mon compte"; 
+                    }
+                    else
+                    {
+                        $message = "Connexion"; 
+                    }
+                ?>
+
+                <a class="nav-link" href="index.php?action=Connexion"><?= $message?></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php?action=Panier">Voir mon panier | Payer</a>

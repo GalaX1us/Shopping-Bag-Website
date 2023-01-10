@@ -18,7 +18,7 @@
 
     <h1> Identification client </h1>
     <p> Merci d'entrer votre identifiant et votre mot de passe pour accéder à votre espace client.
-        Si vous n'avez pas de compte client, vous pouvez en créer un ici gratuitement ici ! <a href = "index.php?action=CreerCompte"> Enregistrement </a> </p>
+        Si vous n'avez pas de compte client, vous pouvez en créer un ici gratuitement ! <a href = "index.php?action=CreerCompte"> Enregistrement </a> </p>
 
     
     <?php if ($msgErreur != "") { ?>
