@@ -1,11 +1,13 @@
-<?php $titre = 'Mon Blog -' . $nomCategorie .''; ?>
+<?php $titre = 'Mon Blog - ' . $nomCategorie .''; ?>
 
 <?php ob_start(); ?>
+    <h2><?= $nomCategorie?></h3>
     <?php
     foreach ($produitsInfos as $produit) {?>
+    <hr class="bg-primary border-3 border-top border-primary">
         <div class="produitMulti m-5">
         <div class="image_produit">
-            <img src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>">
+            <img class="rounded" src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>">
         </div>
         <div class="description_produit">
             <h3><?= $produit['name']?></h3>
@@ -17,8 +19,8 @@
             </form>
         </div>
     </div>
+    
 
-    <?php }
-    ?>
+    <?php }?>
      
 <?php $contenu = ob_get_clean(); ?> 
