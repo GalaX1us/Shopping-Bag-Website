@@ -5,17 +5,17 @@
     <?php
     foreach ($produitsInfos as $produit) {?>
     <hr class="bg-primary border-3 border-top border-primary">
-        <div class="produitMulti m-5">
+        <div class="produitMulti m-5 my-auto">
         <div class="image_produit">
             <img class="rounded" src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>">
         </div>
-        <div class="description_produit">
+        <div class="description_produit m-3 my-auto">
             <h3><?= $produit['name']?></h3>
             <p><?= $produit['description']?></p>
             <strong>Prix : <?= $produit['price']?>€</strong>
 
             <form method="post" action="index.php?action=Produit&prod_id=<?= $produit['id']?>" >
-                <button class="btn btn-primary">Acheter</button>
+                <button class="btn btn-primary mt-3">Acheter</button>
             </form>
         </div>
     </div>

@@ -3,9 +3,9 @@
 <?php ob_start(); ?>
         <div class="produitMulti m-5">
         <div class="image_produit">
-            <img src="assets/<?= $produitInfos['image']?>" alt="<?= $produitInfos['name']?>">
+            <img src="assets/<?= $produitInfos['image']?>" alt="<?= $produitInfos['name']?>" class="rounded my-auto">
         </div>
-        <div class="description_produit">
+        <div class="description_produit m-3 my-auto">
             <h3><?= $produitInfos['name']?></h3>
             <p><?= $produitInfos['description']?></p>
             <strong>Prix : <?= $produitInfos['price']?>€</strong>
@@ -13,11 +13,14 @@
             <input type="number" name="quantite" value="1" min="1" placeholder="Quantité" required>
                 
             <form method="post" action="index.php?action=produit&prod_id=<?= $produitInfos['id']?>" >
-                <button class="btn btn-primary">Acheter</button>
+                <button class="btn btn-primary mt-3">Acheter</button>
             </form>
         </div>
     </div>
 
+    <h2>Avis</h2>
+
+    <hr class="bg-primary border-3 border-top border-primary">
     <?php foreach ($reviewsInfos as $review) { ?>
         <div class="card text-white bg-primary mb-3">
             
