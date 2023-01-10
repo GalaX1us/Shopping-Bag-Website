@@ -64,7 +64,7 @@ class ControleurPanier
 
             $total_general += $total;
         }
-        return array('produits' => $tab_resultat, 'total_general' => $total_general);
+        return array('produits' => $tab_resultat, 'total_general' =>$this->formatagePrix($total_general));
     }
 
     private function formatagePrix($prix_nombre) {

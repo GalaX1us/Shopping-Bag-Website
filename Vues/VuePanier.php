@@ -11,7 +11,7 @@ if (empty($donnees)) {
     ?>
 
 <br><h2> Votre panier :</h2>
-<table class="table table-borderless table-responsive card-1  p-4 mt-3">
+<table class="table table-borderless table-responsive card-1  p-4 mt-4">
     <thead>
         <tr class="border-bottom">
             <th colspan="2"><span class="ml-2">Produit</span></th>
@@ -66,7 +66,7 @@ if (empty($donnees)) {
 <h3 id="total">Total de la commande : <?= $donnees['total_general'] ?></h3>
 
 <form method="post" action="index.php?action=Caisse">
-    <button name="bouton" value="caisse" class="btn btn-primary btn-lg btn-block">Aller à la caisse</button>
+    <button name="bouton" value="caisse" class="btn btn-primary btn-lg btn-block m-4">Aller à la caisse</button>
 </form>
 
 
