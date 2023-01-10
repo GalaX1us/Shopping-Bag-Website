@@ -1,4 +1,4 @@
-<?php $titre = 'Mon Blog -' . $produitInfos['name'] .''; ?>
+<?php $titre = 'ISIWEB4SHOP -' . $produitInfos['name'] .''; ?>
 
 <?php ob_start(); ?>
         <div class="produitMulti m-5">
@@ -24,16 +24,14 @@
     <?php foreach ($reviewsInfos as $review) { ?>
         <div class="card text-white bg-primary mb-3">
             
-            <div class="card-header">
+            <div class="card-header ">
                 <div class="float-start">
                     <img class="rounded" style="height: 8vh" src="assets/<?= $review['photo_user']?>" alt="<?= $review['photo_user']?>">
                 <?= $review['name_user']?>
                 <?php
-                    $etoile = '';
                     for ($i = 0; $i < $review['stars']; $i++) {
-                        $etoile = $etoile . '⭐';
+                    echo '<img style="height: 3vh" src="assets/review_star.png" alt="star">';
                     }
-                    echo $etoile
                 ?>
                 </div>
         </div>

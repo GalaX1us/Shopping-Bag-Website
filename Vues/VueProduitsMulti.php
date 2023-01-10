@@ -1,4 +1,4 @@
-<?php $titre = 'Mon Blog - ' . $nomCategorie .''; ?>
+<?php $titre = 'ISIWEB4SHOP - ' . $nomCategorie .''; ?>
 
 <?php ob_start(); ?>
     <h2><?= $nomCategorie?></h3>
