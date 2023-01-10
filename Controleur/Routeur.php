@@ -40,7 +40,7 @@ class Routeur
                         $this->ctrlConnexion->connexion();
                         break;
                     case 'Panier':
-                        if(isset($_GET['suppr_id'])) $this->ctrlPanier->suppr_produit($_GET['suppr_id']);
+                        if(isset($_GET['suppr_id'])) $this->ctrlPanier->supprProduit($_GET['suppr_id']);
                         $this->ctrlPanier->panier();
                         break;
                     case 'Produit':
