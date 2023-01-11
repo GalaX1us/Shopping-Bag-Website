@@ -1,6 +1,10 @@
 <?php $titre = 'ISIWEB4SHOP -' . $produitInfos['name'] .''; ?>
 
 <?php ob_start(); ?>
+        <div class="float-start">
+        <a href="index.php?action=<?= $_GET['cat']?>" class="text-black" style="text-decoration:none">← Retour</a>
+        </div>
+
         <div class="produitMulti m-5">
         <div class="image_produit">
             <img src="assets/<?= $produitInfos['image']?>" alt="<?= $produitInfos['name']?>" class="rounded my-auto">

@@ -33,7 +33,7 @@ class ControleurProduitsMulti
         $products = new ProduitsMulti();
         $products->connect();
         $results = $products->getProducts($type);
-        $vue->generer(array('produitsInfos'=>$results, 'nomCategorie'=>$name));
+        $vue->generer(array('produitsInfos'=>$results, 'cat'=>$cat, 'nomCategorie'=>$name));
     }
 
     public function Produit($id)
