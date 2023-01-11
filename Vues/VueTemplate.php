@@ -18,7 +18,7 @@
          </main>
 
          <footer class="page-footer font-small mt-auto bg-primary">
-         <div class="text-white py-3 px-3 d-flex justify-content-between">
+         <div class="text-white py-2 px-2 d-flex justify-content-between">
             Site web réalisé avec PHP, HTML5 et CSS.
             <a href="#" class="text-white">Retour en haut ↑</a>
          </div>
