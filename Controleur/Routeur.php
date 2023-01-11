@@ -4,6 +4,7 @@ require_once 'ControleurProduitsMulti.php';
 require_once 'ControleurConnexion.php';
 require_once 'ControleurPanier.php';
 require_once 'ControleurCreerCompte.php';
+require_once 'ControleurAdresse.php';
 require_once 'Vues/Vue.php';
 
 class Routeur
@@ -13,6 +14,7 @@ class Routeur
     private $ctrlConnexion;
     private $ctrlPanier;
     private $ctrlCreerCompte;
+    private $ctrlAdresse;
 
     public function __construct()
     {
@@ -21,12 +23,11 @@ class Routeur
         $this->ctrlConnexion = new ControleurConnexion();
         $this->ctrlPanier = new ControleurPanier();
         $this->ctrlCreerCompte = new ControleurCreerCompte();
+        $this->ctrlAdresse = new ControleurAdresse();
     }
     // Traite une requête entrante
     public function routerRequete()
     {
-        //$this->ctrlAccueil->accueil();
-
         try {
             if (isset($_GET['action'])) {
                 switch($_GET['action']) {
@@ -47,6 +48,9 @@ class Routeur
                         if(isset($_GET['prod_id'])) $this->ctrlProduitsMulti->Produit($_GET['prod_id']); //a modif
                         else throw new Exception("Produit non valide.");
                         break;
+                    case 'Adresse':
+                        $this->ctrlAdresse->adresse();
+                        break;
                     default:
                         throw new Exception("Action non valide.");
                 }
@@ -58,26 +62,6 @@ class Routeur
         catch (Exception $e) {
             $this->erreur($e->getMessage());
         }
-
-        //$this->erreur("Test erreur");
-
-        /*try {
-            if (isset($_GET['action'])) {
-                /*if ($_GET['action'] == 'billet') {
-                    if (isset($_GET['id'])) {
-                        $idBillet = intval($_GET['id']);
-                        if ($idBillet != 0) {
-                            $this->ctrlBillet->billet($idBillet);
-                        } else throw new Exception("Identifiant de billet non valide");
-                    } else throw new Exception("Identifiant de billet non défini");
-                } else throw new Exception("Action non valide");
-            } else {
-                // aucune action définie : affichage de l'accueil
-                $this->ctrlAccueil->accueil();
-            }
-        } catch (Exception $e) {
-            $this->erreur($e->getMessage());
-        }*/
     }
 
     // Affiche une erreur
