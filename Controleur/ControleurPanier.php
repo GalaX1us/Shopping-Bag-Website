@@ -3,6 +3,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once './Vues/Vue.php';
+require_once 'Modeles/Orderitems.php';
+require_once 'Modeles/Orders.php';
 class ControleurPanier
 {
     public function __construct()
@@ -26,7 +28,45 @@ class ControleurPanier
         }
     }
 
-    // Supprime un produit du panier
+    // Ajoute un produit au panier
+    public function ajoutPanier() {
+        if(isset($_GET['prod_id'])) {
+            if(isset($_SESSION['connecte']) && $_SESSION['connecte']) {
+                
+                /// TODO
+
+            }
+            $this->ajoutProduit($_GET['prod_id']);
+            $this->panier();
+        }
+        else throw new Exception("Le produit à ajouter n'est pas valide");
+    }
+
+    // ajoute un produit au panier dans $_SESSION
+    public function ajoutProduit($id_prod) {
+
+        /// TODO
+
+    }
+
+    // Supprime un produit du panier en le supprimant aussi de la BD
+    public function panierSuppr() {
+        if(isset($_GET['suppr_id'])) {
+            if(isset($_SESSION['connecte']) && $_SESSION['connecte']) {
+                $order = new Order();
+                $order->connect();
+                $id_commande = $order->getIdOrder($_SESSION['id'])[0];
+                $orderitem = new Orderitem();
+                $orderitem->connect();
+                $orderitem->supprOrderitem($id_commande, $_GET['suppr_id']);
+            }
+            $this->supprProduit($_GET['suppr_id']);
+            $this->panier();
+        }
+        else throw new Exception("Le produit à supprimer n'est pas valide");
+    }
+
+    // Supprime un produit du panier dans $_SESSION
     public function supprProduit($id) {
         if( array_key_exists($id, $_SESSION['produits'])) {
             unset($_SESSION['produits'][$id]);
@@ -67,6 +107,7 @@ class ControleurPanier
         return array('produits' => $tab_resultat, 'total_general' =>$this->formatagePrix($total_general));
     }
 
+    // formate le prix : 2.5 -> '2,5€'
     private function formatagePrix($prix_nombre) {
         $prix_str = str_replace(".", ",", $prix_nombre) . '€';
         return $prix_str;

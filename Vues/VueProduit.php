@@ -14,7 +14,7 @@
             <p><?= $produitInfos['description']?></p>
             
             
-            <form method="post" action="index.php?action=Panier&prod_id=<?= $produitInfos['id']?>" >
+            <form method="post" action="index.php?action=PanierProd&prod_id=<?= $produitInfos['id']?>" >
                 <strong>Prix : <?= $produitInfos['price']?>€</strong>
                 <input type="number" name="qte" value="1" min="1" placeholder="Quantité" required>
                 <br>

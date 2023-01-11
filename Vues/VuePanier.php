@@ -54,7 +54,7 @@ if (empty($donnees)) {
 
                 <td class="align-middle">
                     
-                        <button onclick="window.location.href = 'index.php?action=Panier&suppr_id=<?= $produit['nom'] ?>'" name="boutonSuppr" value="supprimer" class="btn fs-4">X</button>
+                        <button onclick="window.location.href = 'index.php?action=PanierSuppr&suppr_id=<?= $produit['nom'] ?>'" name="boutonSuppr" value="supprimer" class="btn fs-4">X</button>
                 </td>
             </tr>
     <?php }

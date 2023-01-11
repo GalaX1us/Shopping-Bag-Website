@@ -43,11 +43,16 @@ class Routeur
                         $this->ctrlConnexion->connexion();
                         break;
                     case 'Panier':
-                        if(isset($_GET['suppr_id'])) $this->ctrlPanier->supprProduit($_GET['suppr_id']);
                         $this->ctrlPanier->panier();
                         break;
+                    case 'PanierSuppr':
+                        $this->ctrlPanier->panierSuppr();
+                        break;
+                    case 'PanierProd':
+                        $this->ctrlPanier->ajoutPanier();
+                        break;
                     case 'Produit':
-                        if(isset($_GET['prod_id'])) $this->ctrlProduitsMulti->Produit($_GET['prod_id']); //a modif
+                        if(isset($_GET['prod_id'])) $this->ctrlProduitsMulti->Produit($_GET['prod_id']);
                         else throw new Exception("Produit non valide.");
                         break;
                     case 'Adresse':

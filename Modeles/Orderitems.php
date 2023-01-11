@@ -1,4 +1,4 @@
-<?php require_once 'Modele/Modele.php';
+<?php require_once 'Modeles/Modele.php';
 class Orderitem extends Modele
 {
     // Renvoie la liste des orderitems du blog
@@ -18,5 +18,13 @@ class Orderitem extends Modele
         if ($orderitem->rowCount() == 1) return $orderitem->fetch();
         // Accès à la première ligne de résultat
         else throw new Exception("Aucune produit commandé ne correspond à l'identifiant '$idOrderitem'");
+    }
+
+    // Supprime un produit de la commande
+    public function supprOrderitem($idOrder, $idProduit)
+    {
+        $sql = 'delete from orderitems'
+            . ' where order_id=? and product_id=?';
+        $this->executerRequete($sql, array($idOrder, $idProduit));
     }
 }
