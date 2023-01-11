@@ -1,15 +1,15 @@
 <?php require_once './Vues/Vue.php';
-class ControleurFruitsSecs
+class ControleurAdresse
 {
     public function __construct()
     {
 
     }
 
-    // Affiche la page des fruits secs
-    public function fruitsSecs()
+    // Affiche la page d'accueil du blog
+    public function adresse()
     {
-        $vue = new Vue("Boissons"); //////////////////// remettre FruitsSecs quand la vue aura été créée
+        $vue = new Vue("Adresse"); 
         $vue->generer(array());
     }
     // Affiche une erreur

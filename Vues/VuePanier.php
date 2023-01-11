@@ -65,7 +65,7 @@ if (empty($donnees)) {
 
 <h3 id="total">Total de la commande : <?= $donnees['total_general'] ?></h3>
 
-<form method="post" action="index.php?action=Caisse">
+<form method="post" action="index.php?action=Adresse">
     <button name="bouton" value="caisse" class="btn btn-primary btn-lg btn-block m-4">Aller à la caisse</button>
 </form>
 
