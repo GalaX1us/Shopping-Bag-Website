@@ -9,7 +9,7 @@
 .description_produit {
     margin: auto;
 }
-.container-fluid {
+.dynamic-width {
     text-align: center;
     min-height: 100%;
 }
@@ -32,28 +32,28 @@ input[type='number']{
 
 /* Small devices */
 @media (min-width: 576px) {
-    .container-fluid {
+    .dynamic-width {
       width: 100%;
     }
   }
   
   /* Medium devices */
   @media (min-width: 768px) {
-    .container-fluidody {
+    .dynamic-width {
       width: 100%;
     }
   }
   
   /* Large devices */
   @media (min-width: 992px) {
-    .container-fluid {
+    .dynamic-width {
       width: 80%;
     }
   }
   
   /* Extra large devices */
   @media (min-width: 1200px) {
-    .container-fluid {
+    .dynamic-width {
       width: 60%;
     }
   

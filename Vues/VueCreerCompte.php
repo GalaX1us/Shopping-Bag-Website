@@ -16,7 +16,7 @@ else
 
   <form method="post" action="index.php?action=CreerCompte"> 
         <div class="mb-3">
-           <input type="text" name="name" value="<?= $name?>" placeholder="prénom" class="form-control"  aria-required="true" aria-describedby="emailHelp" required>
+           <input type="text" name="name" value="<?= $name?>" placeholder="Prénom" class="form-control"  aria-required="true" aria-describedby="emailHelp" required>
           <input type="text" name="surname" value="<?= $surname?>" placeholder="Nom" class="form-control" aria-required="true" required>
         </div>
         <br>
@@ -24,7 +24,7 @@ else
           <input type="text" name="add1" value="<?= $add1?>" placeholder="Adresse" class="form-control" aria-required="true" required> 
           <input type="text" name="add2" value="<?= $add2?>" placeholder="Complément d'adresse" class="form-control" >
           <input type="text" name="city" value="<?= $city?>" placeholder="Ville" class="form-control" aria-required="true" required>
-          <input type="text" name="code" value="<?= $code?>" placeholder="code postal" class="form-control" pattern="\d{5,5}"aria-required="true" required>
+          <input type="text" name="code" value="<?= $code?>" placeholder="Code Postal" class="form-control" pattern="\d{5,5}"aria-required="true" required>
         </div>
         <br>
         <div class="mb-3">

@@ -7,7 +7,8 @@
     <hr class="bg-primary border-3 border-top border-primary">
         <div class="produitMulti m-5 my-auto">
         <div class="image_produit">
-            <a href="index.php?action=Produit&prod_id=<?= $produit['id']?>"><img class="rounded" src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>"></a>
+            <a href="index.php?action=Produit&prod_id=<?= $produit['id']?>">
+            <img class="rounded" src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>"></a>
         </div>
         <div class="description_produit m-3 my-auto">
             <a href="index.php?action=Produit&prod_id=<?= $produit['id']?>"><h3><?= $produit['name']?></h3></a>

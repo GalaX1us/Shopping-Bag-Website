@@ -13,8 +13,7 @@
       <div class="d-flex flex-column min-vh-100">
 
          <?php require('VueBarreNavigation.php');?>
-
-         <main class="container-fluid p-3 flex-grow-1" style="min-height:50vh">             
+         <main class="container-fluid dynamic-width p-3 flex-grow-1" style="min-height:50vh">             
             <?= $contenu ?>
          </main>
 

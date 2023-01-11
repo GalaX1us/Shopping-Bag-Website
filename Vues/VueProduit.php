@@ -27,11 +27,14 @@
             <div class="card-header ">
                 <div class="float-start">
                     <img class="rounded" style="height: 8vh" src="assets/<?= $review['photo_user']?>" alt="<?= $review['photo_user']?>">
-                <?= $review['name_user']?>
+                <span class="m-2"><?= $review['name_user']?></span> 
                 <?php
                     for ($i = 0; $i < $review['stars']; $i++) {
                     echo '<img style="height: 3vh" src="assets/review_star.png" alt="star">';
                     }
+                    for ($i = 0; $i < 5-$review['stars']; $i++) {
+                        echo '<img style="height: 3vh" src="assets/review_grey.png" alt="star">';
+                        }
                 ?>
                 </div>
         </div>
