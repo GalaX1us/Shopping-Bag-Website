@@ -36,7 +36,7 @@ if (empty($donnees)) {
                             <img src="assets/<?= $produit['nom'] ?>.jpg" width="100" height="100" alt="<?= $produit['nom'] ?>">
                         </a>
                     </div>
-                    <a href="index.php?action=produit&prod_id=<?= $produit['nom'] ?>" class="text-white"><?= $produit['nom_affichage']?></a>
+                    <a href="index.php?action=produit&prod_id=<?= $produit['nom'] ?>" class="text-black"><?= $produit['nom_affichage']?></a>
                 </td>
 
                 <td class="align-middle">

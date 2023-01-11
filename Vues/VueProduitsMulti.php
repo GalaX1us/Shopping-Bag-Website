@@ -5,7 +5,7 @@
     <?php
     foreach ($produitsInfos as $produit) {?>
     <hr class="bg-primary border-3 border-top border-primary">
-        <div class="produitMulti m-5 my-auto">
+        <div class="produitMulti m-4 my-4">
         <div class="image_produit">
             <a href="index.php?action=Produit&cat=<?= $cat?>&prod_id=<?= $produit['id']?>">
             <img class="rounded" src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>"></a>
