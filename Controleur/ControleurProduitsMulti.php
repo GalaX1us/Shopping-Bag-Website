@@ -1,5 +1,5 @@
 <?php require_once './Vues/Vue.php';
-require_once 'Modeles/ProduitsMulti.php';
+require_once 'Modeles/Products.php';
 require_once 'Modeles/Reviews.php';
 class ControleurProduitsMulti
 {  

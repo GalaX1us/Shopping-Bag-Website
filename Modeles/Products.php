@@ -1,22 +1,33 @@
-<?php require_once 'Modele/Modele.php';
-class Orderitem extends Modele
+<?php 
+require_once 'Modele.php';
+
+class ProduitsMulti extends Modele
 {
-    // Renvoie la liste des orderitems du blog
-    public function getOrderitems()
+    // Renvoie la liste des logins du blog
+    public function getProducts($cat)
     {
-        $sql = 'select id, username, password from orderitems'
-            . ' order by BIL_ID desc';
-        $orderitems = $this->executerRequete($sql);
-        return $orderitems;
-    }
-    // Renvoie les informations sur une orderitem
-    public function getOrderitem($idOrderitem)
-    {
-        $sql = 'select id, username, password from orderitems'
-            . ' where id=?';
-        $orderitem = $this->executerRequete($sql, array($idOrderitem));
-        if ($orderitem->rowCount() == 1) return $orderitem->fetch();
+        $sql = 'select * from products where cat_id = ?';
+        $products = $this->executerRequete($sql,array($cat));
+        if ($products->rowCount() >= 1) return $products->fetchAll();
         // Accès à la première ligne de résultat
-        else throw new Exception("Aucune orderitem ne correspond à l'identifiant '$idOrderitem'");
+        else throw new Exception("Aucune catégorie ne correspond à l'id '$cat'");
+    }
+
+    public function getProduct($id)
+    {
+        $sql = 'select * from products where id = ?';
+        $products = $this->executerRequete($sql,array($id));
+        if ($products->rowCount() == 1) return $products->fetch();
+        // Accès à la première ligne de résultat
+        else throw new Exception("Aucun produit ne correspond à l'id '$id'");
+    }
+
+    public function getProductPrice($id)
+    {
+        $sql = 'select price from products where id = ?';
+        $products = $this->executerRequete($sql,array($id));
+        if ($products->rowCount() == 1) return $products->fetch();
+        // Accès à la première ligne de résultat
+        else throw new Exception("Aucun produit ne correspond à l'id '$id'");
     }
 }

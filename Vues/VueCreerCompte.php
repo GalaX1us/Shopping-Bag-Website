@@ -11,7 +11,7 @@ if ($compteCree)
 }
 else
 { ?>
-
+  <h1>Inscription</h1>
   <p> Merci de remplir le formulaire ci-dessous pour créer votre compte client. </p>
 
   <form class="row g-3" method="post" action="index.php?action=CreerCompte"> 

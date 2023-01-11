@@ -34,8 +34,7 @@
                         $message = "Connexion"; 
                     }
                 ?>
-
-                <a class="nav-link" href="index.php?action=Connexion"><?= $message?></a>
+                    <a class="nav-link" href="index.php?action=Connexion"><?= $message?></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php?action=Panier">

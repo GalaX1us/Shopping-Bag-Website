@@ -12,12 +12,13 @@
         <div class="description_produit m-3 my-auto">
             <h3><?= $produitInfos['name']?></h3>
             <p><?= $produitInfos['description']?></p>
-            <strong>Prix : <?= $produitInfos['price']?>€</strong>
-
-            <input type="number" name="quantite" value="1" min="1" placeholder="Quantité" required>
-                
-            <form method="post" action="index.php?action=produit&prod_id=<?= $produitInfos['id']?>" >
-                <button class="btn btn-primary mt-3">Ajouter au Panier</button>
+            
+            
+            <form method="post" action="index.php?action=Panier&prod_id=<?= $produitInfos['id']?>" >
+                <strong>Prix : <?= $produitInfos['price']?>€</strong>
+                <input type="number" name="qte" value="1" min="1" placeholder="Quantité" required>
+                <br>
+                <button type="submit" class="btn btn-primary mt-3">Ajouter au Panier</button>
             </form>
         </div>
     </div>
