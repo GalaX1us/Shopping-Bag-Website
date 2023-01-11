@@ -7,15 +7,15 @@
     <hr class="bg-primary border-3 border-top border-primary">
         <div class="produitMulti m-5 my-auto">
         <div class="image_produit">
-            <img class="rounded" src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>">
+            <a href="index.php?action=Produit&prod_id=<?= $produit['id']?>"><img class="rounded" src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>"></a>
         </div>
         <div class="description_produit m-3 my-auto">
-            <h3><?= $produit['name']?></h3>
+            <a href="index.php?action=Produit&prod_id=<?= $produit['id']?>"><h3><?= $produit['name']?></h3></a>
             <p><?= $produit['description']?></p>
             <strong>Prix : <?= $produit['price']?>€</strong>
 
             <form method="post" action="index.php?action=Produit&prod_id=<?= $produit['id']?>" >
-                <button class="btn btn-primary mt-3">Acheter</button>
+                <button class="btn btn-primary mt-3">Voir le Produit</button>
             </form>
         </div>
     </div>
