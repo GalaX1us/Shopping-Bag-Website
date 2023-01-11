@@ -42,7 +42,7 @@ else
           <input type="password" name="password" value="<?= $password?>" placeholder="Mot de passe" class="form-control"  aria-describedby="emailHelp" aria-required="true" required>
         </div>
         <br>
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Valider</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Créer Compte</button>
     </form>
 
 <?php } ?>
