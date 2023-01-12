@@ -75,8 +75,6 @@ class ControleurCreerCompte
     private function creationDecompte($name, $surname, $add1, $add2, $city, $code, $phone, $email, $username, $password)
     {
 
-        //traitement pour vérifier les données 
-        //si tout est ok, on crée le compte
         $signUp = new SignUp();
         $signUp->connect();
         if ($signUp->checkUsername($username)) {
