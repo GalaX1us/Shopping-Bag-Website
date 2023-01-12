@@ -1,7 +1,7 @@
 <?php
 
 // Appel de la librairie FPDF
-require("Fpdf/fpdf.php");
+require("Misc/Fpdf/fpdf.php");
 
 // Création de la class PDF
 class PDF extends FPDF {
