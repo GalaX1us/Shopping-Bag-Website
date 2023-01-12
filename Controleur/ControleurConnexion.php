@@ -100,7 +100,9 @@ class ControleurConnexion
         $msg = "";
         $login = new Logins();
         $login->connect();
+        $result = $login->getAdminByLogin($username); 
         $result = $login->getLogin($username);
+
         
 
 
@@ -118,8 +120,6 @@ class ControleurConnexion
                 }
              
             }
-            
-
         }
         else
         {
