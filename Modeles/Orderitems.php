@@ -20,11 +20,26 @@ class Orderitem extends Modele
         else throw new Exception("Aucune produit commandé ne correspond à l'identifiant '$idOrderitem'");
     }
 
+    // Renvoie l'Id du prochain orderItem
+    public function getNextId() {
+        $sql = 'select max(id) from orderitems';
+        $order = $this->executerRequete($sql);
+        if ($order->rowCount() == 1) return $order->fetch()+1;
+        // Accès à la première ligne de résultat
+        else throw new Exception("Erreur lors de l'ajout au panier.");
+    }
+
     // Supprime un produit de la commande
     public function supprOrderitem($idOrder, $idProduit)
     {
         $sql = 'delete from orderitems'
             . ' where order_id=? and product_id=?';
         $this->executerRequete($sql, array($idOrder, $idProduit));
+    }
+
+    public function ajoutPanier($id, $idOrder, $idProduit, $qte) {
+        $sql = 'INSERT INTO orderitems (id, order_id, product_id, quantity)'
+              .'VALUES (?, ?, ?, ?)';
+        $this->executerRequete($sql, array($id, $idOrder, $idProduit, $qte));
     }
 }

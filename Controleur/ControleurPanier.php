@@ -5,13 +5,12 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once './Vues/Vue.php';
 require_once 'Modeles/Orderitems.php';
 require_once 'Modeles/Orders.php';
+require_once 'Modeles/Products.php';
 class ControleurPanier
 {
     public function __construct()
     {
-        $_SESSION['produits'] = array('abricotsSecs' => array('nom' => "abricotsSecs", 'prix' => 1.5, 'qte' => 4), 
-        'amandes' => array('nom' => "amandes", 'prix' => 2.25, 'qte' => 3),
-        'biscuitsCannelle' => array('nom' => "biscuitsCannelle", 'prix' => 2.25, 'qte' => 3));//// a suppr
+        
     }
 
     // Affiche la page du panier
@@ -32,21 +31,58 @@ class ControleurPanier
     public function ajoutPanier() {
         if(isset($_GET['prod_id'])) {
             if(isset($_SESSION['connecte']) && $_SESSION['connecte']) {
-                
-                /// TODO
-
+                $idCommande = $this->getIdCommande($_SESSION['id']);
+                $orderitem = new Orderitem();
+                $orderitem->connect();
+                $idOrderItem = $orderitem->getNextId();
+                $orderitem->ajoutPanier($idOrderItem, $idCommande, $_GET['prod_id'], $_POST['qte']); // Ajoute le produit à la BD
             }
-            $this->ajoutProduit($_GET['prod_id']);
+            $this->ajoutProduit($_GET['prod_id']); // Ajoute le produit à la variable de session
             $this->panier();
         }
         else throw new Exception("Le produit à ajouter n'est pas valide");
     }
 
-    // ajoute un produit au panier dans $_SESSION
+    // Renvoie l'id de commande
+    public function getIdCommande($idClient) {
+        $order = new Order();
+        $order->connect();
+        $idCommande = $order->getIdOrder($idClient);
+        if($idCommande === false) { // Si on n'a pas de commande en cours on en crée une nouvelle
+            $idCommande = $order->getNextId();
+            $order->createOrder($idCommande, $_SESSION['id'], date('Y-m-d'), session_id());               
+        }
+        return $idCommande;
+    }
+
+    // Ajoute un produit au panier dans $_SESSION
     public function ajoutProduit($id_prod) {
-
-        /// TODO
-
+        if(empty($_SESSION['produits'])) $_SESSION['produits'] = array();
+        $product = new ProduitsMulti();
+        $product->connect();
+        $infos_prod = $product->getProduct($id_prod);
+        $nom = $infos_prod['name'];
+        $num_cat = $infos_prod['cat_id'];
+        switch($num_cat) {
+            case 1:
+                $categorie = 'Boissons';
+                break;
+            case 2:
+                $categorie = 'Biscuits';
+                break;
+            case 3:
+                $categorie = 'FruitsSecs';
+                break;
+            default: 
+                $categorie = 'Boissons';
+        }
+        $prix = $infos_prod['price'];
+        $qte = $_POST['qte'];
+        $qteMax = $infos_prod['quantity'];
+        $img = $infos_prod['image'];
+        $prod_array = array('idprod' => $id_prod, 'nom' => $nom, 'cat' => $categorie,'prix' => $prix, 'qte' => $qte, 'qtemax' => $qteMax, 'img' => $img);
+        
+        $_SESSION['produits'][$id_prod] = $prod_array;
     }
 
     // Supprime un produit du panier en le supprimant aussi de la BD
@@ -55,10 +91,10 @@ class ControleurPanier
             if(isset($_SESSION['connecte']) && $_SESSION['connecte']) {
                 $order = new Order();
                 $order->connect();
-                $id_commande = $order->getIdOrder($_SESSION['id'])[0];
+                $idCommande = $order->getIdOrder($_SESSION['id']);
                 $orderitem = new Orderitem();
                 $orderitem->connect();
-                $orderitem->supprOrderitem($id_commande, $_GET['suppr_id']);
+                $orderitem->supprOrderitem($idCommande, $_GET['suppr_id']);
             }
             $this->supprProduit($_GET['suppr_id']);
             $this->panier();
@@ -68,10 +104,10 @@ class ControleurPanier
 
     // Supprime un produit du panier dans $_SESSION
     public function supprProduit($id) {
-        if( array_key_exists($id, $_SESSION['produits'])) {
+        if(array_key_exists($id, $_SESSION['produits'])) {
             unset($_SESSION['produits'][$id]);
         }
-        else throw new Exception("Le produit à supprimer ( ".$id." ) n'est pas dans le panier.");
+        else throw new Exception("Le produit à supprimer n'est pas dans le panier.");
     }
 
     // Traite le contenu du panier en mettant les données nécessaires à la vue dans un tableau
@@ -81,23 +117,29 @@ class ControleurPanier
         $i = 0;
         foreach ($tableau_produits as $produit) {
             $i++;
+            $idProd = $produit['idprod'];
             $nom = $produit['nom'];
-            $nom_affichage = ucwords(implode(' ',preg_split('/(?=[A-Z])/', $nom))); // abricotsSecs -> Abricots Secs
+            $categorie = $produit['cat'];
             $prix = $produit['prix'];
             $prix_affichage = $this->formatagePrix($prix);
             $qte = $produit['qte'];
+            $qteMax = $produit['qtemax'];
             $total = $prix * $qte;
             $total_affichage = $this->formatagePrix($total);
+            $image = $produit['img'];
 
             $produit_resultat = array(
-                'indice' => $i,
-                'nom' => $nom,
-                'nom_affichage' => $nom_affichage,
-                'prix' => $prix,
-                'prix_affichage' => $prix_affichage,
-                'qte' => $qte,
-                'total' => $total,
-                'total_affichage' => $total_affichage
+                'indice'    => $i,
+                'id'        => $idProd,
+                'nom'       => $nom,
+                'cat'       => $categorie,
+                'prix'      => $prix,
+                'prix_aff'  => $prix_affichage,
+                'qte'       => $qte,
+                'qtemax'    => $qteMax,
+                'total'     => $total,
+                'total_aff' => $total_affichage,
+                'img'       => $image
             );
 
             array_push($tab_resultat, $produit_resultat);
