@@ -19,5 +19,6 @@ class ControleurAdmin
     {
         $vue = new Vue("Erreur");
         $vue->generer(array('msgErreur' => $msgErreur));
+        
     }
 }

@@ -22,6 +22,7 @@
                 </div>
             </li>
         </ul>
+        
         <ul class="navbar-nav ms-md-auto">
             <li class="nav-item">
                 <?php 
@@ -36,6 +37,7 @@
                 ?>
                     <a class="nav-link" href="index.php?action=Connexion"><?= $message?></a>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="index.php?action=Panier">
                 <svg class="pb-1" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
