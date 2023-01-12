@@ -30,8 +30,16 @@ class ControleurConnexion
 
         $vue = new Vue("Connexion");
         $connecte = $this->est_connecte();
+        if (isset($_SESSION['admin']))
+        {
+            $admin = $_SESSION['admin'];
+        }
+        else
+        {
+            $admin = false;
+        }
         $nom = $this->get_nom();
-        $donnees = array ('connecte' => $connecte, 'nom' => $nom, 'msgErreur' => $this->msg); 
+        $donnees = array ('connecte' => $connecte, 'nom' => $nom, 'msgErreur' => $this->msg, 'admin' => $admin); 
         $vue->generer($donnees); 
     }
     // Affiche une erreur
@@ -71,24 +79,47 @@ class ControleurConnexion
             $login->connect();
             try
             {
-                if (isset($_SESSION['id']))
+                if (isset($_SESSION['admin']) && $_SESSION['admin'] == true)
                 {
-                    $result = $login->getNomById($_SESSION['id']);
+                    if (isset($_SESSION['id']))
+                    {
+                        $result = $login->getNomByIdAdmin($_SESSION['id']);
+                    }
+                    else
+                    {
+                        $result = "Vous n'êtes pas connecté";
+                    }
                 }
                 else
                 {
-                    $result = "Vous n'êtes pas connecté";
+                    if (isset($_SESSION['id']))
+                    {
+                        $result = $login->getNomById($_SESSION['id']);
+                    }
+                    else
+                    {
+                        $result = "Vous n'êtes pas connecté";
+                    }
                 }
+                
             }
             catch (Exception $e)
             {
                 echo $e->getMessage();
             }
             foreach ($result as $donnees) 
-            
             {
-                $_SESSION['name'] = $donnees['forname'];
-                return $donnees['forname'];
+                if (isset($_SESSION['admin']) && $_SESSION['admin'] == true)
+                {
+                    $_SESSION['name'] = $donnees['username'];
+                    return $donnees['username'];
+                }
+                else
+                {
+                    $_SESSION['name'] = $donnees['forname'];
+                    return $donnees['forname'];
+                }
+        
             }
         }
         
@@ -101,9 +132,8 @@ class ControleurConnexion
         $login = new Logins();
         $login->connect();
         $result = $login->getLogin($username);
+
         
-
-
         if (!empty($result))
         {
             foreach ($result as $donnees)   
@@ -118,13 +148,29 @@ class ControleurConnexion
                 }
              
             }
-            
-
         }
         else
         {
-            $this->msg = "identifiant ou mot de passe incorrect";
+            $result = $login->getAdminByUser($username);
+            if (!empty($result))
+            {
+                foreach ($result as $donnees)   
+                {
+                    if ($donnees['password'] == $password) {
+
+                        $_SESSION['estConnecte'] = true;
+                        $_SESSION['id'] = $donnees['id'];
+                        $_SESSION['admin'] = true;
+                        $this->msg ="";
+                    } 
+                    else {
+                        $this->msg = "identifiant ou mot de passe incorrect";
+                    }
+                }
+            }
+
         }
+       
 
         
     }

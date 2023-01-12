@@ -9,6 +9,20 @@
       <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
         <button name="bouton" value="deconnexion" class="btn btn-primary btn-lg btn-block">Se déconnecter</button>
       </form>
+      
+      <?php 
+      if ($admin)
+      {
+        echo '<h2> Vous êtes administrateur :) </h2>';
+        ?> 
+
+      <button name="bouton"   href="index.php?action=Admin">Page Administrateur</button>
+      <button class="btn btn-primary btn-lg btn-block"onclick="window.location.href = 'index.php?action=Connexion';"> Cliquez ici </button>
+      <?php 
+      }
+      ?>
+      
+      
 
   <?php
     }

@@ -3,6 +3,13 @@
 <?php ob_start(); ?>
 
 <?php
+
+if ($_GET['action']=='PanierProd'){
+    echo '<div class="float-start">
+        <a href="index.php?action=' . $_GET['cat'] . '" class="text-black" style="text-decoration:none">← Continuer mes achats</a>
+        </div>';
+}
+
 if (empty($donnees)) {
     echo '<br/><h2> Votre panier est vide :( </h2>';
 } else { 
