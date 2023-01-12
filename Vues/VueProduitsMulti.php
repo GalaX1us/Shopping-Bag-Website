@@ -1,7 +1,7 @@
 <?php $titre = 'ISIWEB4SHOP - ' . $nomCategorie .''; ?>
 
 <?php ob_start(); ?>
-    <h2><?= $nomCategorie?></h3>
+    <h2><?= $nomCategorie?></h2 >
     <?php
     foreach ($produitsInfos as $produit) {?>
     <hr class="bg-primary border-3 border-top border-primary">
