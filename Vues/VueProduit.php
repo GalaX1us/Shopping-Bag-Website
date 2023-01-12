@@ -13,13 +13,30 @@
             <h3><?= $produitInfos['name']?></h3>
             <p><?= $produitInfos['description']?></p>
             
-            
-            <form method="post" action="index.php?action=PanierProd&prod_id=<?= $produitInfos['id']?>" >
+            <?php
+            if ($produitInfos['quantity']<=0){
+                $lien = '#';
+            }else{
+                $lien = 'index.php?action=PanierProd&prod_id=' . $produitInfos['id'] . '&cat='.$_GET['cat'].'';
+            }
+            echo '<form method="post" action="'. $lien .'" >';
+            ?>
+           
                 <strong>Prix : <?= $produitInfos['price']?>€</strong>
                 <input type="number" name="qte" value="1" min="1" placeholder="Quantité" required>
                 <br>
-                <button type="submit" class="btn btn-primary mt-3">Ajouter au Panier</button>
+                
+            
+            <?php
+            if ($produitInfos['quantity']<=0){
+                echo'<button type="submit" class="btn btn-primary mt-3" disabled>Rupture de Stock</button>';
+            }else{
+                echo '<button type="submit" class="btn btn-primary mt-3">Ajouter au Panier</button>';
+            }
+            ?>    
             </form>
+
+            
         </div>
     </div>
 

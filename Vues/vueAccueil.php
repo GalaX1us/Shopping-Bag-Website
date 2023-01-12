@@ -15,7 +15,7 @@
         </div>
         <div class="col-12 col-md-4 my-2">
         <a href="index.php?action=Biscuits" style="text-decoration:none">
-            <img class="w-75 rounded img-fluid d-block m-auto" src="assets/biscuitsCannelle.jpg" alt="biscuits secs">
+            <img class="w-75 rounded img-fluid d-block m-auto" src="assets/macaronChocolat.jpg" alt="biscuits secs">
             <span class="d-flex justify-content-center my-4"><h2>Biscuits</h2></span>
         </a>
         </div>
