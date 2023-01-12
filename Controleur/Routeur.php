@@ -7,6 +7,7 @@ require_once 'ControleurCreerCompte.php';
 require_once 'ControleurAdresse.php';
 require_once 'Vues/Vue.php';
 require_once 'ControleurPaiement.php';
+require_once 'ControleurAdmin.php';
 class Routeur
 {
     private $ctrlAccueil;
@@ -16,6 +17,7 @@ class Routeur
     private $ctrlCreerCompte;
     private $ctrlAdresse;
     private $ctrlPaiement;
+    private $ctrlAdmin;
 
     public function __construct()
     {
@@ -26,6 +28,7 @@ class Routeur
         $this->ctrlCreerCompte = new ControleurCreerCompte();
         $this->ctrlAdresse = new ControleurAdresse();
         $this->ctrlPaiement = new ControleurPaiement();
+        $this->ctrlAdmin = new ControleurAdmin();
     }
     // Traite une requête entrante
     public function routerRequete()
@@ -60,6 +63,9 @@ class Routeur
                         break;
                     case 'Paiement':
                         $this->ctrlPaiement->paiement();
+                        break;
+                    case 'Admin':
+                        $this->ctrlAdmin->admin();
                         break;
                     default:
                         throw new Exception("Action non valide.");
