@@ -11,7 +11,7 @@
             <div class="col-12">
                 <?php if ($estConnecte) { ?>
                 <div class="card p-3">
-                    <div class="card-body border p-0">
+                    <div class="card-body p-0">
                         <p>
                             <a class="btn btn-primary w-100 h-100 d-flex align-items-center justify-content-between"
                                 data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <?php }?>
-                    <div class="card-body border p-0">
+                    <div class="card-body p-0">
                         <p>
                             <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between"
                                 data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
