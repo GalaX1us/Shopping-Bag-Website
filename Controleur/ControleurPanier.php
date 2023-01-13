@@ -149,9 +149,9 @@ class ControleurPanier
         return array('produits' => $tab_resultat, 'total_general' =>$this->formatagePrix($total_general));
     }
 
-    // formate le prix : 2.5 -> '2,5€'
+    // formate le prix : 2.5 -> '2,50€'
     private function formatagePrix($prix_nombre) {
-        $prix_str = str_replace(".", ",", $prix_nombre) . '€';
+        $prix_str = number_format($prix_nombre, 2, ',', ' ').'€';
         return $prix_str;
     }
 

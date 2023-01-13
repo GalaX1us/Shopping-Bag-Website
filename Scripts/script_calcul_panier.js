@@ -12,8 +12,8 @@ function recalculerPanier() {
   document.getElementById("total").innerHTML = "Total de la commande : " + formatagePrix(total);
 }
 
-// formate le prix : 2.5 -> '2,5€'
+// formate le prix : 2.5 -> '2,50€'
 function formatagePrix(prix_nombre) {
-    var prix_str = String(prix_nombre).replace('.', ',') + '€';
+    var prix_str = String(prix_nombre.toFixed(2)).replace(',', ' ').replace('.', ',') + '€';
     return prix_str;
 }

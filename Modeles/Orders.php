@@ -41,7 +41,7 @@ class Order extends Modele
 
     public function createOrder($idOrder, $idCustomer, $date, $idSession) {
         $sql = 'INSERT INTO orders (id, customer_id, registered, delivery_add_id, payment_type, date, status, session, total)'
-              .'VALUES (?, ?, 1, null, null, ?, 0, ?, null)';
+              .'VALUES (?, ?, 1, null, null, ?, 0, "?", null)';
         $this->executerRequete($sql, array($idOrder, $idCustomer, $date, $idSession));
     }
 }

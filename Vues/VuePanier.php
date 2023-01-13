@@ -13,6 +13,8 @@ if ($_GET['action']=='PanierProd'){
 if (empty($donnees)) {
     echo '<br/><h2> Votre panier est vide :( </h2>';
 } else { 
+    //print_r($_SESSION);
+    //echo session_id();
     ?>
 
 <br><h2> Votre panier :</h2>
