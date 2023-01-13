@@ -55,8 +55,7 @@ class Routeur
                         $this->ctrlPanier->ajoutPanier();
                         break;
                     case 'Produit':
-                        if(isset($_GET['prod_id'])) $this->ctrlProduitsMulti->Produit($_GET['prod_id']);
-                        else throw new Exception("Produit non valide.");
+                        $this->ctrlProduitsMulti->Produit();
                         break;
                     case 'Adresse':
                         $this->ctrlAdresse->adresse();

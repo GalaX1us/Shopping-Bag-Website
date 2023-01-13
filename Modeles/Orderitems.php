@@ -42,4 +42,10 @@ class Orderitem extends Modele
               .'VALUES (?, ?, ?, ?)';
         $this->executerRequete($sql, array($id, $idOrder, $idProduit, $qte));
     }
+
+    public function updateQuantite($idOrder, $idProduit, $qte) {
+        $sql = 'UPDATE orderitems SET quantity=?'
+              .'WHERE order_id=? and product_id=?';
+        $this->executerRequete($sql, array($qte, $idOrder, $idProduit));
+    }
 }
