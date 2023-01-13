@@ -34,14 +34,14 @@ class Order extends Modele
     public function getNextId() {
         $sql = 'select max(id) from orders';
         $order = $this->executerRequete($sql);
-        if ($order->rowCount() == 1) return $order->fetch()+1;
+        if ($order->rowCount() == 1) return $order->fetch()[0]+1;
         // Accès à la première ligne de résultat
         else throw new Exception("Erreur lors de l'ajout au panier.");
     }
 
     public function createOrder($idOrder, $idCustomer, $date, $idSession) {
         $sql = 'INSERT INTO orders (id, customer_id, registered, delivery_add_id, payment_type, date, status, session, total)'
-              .'VALUES (?, ?, 1, null, null, ?, 0, "?", null)';
+              .'VALUES (?, ?, 1, null, null, ?, 0, ?, null)';
         $this->executerRequete($sql, array($idOrder, $idCustomer, $date, $idSession));
     }
 }

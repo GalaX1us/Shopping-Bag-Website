@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 
 <?php
-
+// Si l'on vient d'ajouter un produit au panier, on peut retourner sur la catégorie d'où l'on vient
 if ($_GET['action']=='PanierProd'){
     echo '<div class="float-start">
         <a href="index.php?action=' . $_GET['cat'] . '" class="text-black" style="text-decoration:none">← Continuer mes achats</a>
@@ -13,6 +13,23 @@ if ($_GET['action']=='PanierProd'){
 if (empty($donnees)) {
     echo '<br/><h2> Votre panier est vide :( </h2>';
 } else { 
+    /*$order = new Order();
+    $order->connect();
+    $idCommande = $order->getIdOrder(3);
+    /*$orderitem = new Orderitem();
+    $orderitem->connect();
+    $orderitem->supprOrderitem($idCommande, $_GET['suppr_id']);*/
+    /*if($idCommande === false) { // Si on n'a pas de commande en cours on en crée une nouvelle
+        $idCommande = $order->getNextId();
+        $order->createOrder($idCommande, $_SESSION['id'], date('Y-m-d'), session_id());               
+    }
+    echo $idCommande;/*
+    $orderitem = new Orderitem();
+    $orderitem->connect();
+    $idOrderItem = $orderitem->getNextId();
+    echo $idOrderItem;*/
+    //$orderitem->ajoutPanier($idOrderItem, $idCommande, $_GET['prod_id'], $_POST['qte']);
+
     //print_r($_SESSION);
     //echo session_id();
     ?>

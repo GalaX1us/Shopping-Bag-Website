@@ -24,7 +24,7 @@ class Orderitem extends Modele
     public function getNextId() {
         $sql = 'select max(id) from orderitems';
         $order = $this->executerRequete($sql);
-        if ($order->rowCount() == 1) return $order->fetch()+1;
+        if ($order->rowCount() == 1) return $order->fetch()[0]+1;
         // Accès à la première ligne de résultat
         else throw new Exception("Erreur lors de l'ajout au panier.");
     }
