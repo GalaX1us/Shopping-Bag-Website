@@ -4,29 +4,25 @@
         <div class="float-start">
         <a href="index.php?action=<?= $_GET['cat']?>" class="text-black" style="text-decoration:none">← Retour</a>
         </div>
-
-        <div class="produitMulti m-5">
-        <div class="image_produit">
-            <img src="assets/<?= $produitInfos['image']?>" alt="<?= $produitInfos['name']?>" class="rounded my-auto">
+        <br>
+        <div class="row m-1 g-3">
+        <div class="col-12 col-md-6">
+            <img src="assets/<?= $produitInfos['image']?>" alt="<?= $produitInfos['name']?>" class="img-fluid rounded my-auto">
         </div>
-        <div class="description_produit m-3 my-auto">
+        <div class="col-12 col-md-6">
             <h3><?= $produitInfos['name']?></h3>
             <p><?= $produitInfos['description']?></p>
-            
+            <strong>Prix : <?= $produitInfos['price']?>€</strong>
             <?php
             if ($produitInfos['quantity']<=0){
                 $lien = '#';
             }else{
                 $lien = 'index.php?action=PanierProd&prod_id=' . $produitInfos['id'] . '&cat='.$_GET['cat'].'';
             }
-            echo '<form method="post" action="'. $lien .'" >';
+            echo '<form class="row m-3" method="post" action="'. $lien .'" >';
             ?>
-           
-                <strong>Prix : <?= $produitInfos['price']?>€</strong>
-                <input type="number" name="qte" value="1" min="1" placeholder="Quantité" required>
-                <br>
-                
             
+            <input type="number" class="form-control col" name="qte" value="1" min="1" max="<?= $produitInfos['quantity'] ?>" placeholder="Quantité" required>
             <?php
             if ($produitInfos['quantity']<=0){
                 echo'<button type="submit" class="btn btn-primary mt-3" disabled>Rupture de Stock</button>';
@@ -39,7 +35,7 @@
             
         </div>
     </div>
-
+    <div class="mt-5">
     <h2>Avis</h2>
 
     <hr class="bg-primary border-3 border-top border-primary">
@@ -65,6 +61,7 @@
                 <p class="card-text"><?= $review['description']?></div>
         </div>
     <?php }?>
+    </div>
     
      
 <?php $contenu = ob_get_clean(); ?> 
