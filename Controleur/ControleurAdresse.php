@@ -17,6 +17,7 @@ class ControleurAdresse
         catch (Exception $e) {
             $this->erreur($e->getMessage());
         }
+        
         $co = isset($_SESSION['estConnecte']) && $_SESSION['estConnecte'];
         $donnees = array('estConnecte' => $co);
 

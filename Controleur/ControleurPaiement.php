@@ -24,6 +24,8 @@ class ControleurPaiement
     // Affiche la page d'accueil du blog
     public function Paiement()
     {
+        $this->ProcessAddress();
+
         $paye = false;
         $prix = 0; 
         if (isset($_SESSION["total_general"]))
@@ -43,44 +45,46 @@ class ControleurPaiement
         $vue = new Vue("Paiement");
         $donnees = array("prix" => $prix, "paye" => $paye);
         $vue->generer($donnees);
-
     }
     // Affiche une erreur
-    public function ProcessAdress(){
+    public function ProcessAddress(){
+
         if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["add1"]) && isset($_POST["city"])
         && isset($_POST["code"]) && isset($_POST["phone"]) && isset($_POST["email"])){
             $this->name = $_POST['name'];
             $this->surname = $_POST['surname'];
             $this->add1 = $_POST['add1'];
-            $this->add2 = null;
+            $this->add2 = $_POST['add2'];
             $this->city = $_POST['city'];
             $this->code = $_POST['code'];
             $this->phone = $_POST['phone'];
             $this->email = $_POST['email'];
-            if (isset($_POST["add2"])){
-                $this->email = $_POST['add2'];
-            }
-
-            if (!(isset($_SESSION['estConnecte']) && $_SESSION['estConnecte'])){
-                $newAccount = new SignUp();
-                $newAccount->connect();
-                $newAccount->createAccount($newAccount->maxId() + 1, $this->name, $this->surname, $this->add1, $this->add2, $this->city, $this->code, $this->phone, $this->email);
-            }
 
             $delAdrr = new Delivery_adress();
             $delAdrr->connect();
-            $addId = $delAdrr->deliveryAdressExist($this->name, $this->surname,$this->add1,$this->add2,$this->city,$this->code,$this->phone,$this->email);
-            
-            if ($addId == -1){
+            $addId = $delAdrr->creatDeliveryAddress($this->name, $this->surname,$this->add1,$this->add2,$this->city,$this->code,$this->phone,$this->email);
 
+
+            if (!(isset($_SESSION['estConnecte']) && $_SESSION['estConnecte'])){
+
+                $newAccount = new SignUp();
+                $newAccount->connect();
+                $custId = $newAccount->maxId() + 1;
+                $newAccount->createAccount($custId, $this->name, $this->surname, $this->add1, $this->add2, $this->city, $this->code, $this->phone, $this->email, 0);
+                $_SESSION['id'] = $custId;
+                $_SESSION['deliveryId'] = $addId;
+        
+            }else{
+                $order = new Order();
+                $order->connect();
+                $idCommande = $order->getIdOrder($_SESSION['id'])[0];
+                $order->setDeliveryAddress($idCommande, $addId);
             }
 
         }else{
             $this->erreur("Certains champs d'adresse requis n'ont pas été remplis");
         }
     }
-
-
     private function erreur($msgErreur)
     {
         $vue = new Vue("Erreur");

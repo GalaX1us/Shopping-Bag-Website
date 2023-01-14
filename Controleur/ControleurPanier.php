@@ -142,7 +142,7 @@ class ControleurPanier
                 'total_aff' => $total_affichage,
                 'img'       => $image
             );
-
+            
             array_push($tab_resultat, $produit_resultat);
 
             $total_general += $total;

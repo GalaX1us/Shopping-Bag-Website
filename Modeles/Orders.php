@@ -44,4 +44,9 @@ class Order extends Modele
               .'VALUES (?, ?, 1, null, null, ?, 0, ?, null)';
         $this->executerRequete($sql, array($idOrder, $idCustomer, $date, $idSession));
     }
+
+    public function setDeliveryAddress($idOrder, $idAddress) {
+        $sql = 'UPDATE orders SET delivery_add_id = ? WHERE id=?';
+        $this->executerRequete($sql, array($idAddress, $idOrder));
+    }
 }
