@@ -4,7 +4,7 @@
   <?php 
   if ($connecte)
     {
-      echo '<h2> Bonjour ' . $nom . ' :) </h2>'; 
+      echo '<br /><h2> Bonjour ' . $nom . ' :) </h2><br />'; 
       ?>
       <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
         <button name="bouton" value="deconnexion" class="btn btn-primary btn-lg btn-block">Se déconnecter</button>

@@ -30,6 +30,7 @@ class ControleurPanier
     // Ajoute un produit au panier
     public function ajoutPanier() {
         if(isset($_GET['prod_id'])) {
+            $qte = $_POST['qte'];
             if(isset($_SESSION['estConnecte']) && $_SESSION['estConnecte']) {
                 $idCommande = $this->getIdCommande($_SESSION['id']);
                 $orderitem = new Orderitem();
@@ -38,7 +39,7 @@ class ControleurPanier
                 // On vérifie que le produit n'est pas déjà dans le panier
                 $produitsCommande = $orderitem->getProduitsCommande($idCommande);
                 $productInCart = false;
-                $newQte = $_POST['qte'];
+                $newQte = $qte;
                 foreach ($produitsCommande as $produit) {
                     if ($produit['product_id'] == $_GET['prod_id']) {
                         $productInCart = true;
@@ -46,6 +47,10 @@ class ControleurPanier
                         break;
                     }
                 }
+                $product = new ProduitsMulti();
+                $product->connect();
+                $qteMaxProd = $product->getProductQte($_GET['prod_id'])[0]; 
+                if($newQte > $qteMaxProd) $newQte = $qteMaxProd; // On vérifie que la nouvelle qte ne dépasse pas le stock
                 if ($productInCart) { // Si oui, on ne modifie que la quantité enregistrée
                     $orderitem->updateQuantite($idCommande, $_GET['prod_id'], $newQte);
                 }
@@ -54,7 +59,7 @@ class ControleurPanier
                     $orderitem->ajoutPanier($idOrderItem, $idCommande, $_GET['prod_id'], $_POST['qte']);
                 }
             }
-            $this->ajoutProduit($_GET['prod_id'], $newQte); // Ajoute le produit à la variable de session
+            $this->ajoutProduit($_GET['prod_id'], $qte); // Ajoute le produit à la variable de session
             $this->panier();
         }
         else throw new Exception("Le produit à ajouter n'est pas valide");
@@ -76,6 +81,8 @@ class ControleurPanier
     // Ajoute un produit au panier dans $_SESSION
     public function ajoutProduit($id_prod, $qte) {
         if(empty($_SESSION['produits'])) $_SESSION['produits'] = array();
+        if(isset($_SESSION['produits'][$id_prod])) $qte += $_SESSION['produits'][$id_prod]['qte'];
+        
         $product = new ProduitsMulti();
         $product->connect();
         $infos_prod = $product->getProduct($id_prod);
@@ -96,6 +103,7 @@ class ControleurPanier
         }
         $prix = $infos_prod['price'];
         $qteMax = $infos_prod['quantity'];
+        if($qte > $qteMax) $qte = $qteMax;
         $img = $infos_prod['image'];
         $prod_array = array('idprod' => $id_prod, 'nom' => $nom, 'cat' => $categorie,'prix' => $prix, 'qte' => $qte, 'qtemax' => $qteMax, 'img' => $img);
         
