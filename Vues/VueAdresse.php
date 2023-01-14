@@ -1,7 +1,7 @@
 <?php $titre = 'Paiement'; ?>
 
 <?php ob_start(); ?>
-<?php print_r($_SESSION); echo '<br>'; print_r($_POST); ?>
+<?php //print_r($_SESSION); echo '<br>'; print_r($_POST); ?>
 
 <div class="col-12 mt-4">
     <div class="card p-3">
