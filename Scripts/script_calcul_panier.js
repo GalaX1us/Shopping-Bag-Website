@@ -3,7 +3,7 @@ function recalculerPanier() {
   var total = 0;
   var produits = document.getElementsByName("produit");
   produits.forEach(produit => {
-    var qte = produit.querySelector("input[name='quantite']").value;
+    var qte = produit.querySelector("input[class='qte']").value;
     var prix = document.querySelector(".prix").getAttribute('value');
     var total_prod = parseFloat(qte) * parseFloat(prix);
     produit.querySelector(".total_prod").innerHTML = formatagePrix(total_prod);

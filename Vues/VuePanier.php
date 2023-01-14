@@ -50,7 +50,7 @@ if (empty($donnees)) {
 
 
                 <td class="align-middle"> 
-                    <input type="number" id="qte" name="qte-<?= $produit['id'] ?>" value="<?= $produit['qte'] ?>" min="1" max="<?= $produit['qtemax'] ?>" placeholder="Qte" onchange="recalculerPanier()" required>
+                    <input type="number" class="qte" name="qte-<?= $produit['id'] ?>" value="<?= $produit['qte'] ?>" min="1" max="<?= $produit['qtemax'] ?>" placeholder="Qte" onchange="recalculerPanier()" required>
                 </td>
 
                 <td class="align-middle">
@@ -59,7 +59,7 @@ if (empty($donnees)) {
 
                 <td class="align-middle">
                     
-                        <button onclick="window.location.href = 'index.php?action=PanierSuppr&suppr_id=<?= $produit['id'] ?>'" name="boutonSuppr" value="supprimer" class="btn fs-4">X</button>
+                        <button onclick="window.location.href = 'index.php?action=PanierSuppr&suppr_id=<?= $produit['id'] ?>'" name="boutonSuppr" type="button" value="supprimer" class="btn fs-4">X</button>
                 </td>
             </tr>
     <?php } ?>
