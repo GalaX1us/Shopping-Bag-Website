@@ -37,15 +37,23 @@ class Orderitem extends Modele
         $this->executerRequete($sql, array($idOrder, $idProduit));
     }
 
+    // Ajoute un produit à la commande
     public function ajoutPanier($id, $idOrder, $idProduit, $qte) {
         $sql = 'INSERT INTO orderitems (id, order_id, product_id, quantity)'
               .'VALUES (?, ?, ?, ?)';
         $this->executerRequete($sql, array($id, $idOrder, $idProduit, $qte));
     }
 
+    // Met à jour la quantité d'un produit de la commande
     public function updateQuantite($idOrder, $idProduit, $qte) {
         $sql = 'UPDATE orderitems SET quantity=?'
               .'WHERE order_id=? and product_id=?';
         $this->executerRequete($sql, array($qte, $idOrder, $idProduit));
+    }
+
+    public function getProduitsCommande($idOrder) {
+        $sql = 'SELECT product_id, quantity FROM orderitems WHERE order_id=?';
+        $orderitems = $this->executerRequete($sql, array($idOrder));
+        return $orderitems->fetchAll();
     }
 }

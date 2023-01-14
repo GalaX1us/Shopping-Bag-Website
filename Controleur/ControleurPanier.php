@@ -34,16 +34,33 @@ class ControleurPanier
                 $idCommande = $this->getIdCommande($_SESSION['id']);
                 $orderitem = new Orderitem();
                 $orderitem->connect();
-                $idOrderItem = $orderitem->getNextId();
-                $orderitem->ajoutPanier($idOrderItem, $idCommande, $_GET['prod_id'], $_POST['qte']); // Ajoute le produit à la BD
+
+                // On vérifie que le produit n'est pas déjà dans le panier
+                $produitsCommande = $orderitem->getProduitsCommande($idCommande);
+                $productInCart = false;
+                $newQte = $_POST['qte'];
+                foreach ($produitsCommande as $produit) {
+                    if ($produit['product_id'] == $_GET['prod_id']) {
+                        $productInCart = true;
+                        $newQte += $produit['quantity'];
+                        break;
+                    }
+                }
+                if ($productInCart) { // Si oui, on ne modifie que la quantité enregistrée
+                    $orderitem->updateQuantite($idCommande, $_GET['prod_id'], $newQte);
+                }
+                else { // Sinon, on ajoute le produit à la commande dans la BD
+                    $idOrderItem = $orderitem->getNextId();
+                    $orderitem->ajoutPanier($idOrderItem, $idCommande, $_GET['prod_id'], $_POST['qte']);
+                }
             }
-            $this->ajoutProduit($_GET['prod_id']); // Ajoute le produit à la variable de session
+            $this->ajoutProduit($_GET['prod_id'], $newQte); // Ajoute le produit à la variable de session
             $this->panier();
         }
         else throw new Exception("Le produit à ajouter n'est pas valide");
     }
 
-    // Renvoie l'id de commande
+    // Renvoie l'id de commande s'il existe, ou crée une nouvelle commande
     public function getIdCommande($idClient) {
         $order = new Order();
         $order->connect();
@@ -57,7 +74,7 @@ class ControleurPanier
     }
 
     // Ajoute un produit au panier dans $_SESSION
-    public function ajoutProduit($id_prod) {
+    public function ajoutProduit($id_prod, $qte) {
         if(empty($_SESSION['produits'])) $_SESSION['produits'] = array();
         $product = new ProduitsMulti();
         $product->connect();
@@ -78,7 +95,6 @@ class ControleurPanier
                 $categorie = 'Boissons';
         }
         $prix = $infos_prod['price'];
-        $qte = $_POST['qte'];
         $qteMax = $infos_prod['quantity'];
         $img = $infos_prod['image'];
         $prod_array = array('idprod' => $id_prod, 'nom' => $nom, 'cat' => $categorie,'prix' => $prix, 'qte' => $qte, 'qtemax' => $qteMax, 'img' => $img);
