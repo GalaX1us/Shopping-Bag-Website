@@ -5,12 +5,12 @@
     <?php
     foreach ($produitsInfos as $produit) {?>
     <hr class="bg-primary border-3 border-top border-primary">
-        <div class="produitMulti m-4 my-4">
-        <div class="image_produit">
+    <div class="row m-4 g-3">
+        <div class="col-12 col-md-4">
             <a href="index.php?action=Produit&cat=<?= $cat?>&prod_id=<?= $produit['id']?>">
-            <img class="rounded" src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>"></a>
+            <img class="img-fluid rounded" src="assets/<?= $produit['image']?>" alt="<?= $produit['name']?>"></a>
         </div>
-        <div class="description_produit m-3 my-auto">
+        <div class="col-12 col-md-8 p-3">
             <a href="index.php?action=Produit&cat=<?= $cat?>&prod_id=<?= $produit['id']?>"><h3><?= $produit['name']?></h3></a>
             <p><?= $produit['description']?></p>
             <strong>Prix : <?= $produit['price']?>€</strong>
