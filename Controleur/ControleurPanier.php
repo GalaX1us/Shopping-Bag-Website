@@ -30,7 +30,7 @@ class ControleurPanier
     // Ajoute un produit au panier
     public function ajoutPanier() {
         if(isset($_GET['prod_id'])) {
-            if(isset($_SESSION['connecte']) && $_SESSION['connecte']) {
+            if(isset($_SESSION['estConnecte']) && $_SESSION['estConnecte']) {
                 $idCommande = $this->getIdCommande($_SESSION['id']);
                 $orderitem = new Orderitem();
                 $orderitem->connect();
@@ -52,6 +52,7 @@ class ControleurPanier
             $idCommande = $order->getNextId();
             $order->createOrder($idCommande, $_SESSION['id'], date('Y-m-d'), session_id());               
         }
+        else $idCommande = $idCommande[0];
         return $idCommande;
     }
 
@@ -88,10 +89,10 @@ class ControleurPanier
     // Supprime un produit du panier en le supprimant aussi de la BD
     public function panierSuppr() {
         if(isset($_GET['suppr_id'])) {
-            if(isset($_SESSION['connecte']) && $_SESSION['connecte']) {
+            if(isset($_SESSION['estConnecte']) && $_SESSION['estConnecte']) {
                 $order = new Order();
                 $order->connect();
-                $idCommande = $order->getIdOrder($_SESSION['id']);
+                $idCommande = $order->getIdOrder($_SESSION['id'])[0];
                 $orderitem = new Orderitem();
                 $orderitem->connect();
                 $orderitem->supprOrderitem($idCommande, $_GET['suppr_id']);

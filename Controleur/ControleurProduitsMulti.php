@@ -36,16 +36,20 @@ class ControleurProduitsMulti
         $vue->generer(array('produitsInfos'=>$results, 'cat'=>$cat, 'nomCategorie'=>$name));
     }
 
-    public function Produit($id)
-    {         
-        $vue = new Vue('Produit');
-        $product = new ProduitsMulti();
-        $reviews = new Review();
-        $reviews->connect();
-        $product->connect();
-        $results = $product->getProduct($id);
-        $results_rev = $reviews->getReview($id);
-        $vue->generer(array('produitInfos'=>$results, 'reviewsInfos'=>$results_rev));
+    public function Produit()
+    {
+        if(isset($_GET['prod_id'])) {
+            $id = $_GET['prod_id'];
+            $vue = new Vue('Produit');
+            $product = new ProduitsMulti();
+            $reviews = new Review();
+            $reviews->connect();
+            $product->connect();
+            $results = $product->getProduct($id);
+            $results_rev = $reviews->getReview($id);
+            $vue->generer(array('produitInfos'=>$results, 'reviewsInfos'=>$results_rev));
+        }
+        else throw new Exception("Produit non valide.");
     }
 
     // Affiche une erreur

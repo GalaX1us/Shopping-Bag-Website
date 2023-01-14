@@ -3,18 +3,16 @@
 <?php ob_start(); ?>
 
 <?php
-
-if ($_GET['action']=='PanierProd'){
-    echo '<div class="float-start">
-        <a href="index.php?action=' . $_GET['cat'] . '" class="text-black" style="text-decoration:none">← Continuer mes achats</a>
-        </div>';
-}
+// Si l'on vient d'ajouter un produit au panier, on peut retourner sur la catégorie d'où l'on vient
+if ($_GET['action']=='PanierProd'){ ?>
+    <div class="float-start">
+        <a href="index.php?action=<?= $_GET['cat'] ?>" class="text-black" style="text-decoration:none">← Continuer mes achats</a>
+    </div>
+<?php }
 
 if (empty($donnees)) {
     echo '<br/><h2> Votre panier est vide :( </h2>';
 } else { 
-    //print_r($_SESSION);
-    //echo session_id();
     ?>
 
 <br><h2> Votre panier :</h2>
@@ -28,7 +26,7 @@ if (empty($donnees)) {
             <th><span class="ml-4">Supprimer</span></th>
         </tr>
     </thead>
-
+<form method="post" action="index.php?action=Adresse"> <!-- formulaire pour récupérer les quantités des produits -->
     <tbody>
         <?php foreach($donnees['produits'] as $produit) { ?>
             <tr class="border-bottom" name="produit">
@@ -52,7 +50,7 @@ if (empty($donnees)) {
 
 
                 <td class="align-middle"> 
-                    <input type="number" id="qte" name="quantite" value="<?= $produit['qte'] ?>" min="1" max="<?= $produit['qtemax'] ?>" placeholder="Qte" onchange="recalculerPanier()" required>
+                    <input type="number" class="qte" name="qte-<?= $produit['id'] ?>" value="<?= $produit['qte'] ?>" min="1" max="<?= $produit['qtemax'] ?>" placeholder="Qte" onchange="recalculerPanier()" required>
                 </td>
 
                 <td class="align-middle">
@@ -61,7 +59,7 @@ if (empty($donnees)) {
 
                 <td class="align-middle">
                     
-                        <button onclick="window.location.href = 'index.php?action=PanierSuppr&suppr_id=<?= $produit['id'] ?>'" name="boutonSuppr" value="supprimer" class="btn fs-4">X</button>
+                        <button onclick="window.location.href = 'index.php?action=PanierSuppr&suppr_id=<?= $produit['id'] ?>'" name="boutonSuppr" type="button" value="supprimer" class="btn fs-4">X</button>
                 </td>
             </tr>
     <?php } ?>
@@ -70,7 +68,7 @@ if (empty($donnees)) {
 
 <h3 id="total">Total de la commande : <?= $donnees['total_general'] ?></h3>
 
-<form method="post" action="index.php?action=Adresse">
+
     <button name="bouton" value="caisse" class="btn btn-primary btn-lg btn-block m-4">Aller à la caisse</button>
 </form>
 
