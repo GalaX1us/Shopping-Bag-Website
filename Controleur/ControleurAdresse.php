@@ -1,5 +1,5 @@
 <?php require_once './Vues/Vue.php';
-require_once './Modeles/Delivery_addresses.php';
+require_once './Modeles/Customers.php';
 class ControleurAdresse
 {
     public function __construct()
@@ -14,10 +14,10 @@ class ControleurAdresse
         $donnees = array('estConnecte' => $co);
 
         if ($co) {
-            $customer = new Delivery_adress();
+            $customer = new Customer();
             $customer->connect();
 
-            $infos = $customer->getDelivery_adress($_SESSION['id']);
+            $infos = $customer->getCustomer($_SESSION['id']);
             $donnees = array('infosClient' => $infos, 'estConnecte' => $co);
         }
 
