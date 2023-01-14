@@ -1,22 +1,21 @@
-<?php require_once 'Modele/Modele.php';
+<?php require_once 'Modele.php';
 class Admin extends Modele
 {
-    // Renvoie la liste des admins du blog
-    public function getAdmins()
+    // Renvoie la liste des commandes 
+    public function getCommandes()
     {
-        $sql = 'select id, username, password from admin'
-            . ' order by BIL_ID desc';
-        $admins = $this->executerRequete($sql);
-        return $admins;
-    }
-    // Renvoie les informations sur un admin
-    public function getAdmin($idAdmin)
-    {
-        $sql = 'select id, username, password from admin'
-            . ' where id=?';
-        $admin = $this->executerRequete($sql, array($idAdmin));
-        if ($admin->rowCount() == 1) return $admin->fetch();
-        // Accès à la première ligne de résultat
-        else throw new Exception("Aucun admin ne correspond à l'identifiant '$idAdmin'");
+        $sql = 'select O.id, D.firstname, D.lastname, D.add1, D.add2, D.city, D.postcode, O.date, O.payment_type, O.total from orders O
+                    join delivery_addresses D on D.id = O.delivery_add_id
+                    where status = 2';
+            $commandes = $this->executerRequete($sql, array());
+
+            if($commandes->rowCount() > 0)
+            {
+                return $commandes->fetchAll(); 
+            }
+            else
+            {
+                throw new Exception("Aucune commande n'a été trouvée");
+            }
     }
 }

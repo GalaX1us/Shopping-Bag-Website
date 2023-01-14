@@ -13,14 +13,14 @@
       <?php 
       if ($admin)
       {
-        echo '<h2> Vous êtes administrateur :) </h2>';
+        echo '<h2> Vous êtes administrateur 😎😎😎 </h2>';
         ?> 
+    <form method="post" action="index.php?action=Admin"> <!-- bien creer le fichier au bon endroit -->
+        <button name="bouton"  class="btn btn-primary btn-lg btn-block">Accéder à la page administrateur</button>
+    </form>
+      
 
-      <button name="bouton"   href="index.php?action=Admin">Page Administrateur</button>
-      <button class="btn btn-primary btn-lg btn-block"onclick="window.location.href = 'index.php?action=Connexion';"> Cliquez ici </button>
-      <?php 
-      }
-      ?>
+<?php } ?>
       
       
 
