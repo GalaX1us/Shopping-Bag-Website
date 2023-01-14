@@ -9,10 +9,10 @@ class SignUp extends Modele
         $sql = 'INSERT INTO logins (id, customer_id, username, password) VALUES (?, ?, ?, ?)';
         $this->executerRequete($sql, array($id, $id, $identifiant, $password));
     }
-    public function createAccount($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email)
+    public function createAccount($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email, $reg=1)
     {
-        $sql = 'INSERT INTO customers (id, forname, surname, add1, add2, add3, postcode, phone, email, registered) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)';
-        $this->executerRequete($sql, array($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email));
+        $sql = 'INSERT INTO customers (id, forname, surname, add1, add2, add3, postcode, phone, email, registered) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $this->executerRequete($sql, array($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email, $reg));
     }
     public function maxId()
     {

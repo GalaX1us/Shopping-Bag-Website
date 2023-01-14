@@ -1,6 +1,6 @@
 <?php 
 require_once './Vues/Vue.php';
-require_once './Modeles/Delivery_addresses.php';
+require_once './Modeles/Customers.php';
 require_once './Modeles/Orders.php';
 require_once './Modeles/Orderitems.php';
 class ControleurAdresse
@@ -17,14 +17,15 @@ class ControleurAdresse
         catch (Exception $e) {
             $this->erreur($e->getMessage());
         }
+        
         $co = isset($_SESSION['estConnecte']) && $_SESSION['estConnecte'];
         $donnees = array('estConnecte' => $co);
 
         if ($co) {
-            $customer = new Delivery_adress();
+            $customer = new Customer();
             $customer->connect();
 
-            $infos = $customer->getDelivery_adress($_SESSION['id']);
+            $infos = $customer->getCustomer($_SESSION['id']);
             $donnees = array('infosClient' => $infos, 'estConnecte' => $co);
         }
 

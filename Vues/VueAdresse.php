@@ -1,7 +1,6 @@
 <?php $titre = 'Paiement'; ?>
 
 <?php ob_start(); ?>
-<?php //print_r($_SESSION); echo '<br>'; print_r($_POST); ?>
 
 <div class="col-12 mt-4">
     <div class="card p-3">
@@ -20,21 +19,21 @@
                 <div class="collapse p-3 pt-0" id="collapseExample">
                     <form class="row g-3" method="post" action="index.php?action=Paiement">
                         <h4 class="d-flex float-start">Identité</h4>
-                        <div class="col-md-6 col-12"><input type="text" name="name" value="<?= $infosClient['forname'] ?>" placeholder="Prénom" class="form-control" disabled>
+                        <div class="col-md-6 col-12"><input type="text" name="name" value="<?= $infosClient['forname'] ?>" placeholder="Prénom" class="form-control" readonly>
                         </div>
-                        <div class="col-md-6 col-12"><input type="text" name="surname" value="<?= $infosClient['surname'] ?>" placeholder="Nom" class="form-control" disabled>
+                        <div class="col-md-6 col-12"><input type="text" name="surname" value="<?= $infosClient['surname'] ?>" placeholder="Nom" class="form-control" readonly>
                         </div>
                         <br>
                         <h4 class="d-flex float-start">Adresse</h4>
-                        <div class="col-md-6 col-12"><input type="text" name="add1" value="<?= $infosClient['add1'] ?>" placeholder="Adresse" class="form-control col" disabled></div>
-                        <div class="col-md-6 col-12"><input type="text" name="add2" value="<?= $infosClient['add2'] ?>" placeholder="Complément d'adresse" class="form-control" disabled></div>
-                        <div class="col-md-6 col-12"><input type="text" name="city" value="<?= $infosClient['add3'] ?>" placeholder="Ville" class="form-control" disabled></div>
-                        <div class="col-md-6 col-12"><input type="text" name="code" value="<?= $infosClient['postcode'] ?>" placeholder="Code Postal" class="form-control" disabled></div>
+                        <div class="col-md-6 col-12"><input type="text" name="add1" value="<?= $infosClient['add1'] ?>" placeholder="Adresse" class="form-control col" readonly></div>
+                        <div class="col-md-6 col-12"><input type="text" name="add2" value="<?= $infosClient['add2'] ?>" placeholder="Complément d'adresse" class="form-control" readonly></div>
+                        <div class="col-md-6 col-12"><input type="text" name="city" value="<?= $infosClient['add3'] ?>" placeholder="Ville" class="form-control" readonly></div>
+                        <div class="col-md-6 col-12"><input type="text" name="code" value="<?= $infosClient['postcode'] ?>" placeholder="Code Postal" class="form-control" readonly></div>
                         <br>
 
                         <h4 class="d-flex float-start">Contact</h4>
-                        <div class="col-md-6 col-12"><input type="email" name="email" value="<?= $infosClient['email'] ?>" placeholder="Email" class="form-control" disabled></div>
-                        <div class="col-md-6 col-12"><input type="tel" name="phone" value="<?= $infosClient['phone'] ?>" placeholder="Numéro de téléphone" class="form-control" disabled></div>
+                        <div class="col-md-6 col-12"><input type="email" name="email" value="<?= $infosClient['email'] ?>" placeholder="Email" class="form-control" readonly></div>
+                        <div class="col-md-6 col-12"><input type="tel" name="phone" value="<?= $infosClient['phone'] ?>" placeholder="Numéro de téléphone" class="form-control" readonly></div>
 
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Utiliser</button>
