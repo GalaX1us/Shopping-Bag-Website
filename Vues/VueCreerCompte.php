@@ -1,4 +1,4 @@
-<?php $titre = "Création d'un compte"; 
+<?php $titre = "ISIWEB4SHOP - Créer Compte"; 
 require_once 'Controleur/ControleurConnexion.php';
 ?>
 

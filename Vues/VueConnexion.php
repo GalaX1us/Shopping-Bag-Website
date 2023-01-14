@@ -1,4 +1,4 @@
-<?php $titre = "Page de connexion"; ?>
+<?php $titre = "ISIWEB4SHOP - Connexion"; ?>
 <?php ob_start(); ?>
 
   <?php 

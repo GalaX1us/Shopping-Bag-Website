@@ -1,4 +1,4 @@
-<?php $titre = 'ISIWEB4SHOP -Accueil'; ?>
+<?php $titre = 'ISIWEB4SHOP - Accueil'; ?>
 
 <?php ob_start(); ?>
     <span class="d-flex justify-content-center"><h2>Bienvenue sur ISIWEB4SHOP</h2>

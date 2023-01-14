@@ -3,7 +3,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$titre = 'ISIWEB4SHOP -Admin'; ?>
+$titre = 'ISIWEB4SHOP - Admin'; ?>
 
 <?php ob_start(); 
 

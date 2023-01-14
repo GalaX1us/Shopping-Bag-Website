@@ -1,4 +1,4 @@
-<?php $titre = 'Paiement'; ?>
+<?php $titre = 'ISIWEB4SHOP - Paiement'; ?>
 
 <?php ob_start(); ?>
 
