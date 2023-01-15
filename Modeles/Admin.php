@@ -18,4 +18,24 @@ class Admin extends Modele
                 throw new Exception("Aucune commande n'a été trouvée");
             }
     }
+    // Renvoie les informations sur une commande
+    public function getProduits()
+    {
+        $sql = 'SELECT p.name, p.image, o.quantity FROM products p
+                JOIN orderitems o ON o.product_id = p.id
+                WHERE o.order_id = ?';
+                ;
+        $infos = $this->executerRequete($sql, array());
+        if($infos->rowCount() > 0)
+        {
+            return $infos->fetchAll(); 
+        }
+        else
+        {
+            throw new Exception("Aucune commande n'a été trouvée");
+        }
+    }
+
+
+
 }

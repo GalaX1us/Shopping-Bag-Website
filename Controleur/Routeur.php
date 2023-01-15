@@ -66,6 +66,8 @@ class Routeur
                     case 'Admin':
                         $this->ctrlAdmin->admin();
                         break;
+                    case 'TraiterCommande':
+                        $this->ctrlAdmin->traiterCommande();
                     default:
                         throw new Exception("Action non valide.");
                 }
