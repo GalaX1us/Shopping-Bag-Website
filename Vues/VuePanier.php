@@ -1,4 +1,4 @@
-<?php $titre = "Mon Blog - Panier"; ?>
+<?php $titre = "ISIWEB4SHOP - Panier"; ?>
 
 <?php ob_start(); ?>
 

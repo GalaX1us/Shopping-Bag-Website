@@ -1,4 +1,4 @@
-<?php $titre = 'Mon Blog - Erreur'; ?>
+<?php $titre = 'ISIWEB4SHOP - Erreur'; ?>
 
 <?php ob_start(); ?>
 <br />

@@ -30,4 +30,13 @@ class ProduitsMulti extends Modele
         // Accès à la première ligne de résultat
         else throw new Exception("Aucun produit ne correspond à l'id '$id'");
     }
+
+    public function getProductQte($id)
+    {
+        $sql = 'select quantity from products where id = ?';
+        $products = $this->executerRequete($sql,array($id));
+        if ($products->rowCount() == 1) return $products->fetch();
+        // Accès à la première ligne de résultat
+        else throw new Exception("Aucun produit ne correspond à l'id '$id'");
+    }
 }

@@ -1,4 +1,4 @@
-<?php $titre = 'ISIWEB4SHOP -' . $produitInfos['name'] .''; ?>
+<?php $titre = 'ISIWEB4SHOP - ' . $produitInfos['name'] .''; ?>
 
 <?php ob_start(); ?>
         <div class="float-start">
