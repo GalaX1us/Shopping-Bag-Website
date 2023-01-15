@@ -7,6 +7,13 @@ $titre = 'ISIWEB4SHOP - Admin'; ?>
 
 ?><h1>Liste des commandes à traiter</h1>
 <?php 
+if ($exist == 0)
+{
+    echo '<hr class="bg-primary border-3 border-top border-primary">';
+    echo "<p>Aucune commande à traiter<p>";
+}
+else
+{
 foreach ($commandes as $c) {
 ?>
     <div class="Commande">
@@ -25,7 +32,7 @@ foreach ($commandes as $c) {
             </form>
         </div>
     </div>
-<?php } ?>
+<?php }} ?>
 
 
 

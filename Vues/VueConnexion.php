@@ -4,23 +4,26 @@
   <?php 
   if ($connecte)
     {
-      echo '<br /><h2> Bonjour ' . $nom . ' :) </h2><br />'; 
-      ?>
-      <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
-        <button name="bouton" value="deconnexion" class="btn btn-primary btn-lg btn-block">Se déconnecter</button>
-      </form>
-      
-      <?php 
+        echo '<br /><h2> Bonjour ' . $nom . ' :) </h2> '; 
+        if ($admin)
+        {
+          echo '<hr class="bg-primary border-3 border-top border-primary">';
+          echo '<h2> Vous êtes administrateur </h2>';
+        }
+          ?> 
+        
+        <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
+          <button name="bouton" value="deconnexion" class="btn btn-primary btn-lg btn-block">Se déconnecter</button>
+        </form>
+    <?php 
       if ($admin)
-      {
-        echo '<h2> Vous êtes administrateur 😎😎😎 </h2>';
-        ?> 
-    <form method="post" action="index.php?action=Admin"> <!-- bien creer le fichier au bon endroit -->
-        <button name="bouton"  class="btn btn-primary btn-lg btn-block">Accéder à la page administrateur</button>
-    </form>
-      
+      { ?>
+      <form method="post" action="index.php?action=Admin"> <!-- bien creer le fichier au bon endroit -->
+          <button name="bouton"  class="btn btn-primary btn-lg btn-block">Accéder à la page administrateur</button>
+      </form>
+        
 
-<?php } ?>
+      <?php } ?>
       
       
 

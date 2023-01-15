@@ -15,17 +15,17 @@ class Admin extends Modele
             }
             else
             {
-                throw new Exception("Aucune commande n'a été trouvée");
+                throw new Exception();
             }
     }
     // Renvoie les informations sur une commande
-    public function getProduits()
+    public function getProduits($id)
     {
         $sql = 'SELECT p.name, p.image, o.quantity FROM products p
                 JOIN orderitems o ON o.product_id = p.id
                 WHERE o.order_id = ?';
                 ;
-        $infos = $this->executerRequete($sql, array());
+        $infos = $this->executerRequete($sql, array($id));
         if($infos->rowCount() > 0)
         {
             return $infos->fetchAll(); 
@@ -35,6 +35,13 @@ class Admin extends Modele
             throw new Exception("Aucune commande n'a été trouvée");
         }
     }
+
+    public function validerCommande($id)
+    {
+        $sql = 'UPDATE orders SET status = 10 WHERE id = ?';
+        $this->executerRequete($sql, array($id));
+    }
+
 
 
 
