@@ -1,14 +1,3 @@
-.produitMulti{
-  display:flex;
-  flex-direction: row;
-}
-
-.image_produit img{
-    width: 20vw;
-}
-.description_produit {
-    margin: auto;
-}
 .dynamic-width {
     text-align: center;
     min-height: 100%;

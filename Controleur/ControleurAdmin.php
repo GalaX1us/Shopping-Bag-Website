@@ -1,4 +1,8 @@
-<?php require_once './Vues/Vue.php';
+<?php 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+require_once './Vues/Vue.php';
 require_once './Modeles/Admin.php';
 
 class ControleurAdmin
@@ -11,21 +15,87 @@ class ControleurAdmin
     // Affiche la page d'accueil du blog
     public function admin()
     {
-        
-        $vue = new Vue("Admin");
-        $Admin = new Admin();
-        $Admin->connect();
-        try
+        if (isset($_SESSION['admin']) && ($_SESSION['admin']==true))
         {
-            $commandes = $Admin->getCommandes();
+            $vue = new Vue("Admin");
+            $Admin = new Admin();
+            $Admin->connect();
+            $exist = 1;
+            $commandes = array();
             
+            try
+            {
+                $commandes = $Admin->getCommandes();
+            }
+            catch (Exception $e)
+            {
+
+                $exist = 0;
+                //$this->erreur("Aucune commande n'a été trouvée");
+            } 
+            
+            
+            $vue->generer(array("commandes" => $commandes , "exist" => $exist));
         }
-        catch (Exception $e)
+        else 
         {
-            $this->erreur("Aucune commande n'a été trouvée");
+            $this->erreur("Vous n'êtes pas connecté en tant qu'administrateur");
         }
-        $vue->generer(array("commandes" => $commandes));
+        
+        
        
+    }
+    
+    public function TraiterCommande()
+    {
+        if (isset($_SESSION['admin']) && ($_SESSION['admin']==true))
+        {
+            $vue = new Vue("TraiterCommande");
+            $Admin = new Admin();
+            $Admin->connect();
+            try
+            {
+                $produits = $Admin->getProduits($_GET['id']);
+            }
+            catch (Exception $e)
+            {
+                $this->erreur("Aucune commande n'a été trouvée 1");
+            }
+            $vue->generer(array("produits" => $produits, "id" => $_GET['id']));
+        }
+        else 
+        {
+            $this->erreur("Vous n'êtes pas connecté en tant qu'administrateur");
+        }
+    }
+    public function actionCommande()
+    {
+        if (isset($_SESSION['admin']) && ($_SESSION['admin']==true))
+        {
+            $vue = new Vue("Admin");
+            $Admin = new Admin();
+            $Admin->connect();
+            if (isset($_POST['valider']) && $_POST['valider'] == "valider")
+            {
+                
+                $Admin->validerCommande($_GET['id']);
+                header('Location: index.php?action=Admin');
+            }
+            else if (isset($_POST['refuser']) && $_POST['refuser'] == "refuser")
+            {
+                $this->erreur("refuser");
+            }
+            else
+            {
+                $this->erreur("Aucune action n'a été choisie");
+            }
+
+                
+        }
+        else 
+        {
+            $this->erreur("Vous n'êtes pas connecté en tant qu'administrateur");
+        }
     }
     // Affiche une erreur
     private function erreur($msgErreur)
