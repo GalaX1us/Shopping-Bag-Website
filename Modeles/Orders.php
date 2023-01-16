@@ -24,7 +24,7 @@ class Order extends Modele
     public function getIdOrder($idCustomer)
     {
         $sql = 'select id from orders'
-            . ' where customer_id=? and status=0';
+            . ' where customer_id=? and (status=0 or status=1)';
         $order = $this->executerRequete($sql, array($idCustomer));
         if ($order->rowCount() == 1) return $order->fetch();
         // Accès à la première ligne de résultat

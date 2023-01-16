@@ -5,6 +5,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require_once 'Vues/Vue.php';
 require_once 'Modeles/Logins.php';
+require_once './Modeles/Orders.php';
+require_once './Controleur/ControleurPanier.php';
 class ControleurConnexion
 {
     private $msg = "";
@@ -142,6 +144,19 @@ class ControleurConnexion
                     $_SESSION['estConnecte'] = true;
                     $_SESSION['id'] = $donnees['id'];
                     $this->msg ="";
+
+                    // On va voir s'il a une commande en cours pour récupérer son panier
+                    if(isset($_SESSION['produits'])) unset($_SESSION['produits']);
+                    $order = new Order();
+                    $order->connect();
+                    $idCommande = $order->getIdOrder($_SESSION['id'])[0];
+                    $orderitem = new Orderitem();
+                    $orderitem->connect();
+                    $produitsCommande = $orderitem->getProduitsCommande($idCommande);
+                    $ctrlPanier = new ControleurPanier();
+                    foreach ($produitsCommande as $produit) {
+                        $ctrlPanier->ajoutProduit($produit['product_id'], $produit['quantity']);
+                    }
                 } 
                 else {
                     $this->msg = "identifiant ou mot de passe incorrect";
