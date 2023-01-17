@@ -15,27 +15,31 @@ class ControleurAdmin
     // Affiche la page d'accueil du blog
     public function admin()
     {
+        
         if (isset($_SESSION['admin']) && ($_SESSION['admin']==true))
         {
-            $vue = new Vue("Admin");
-            $Admin = new Admin();
-            $Admin->connect();
-            $exist = 1;
-            $commandes = array();
-            
-            try
+            if (isset($_POST['bouton'])&& $_POST['bouton'] == "commandes") 
             {
-                $commandes = $Admin->getCommandes();
-            }
-            catch (Exception $e)
-            {
+                $vue = new Vue("Admin");
+                $Admin = new Admin();
+                $Admin->connect();
+                $exist = 1;
+                $commandes = array();
+                
+                try
+                {
+                    $commandes = $Admin->getCommandes();
+                }
+                catch (Exception $e)
+                {
 
-                $exist = 0;
-                //$this->erreur("Aucune commande n'a été trouvée");
-            } 
-            
-            
-            $vue->generer(array("commandes" => $commandes , "exist" => $exist));
+                    $exist = 0;
+                    //$this->erreur("Aucune commande n'a été trouvée");
+                } 
+                
+                
+                $vue->generer(array("commandes" => $commandes , "exist" => $exist));
+            }
         }
         else 
         {
@@ -92,6 +96,23 @@ class ControleurAdmin
         {
             $this->erreur("Vous n'êtes pas connecté en tant qu'administrateur");
         }
+    }
+    public function gererStocks()
+    {
+
+        $vue = new Vue("GererStocks");
+        $Admin = new Admin();
+        $Admin->connect();
+        $produits = array();
+        try
+        {
+            $produits = $Admin->getAllProduits();
+        }
+        catch (Exception $e)
+        {
+            $this->erreur("Aucun produit n'a été trouvé");
+        }
+        $vue->generer(array("produits" => $produits));
     }
     // Affiche une erreur
     private function erreur($msgErreur)

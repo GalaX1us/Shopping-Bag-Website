@@ -6,7 +6,7 @@ class Order extends Modele
     {
         $sql = 'select id, username, password from orders'
             . ' order by BIL_ID desc';
-        $orders = $this->executerRequete($sql);
+        $orders = $this->executerRequete($sql)->fetch();
         return $orders;
     }
     // Renvoie les informations sur une order

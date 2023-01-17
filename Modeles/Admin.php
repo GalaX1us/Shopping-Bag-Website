@@ -35,6 +35,19 @@ class Admin extends Modele
             throw new Exception("Aucune commande n'a été trouvée");
         }
     }
+    public function getAllProduits()
+    {
+        $sql = 'SELECT * FROM products';
+        $produits = $this->executerRequete($sql, array());
+        if($produits->rowCount() > 0)
+        {
+            return $produits->fetchAll(); 
+        }
+        else
+        {
+            throw new Exception("Aucun produit n'a été trouvé");
+        }
+    }
 
     public function validerCommande($id)
     {

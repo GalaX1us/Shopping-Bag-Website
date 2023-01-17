@@ -149,7 +149,12 @@ class ControleurConnexion
                     if(isset($_SESSION['produits'])) unset($_SESSION['produits']);
                     $order = new Order();
                     $order->connect();
-                    $idCommande = $order->getIdOrder($_SESSION['id'])[0];
+                    $idCommande = $order->getIdOrder($_SESSION['id']);
+                    if($idCommande === false) { // Si on n'a pas de commande en cours on en crée une nouvelle
+                        $idCommande = $order->getNextId();
+                        $order->createOrder($idCommande, $_SESSION['id'], date('Y-m-d'), session_id());               
+                    }
+                    else $idCommande = $idCommande[0];
                     $orderitem = new Orderitem();
                     $orderitem->connect();
                     $produitsCommande = $orderitem->getProduitsCommande($idCommande);
