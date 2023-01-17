@@ -171,6 +171,7 @@ class ControleurPanier
 
             $total_general += $total;
         }
+        $_SESSION['total_general'] = $total_general;
         return array('produits' => $tab_resultat, 'total_general' =>$this->formatagePrix($total_general));
     }
 

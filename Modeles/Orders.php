@@ -54,4 +54,9 @@ class Order extends Modele
         $sql = 'UPDATE orders SET status = ? WHERE id=?';
         $this->executerRequete($sql, array($status, $idOrder));
     }
+
+    public function updateOrderPaiement($idOrder, $typePaiement, $total, $date, $idSession) {
+        $sql = 'UPDATE orders SET status = 2, payment_type=?, total=?, date=?, session=?  WHERE id=?';
+        $this->executerRequete($sql, array($typePaiement, $total, $date, $idSession, $idOrder));
+    }
 }

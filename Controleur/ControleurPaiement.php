@@ -28,21 +28,34 @@ class ControleurPaiement
     // Affiche la page d'accueil du blog
     public function Paiement()
     {   
-        if (isset($_SESSION["total_general"]))
+        if (isset($_SESSION['total_general']))
         {
-            $this->prix = $_SESSION["total_general"]; //verifier que c'est bien le bon nom 
+            $this->prix = $_SESSION['total_general'];
         }
-        if (((isset($_POST['paypal']) &&  $_POST['paypal']== true)||(isset($_POST['cb']) &&  $_POST['paypal']== true))&&!$this->paye) 
+        if (((isset($_POST['paypal']) &&  $_POST['paypal']== true)||(isset($_POST['cheque']) &&  $_POST['cheque']== true))&&!$this->paye) 
         {
             $this->paye = true;
-            $order = new Order();
-            $order->connect();
-            $idCommande = $order->getIdOrder($_SESSION['id']);
-            if ($idCommande !== False) {
-                $order->changeStatus($idCommande[0], 2);
-            }
+            if($_POST['paypal']) $typePaiement = "paypal";
+            else $typePaiement = "cheque";
 
-            //rajout a la base de données
+            // Finalisation de la commande dans la BD
+            if(isset($_SESSION['estConnecte']) && $_SESSION['estConnecte']) {
+                $order = new Order();
+                $order->connect();
+                $idCommande = $order->getIdOrder($_SESSION['id']);
+                if ($idCommande !== False) {
+                    $order->updateOrderPaiement($idCommande[0], $typePaiement, $this->prix, date('Y-m-d'), session_id());
+                }
+                // Création de la commande suivante
+                $idCommande = $order->getNextId();
+                $order->createOrder($idCommande, $_SESSION['id'], date('Y-m-d'), session_id());
+            }
+            else {
+
+                // TODO
+                
+            }
+            if(isset($_SESSION['produits'])) unset($_SESSION['produits']);
         }
 
         $vue = new Vue("Paiement");
@@ -58,7 +71,7 @@ class ControleurPaiement
         ){
 
             $_SESSION['name'] = $_POST['name'];
-            $_SESSION['surename'] = $_POST['surname'];
+            $_SESSION['surname'] = $_POST['surname'];
             $_SESSION['add1'] = $_POST['add1'];
             $_SESSION['add2'] = $_POST['add2'];
             $_SESSION['city'] = $_POST['city'];

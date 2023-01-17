@@ -58,7 +58,7 @@
                                 <p> 75000 Paris </p>
                                 <div class="d-flex justify-content-center"> 
                                         <form  method="post" action="generationPdf.php"> <!-- bien creer le fichier au bon endroit -->
-                                                <button name="paypal" value=true class="btn btn-primary btn-lg btn-block">Générer la facture</button>
+                                                <button name="cheque" value=true class="btn btn-primary btn-lg btn-block">Générer la facture</button>
                                         </form>
                                 </div>
                                 </span></p></div>
