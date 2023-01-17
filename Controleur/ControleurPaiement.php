@@ -35,12 +35,14 @@ class ControleurPaiement
         if (((isset($_POST['paypal']) &&  $_POST['paypal']== true)||(isset($_POST['cb']) &&  $_POST['paypal']== true))&&!$this->paye) 
         {
             $this->paye = true;
-            // $order = new Order();
-            // $order->connect();
-            // $idCommande = $order->getIdOrder($_SESSION['id']);
-            // if ($idCommande !== False) {
-            //     $order->changeStatus($idCommande, 2);
-            // }
+            $order = new Order();
+            $order->connect();
+            $idCommande = $order->getIdOrder($_SESSION['id']);
+            if ($idCommande !== False) {
+                $order->changeStatus($idCommande[0], 2);
+            }
+
+            //rajout a la base de données
         }
 
         $vue = new Vue("Paiement");
