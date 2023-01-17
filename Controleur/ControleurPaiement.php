@@ -62,7 +62,7 @@ class ControleurPaiement
             $_SESSION['city'] = $_POST['city'];
             $_SESSION['code'] = $_POST['code'];
             $_SESSION['phone'] = $_POST['phone'];
-            $_SESSION['phone'] = $_POST['email'];
+            $_SESSION['email'] = $_POST['email'];
 
             if ((isset($_SESSION['estConnecte']) && $_SESSION['estConnecte'])) {
                 $delAdrr = new Delivery_adress();
@@ -74,10 +74,9 @@ class ControleurPaiement
                 $idCommande = $order->getIdOrder($_SESSION['id']);
                 if ($idCommande !== False) {
                     $order->setDeliveryAddress($idCommande[0], $addId);
-                    $order->changeStatus($idCommande, 1);
+                    $order->changeStatus($idCommande[0], 1);
                 }
             }
-
                 $this->Paiement();
 
             } else {
