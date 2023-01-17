@@ -11,13 +11,14 @@
           echo '<h2> Vous êtes administrateur </h2>';
         }
           ?> 
-        
+        <br />
         <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
           <button name="bouton" value="deconnexion" class="btn btn-primary btn-lg btn-block">Se déconnecter</button>
         </form>
     <?php 
       if ($admin)
       { ?>
+      <br />
       <form method="post" action="index.php?action=Admin"> <!-- bien creer le fichier au bon endroit -->
           <button name="bouton"  class="btn btn-primary btn-lg btn-block">Accéder à la page administrateur</button>
       </form>

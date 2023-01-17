@@ -63,6 +63,9 @@ class Routeur
                     case 'Paiement':
                         $this->ctrlPaiement->paiement();
                         break;
+                    case 'ProcessAddress':
+                        $this->ctrlPaiement->ProcessAddress();
+                        break;
                     case 'Admin':
                         $this->ctrlAdmin->admin();
                         break;

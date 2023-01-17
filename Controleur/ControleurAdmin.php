@@ -81,10 +81,6 @@ class ControleurAdmin
                 $Admin->validerCommande($_GET['id']);
                 header('Location: index.php?action=Admin');
             }
-            else if (isset($_POST['refuser']) && $_POST['refuser'] == "refuser")
-            {
-                $this->erreur("refuser");
-            }
             else
             {
                 $this->erreur("Aucune action n'a été choisie");
