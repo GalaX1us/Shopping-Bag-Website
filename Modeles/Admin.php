@@ -51,8 +51,15 @@ class Admin extends Modele
 
     public function validerCommande($id)
     {
+        
         $sql = 'UPDATE orders SET status = 10 WHERE id = ?';
         $this->executerRequete($sql, array($id));
+
+    }
+    public function changerStocks($id, $qte)
+    {
+        $sql = 'UPDATE products SET quantity = ? WHERE id = ?';
+        $this->executerRequete($sql, array($qte, $id));
     }
 
 

@@ -21,7 +21,7 @@ foreach ($produits as $produits) { ?>
      <div class="col-6 my-auto mx-auto">
         <h4><?= $produits['name']?></h4>
 
-            <form class="row m-3" method="post"  action="index.php?action=GererStocks" >
+            <form class="row m-3" method="post"  action="index.php?action=GererStocks&id=id=<?=$produits['id']?>" >
             
             
             <input type="number" class="form-control col" name="qte" value="<?=$produits['quantity']?>"  min="1" max=100 placeholder="Quantité" required>
