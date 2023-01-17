@@ -36,35 +36,41 @@ class ControleurAdresse
     private function updateQte() {
         $total = 0;
         if(isset($_SESSION['estConnecte']) && $_SESSION['estConnecte']) {
-            foreach($_SESSION['produits'] as $produit) {
-                if(isset($_POST['qte-'.$produit['idprod']])) {
-                    $qte = $_POST['qte-'.$produit['idprod']];
-                    if($qte != $produit['qte']) {
-                        $_SESSION['produits'][$produit['idprod']]['qte'] = $qte;
-                        $order = new Order();
-                        $order->connect();
-                        $idCommande = $order->getIdOrder($_SESSION['id'])[0];
-                        $orderItem = new Orderitem();
-                        $orderItem->connect();
-                        $orderItem->updateQuantite($idCommande, $produit['idprod'], $qte);
+            if(isset($_SESSION['produits'])) {
+                foreach($_SESSION['produits'] as $produit) {
+                    if(isset($_POST['qte-'.$produit['idprod']])) {
+                        $qte = $_POST['qte-'.$produit['idprod']];
+                        if($qte != $produit['qte']) {
+                            $_SESSION['produits'][$produit['idprod']]['qte'] = $qte;
+                            $order = new Order();
+                            $order->connect();
+                            $idCommande = $order->getIdOrder($_SESSION['id'])[0];
+                            $orderItem = new Orderitem();
+                            $orderItem->connect();
+                            $orderItem->updateQuantite($idCommande, $produit['idprod'], $qte);
+                        }
+                        $total += $produit['prix'] * $qte;
                     }
-                    $total += $produit['prix'] * $qte;
+                    else throw new Exception("Erreur lors de la validation du panier.");
                 }
-                else throw new Exception("Erreur lors de la validation du panier.");
             }
+            else throw new Exception("Erreur lors de la validation du panier.");
         }
         else {
-            foreach($_SESSION['produits'] as $produit) {
-                if(isset($_POST['qte-'.$produit['idprod']])) {
-                    $qte = $_POST['qte-'.$produit['idprod']];
-                    if($qte != $produit['qte']) {
-                        $_SESSION['produits'][$produit['idprod']]['qte'] = $qte;
-                    }
+            if(isset($_SESSION['produits'])) {
+                foreach($_SESSION['produits'] as $produit) {
+                    if(isset($_POST['qte-'.$produit['idprod']])) {
+                        $qte = $_POST['qte-'.$produit['idprod']];
+                        if($qte != $produit['qte']) {
+                            $_SESSION['produits'][$produit['idprod']]['qte'] = $qte;
+                        }
 
-                    $total += $produit['prix'] * $qte;
+                        $total += $produit['prix'] * $qte;
+                    }
+                    else throw new Exception("Erreur lors de la validation du panier.");
                 }
-                else throw new Exception("Erreur lors de la validation du panier.");
             }
+            else throw new Exception("Erreur lors de la validation du panier.");
         }
     }
 

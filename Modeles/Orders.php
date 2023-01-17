@@ -21,7 +21,7 @@ class Order extends Modele
     }
 
     // Renvoie l'Id de la commande d'un client
-    public function getIdOrder($idCustomer)
+        public function getIdOrder($idCustomer)
     {
         $sql = 'select id from orders'
             . ' where customer_id=? and (status=0 or status=1)';
@@ -48,5 +48,10 @@ class Order extends Modele
     public function setDeliveryAddress($idOrder, $idAddress) {
         $sql = 'UPDATE orders SET delivery_add_id = ? WHERE id=?';
         $this->executerRequete($sql, array($idAddress, $idOrder));
+    }
+
+    public function changeStatus($idOrder, $status) {
+        $sql = 'UPDATE orders SET status = ? WHERE id=?';
+        $this->executerRequete($sql, array($status, $idOrder));
     }
 }

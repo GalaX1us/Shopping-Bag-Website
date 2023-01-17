@@ -17,7 +17,7 @@
                     </a>
                 </p>
                 <div class="collapse p-3 pt-0" id="collapseExample">
-                    <form class="row g-3" method="post" action="index.php?action=Paiement">
+                    <form class="row g-3" method="post" action="index.php?action=ProcessAddress">
                         <h4 class="d-flex float-start">Identité</h4>
                         <div class="col-md-6 col-12"><input type="text" name="name" value="<?= $infosClient['forname'] ?>" placeholder="Prénom" class="form-control" readonly>
                         </div>
@@ -50,7 +50,7 @@
             </p>
             <div class="collapse show p-3 pt-0 " id="collapseExample">
 
-                <form class="row g-3" method="post" action="index.php?action=Paiement">
+                <form class="row g-3" method="post" action="index.php?action=ProcessAddress">
                     <h4 class="d-flex float-start">Identité</h4>
                     <div class="col-md-6 col-12"><input type="text" name="name" placeholder="Prénom" class="form-control" aria-required="true" aria-describedby="emailHelp" required>
                     </div>
