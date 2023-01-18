@@ -37,63 +37,31 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <p>
-                    <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
-                        <span class="fw-bold">Payement par chèque</span>
-                    </a>
-                </p>
-                <div class="collapse show p-3 pt-0 " id="collapseExample">
+        <div class="card-body p-0">
+            <p>
+                <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
+                    <span class="fw-bold">Payement par chèque</span>
+                </a>
+            </p>
+            <div class="collapse show p-3 pt-0 " id="collapseExample">
 
-                    <p class="mb-0"><span class="fw-bold">Prix :</span><span class="c-green"> <?= $prix ?> €
-                        </span>
+                <p class="mb-0"><span class="fw-bold">Prix :</span><span class="c-green"> <?= $prix ?> €
 
-<<<<<<< HEAD
-                    <p> Veuillez envoyer votre chèque à l'adresse suivante : </p>
-                    <p> 1 rue de la paix </p>
-                    <p> 75000 Paris </p>
-                    <div class="d-flex justify-content-center">
-                        <form method="post" action="generationPdf.php"> <!-- bien creer le fichier au bon endroit -->
-                            <button name="paypal" value=true class="btn btn-primary btn-lg btn-block">Générer la facture</button>
-                        </form>
-=======
-                                            <div class="d-flex justify-content-center"> 
-                                                <form  method="post" action="index.php?action=Paiement"> <!-- bien creer le fichier au bon endroit -->
-                                                <button name="paypal" value=true class="btn btn-primary btn-lg btn-block">Payer</button>
-                                        </form>
-                                        </div>
-                                   
-                                
-                            </div>
+                        <p> Veuillez envoyer votre chèque à l'adresse suivante : </p>
+                        <p> 1 rue de la paix </p>
+                        <p> 75000 Paris </p>
+                        <div class="d-flex justify-content-center">
+                            <form method="post" action="index.php?action=Paiement"> <!-- bien creer le fichier au bon endroit -->
+                                <button name="cheque" value=true class="btn btn-primary btn-lg btn-block">Générer la facture</button>
+                            </form>
                         </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <p>
-                            <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between"
-                                data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
-                                aria-controls="collapseExample">
-                                <span class="fw-bold">Payement par chèque</span>
-                            </a>
-                        </p>
-                        <div class="collapse show p-3 pt-0 " id="collapseExample">
-
-                                <p class="mb-0"><span class="fw-bold">Prix :</span><span class="c-green"> <?= $prix?> € 
-                            
-                                <p> Veuillez envoyer votre chèque à l'adresse suivante : </p>
-                                <p> 1 rue de la paix </p>
-                                <p> 75000 Paris </p>
-                                <div class="d-flex justify-content-center"> 
-                                        <form  method="post" action="generationPdf.php"> <!-- bien creer le fichier au bon endroit -->
-                                                <button name="cheque" value=true class="btn btn-primary btn-lg btn-block">Générer la facture</button>
-                                        </form>
-                                </div>
-                                </span></p></div>
->>>>>>> 5b130e29f1b65c6fa396f30f53c06c37c2cb1b1a
-                    </div>
-                    </p>
-                </div>
+                    </span></p>
             </div>
         </div>
+        </p>
+    </div>
+    </div>
+    </div>
     </div>
     </div>
     </div>

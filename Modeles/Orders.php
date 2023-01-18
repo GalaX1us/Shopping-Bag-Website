@@ -12,7 +12,7 @@ class Order extends Modele
     // Renvoie les informations sur une order
     public function getOrder($idOrder)
     {
-        $sql = 'select id, username, password from orders'
+        $sql = 'select * from orders'
             . ' where id=?';
         $order = $this->executerRequete($sql, array($idOrder));
         if ($order->rowCount() == 1) return $order->fetch();
@@ -30,6 +30,18 @@ class Order extends Modele
         // Accès à la première ligne de résultat
         else return false;
     }
+
+    public function getFinishedIdOrder($idCustomer)
+    {
+        $sql = 'select id from orders'
+            . ' where customer_id=? and status=2';
+        $order = $this->executerRequete($sql, array($idCustomer));
+        if ($order->rowCount() >= 1) return $order->fetch();
+        // Accès à la première ligne de résultat
+        else return -1;
+    }
+
+
 
     public function getNextId() {
         $sql = 'select max(id) from orders';
@@ -58,5 +70,17 @@ class Order extends Modele
     public function updateOrderPaiement($idOrder, $typePaiement, $total, $date, $idSession) {
         $sql = 'UPDATE orders SET status = 2, payment_type=?, total=?, date=?, session=?  WHERE id=?';
         $this->executerRequete($sql, array($typePaiement, $total, $date, $idSession, $idOrder));
+    }
+    public function getPanier($id)
+    {
+        $sql = 'select P.cat_id, P.id, P.name, P.description, P.image, P.price, OI.quantity from orders O '
+                .'join orderitems OI on OI.order_id=O.id '
+                .'join products P on P.id=OI.product_id where OI.order_id=?';
+
+        $res = $this->executerRequete($sql,array($id));
+
+        if ($res->rowCount() >= 1)
+            return $res->fetchAll();
+        else throw new Exception("Panier Vide.");
     }
 }

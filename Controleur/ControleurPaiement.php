@@ -6,6 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once './Vues/Vue.php';
 require_once 'Modeles/Delivery_addresses.php';
 require_once 'Modeles/SignUp.php';
+require_once 'Modeles/Facture.php';
 class ControleurPaiement
 {
     private $name; 
@@ -35,7 +36,7 @@ class ControleurPaiement
         if (((isset($_POST['paypal']) &&  $_POST['paypal']== true)||(isset($_POST['cheque']) &&  $_POST['cheque']== true))&&!$this->paye) 
         {
             $this->paye = true;
-            if($_POST['paypal']) $typePaiement = "paypal";
+            if(isset($_POST['paypal']) && $_POST['paypal']) $typePaiement = "paypal";
             else $typePaiement = "cheque";
 
 
@@ -90,6 +91,12 @@ class ControleurPaiement
             }
 
             if(isset($_SESSION['produits'])) unset($_SESSION['produits']);
+
+            if ($typePaiement == 'cheque'){
+                $fac = new Facture();
+                $fac->generer_facture();
+            }
+
         }
 
         $vue = new Vue("Paiement");

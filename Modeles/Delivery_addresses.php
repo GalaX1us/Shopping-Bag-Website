@@ -28,6 +28,7 @@ class Delivery_adress extends Modele
         }
         return $id;
     }
+
     public function getNextId() {
         $sql = 'select max(id) from delivery_addresses';
         $deli = $this->executerRequete($sql);
@@ -35,4 +36,27 @@ class Delivery_adress extends Modele
         // Accès à la première ligne de résultat
         else throw new Exception("Erreur lors de l'ajout au panier.");
     }
+
+    public function getDeliveryAddress($id)
+    {
+        $sql = 'select * from delivery_addresses where id=?';
+        $res = $this->executerRequete($sql,array($id));
+        if ($res->rowCount() >= 1)
+            return $res->fetch();
+        else throw new Exception("Erreur, pas d'adresse correspondant à l'id : ".$id);
+    }
+
+    public function getDeliveryAddressFromOrder($id)
+    {
+        $sql = 'select delivery_add_id from orders where id=?';
+        $res = $this->executerRequete($sql,array($id));
+        if ($res->rowCount() >= 1){
+            $res = $res->fetch()[0];
+            return $this->getDeliveryAddress($res);
+        }
+        else throw new Exception("Erreur, pas de commande correspondant à l'id : ".$id);
+    }
+
+
+
 }

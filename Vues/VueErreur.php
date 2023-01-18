@@ -1,6 +1,7 @@
 <?php $titre = 'ISIWEB4SHOP - Erreur'; ?>
 
 <?php ob_start(); ?>
+
 <br />
 <p>Une erreur est survenue : <?= $msgErreur ?></p>
 <br />
