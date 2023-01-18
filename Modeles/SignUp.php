@@ -4,23 +4,32 @@ require_once 'Modele.php';
 class SignUp extends Modele
 {
     //create a new account
-    public function createLog($id, $identifiant, $password)
+    public function createLog($logId, $custId, $identifiant, $password)
     {
         $sql = 'INSERT INTO logins (id, customer_id, username, password) VALUES (?, ?, ?, ?)';
-        $this->executerRequete($sql, array($id, $id, $identifiant, $password));
+        $this->executerRequete($sql, array($logId, $custId, $identifiant, $password));
     }
     public function createAccount($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email, $reg=1)
     {
         $sql = 'INSERT INTO customers (id, forname, surname, add1, add2, add3, postcode, phone, email, registered) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $this->executerRequete($sql, array($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email, $reg));
     }
-    public function maxId()
+    public function nextCustomerId()
     {
         $sql = 'SELECT MAX(id) FROM customers';
         $result = $this->executerRequete($sql);
         $maxId = $result->fetchColumn();
-        return $maxId;
+        return $maxId+1;
     }
+
+    public function nextLoginId()
+    {
+        $sql = 'SELECT MAX(id) FROM logins';
+        $result = $this->executerRequete($sql);
+        $maxId = $result->fetchColumn();
+        return $maxId+1;
+    }
+
     public function checkUsername ($username)
     {
         $sql = 'SELECT username FROM logins WHERE username = ?';

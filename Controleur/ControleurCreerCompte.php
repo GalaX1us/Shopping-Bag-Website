@@ -82,13 +82,16 @@ class ControleurCreerCompte
             $this->compteCree = false;
             return;
         }
-        $id = $signUp->maxId()+1;
-        $signUp->createAccount($id, $name, $surname, $add1, $add2, $city, $code, $phone, $email);
-        $signUp->createLog($id, $username, $password);
+
+        $custId = $signUp->nextCustomerId();
+        $logId = $signUp->nextLoginId();
+
+        $signUp->createAccount($custId, $name, $surname, $add1, $add2, $city, $code, $phone, $email);
+        $signUp->createLog($logId,$custId, $username, $password);
 
         $this->compteCree = true;
         $_SESSION['estConnecte'] = true;
-        $_SESSION['id'] = $id;
+        $_SESSION['id'] = $custId;
 
         header('Location: index.php');
         

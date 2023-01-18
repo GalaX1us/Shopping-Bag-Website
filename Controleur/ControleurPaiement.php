@@ -33,6 +33,7 @@ class ControleurPaiement
         {
             $this->prix = $_SESSION['total_general'];
         }
+
         if (((isset($_POST['paypal']) &&  $_POST['paypal']== true)||(isset($_POST['cheque']) &&  $_POST['cheque']== true))&&!$this->paye) 
         {
             $this->paye = true;
@@ -59,7 +60,7 @@ class ControleurPaiement
                     // Création du customer
                     $signup = new SignUp();
                     $signup->connect();
-                    $idClient = $signup->maxId()+1;
+                    $idClient = $signup->nextCustomerId();
                     $signup->createAccount($idClient, $_SESSION["name"], $_SESSION["surname"], $_SESSION["add1"], 
                     $_SESSION["add2"], $_SESSION["city"], $_SESSION["code"], $_SESSION["phone"], $_SESSION["email"], 0);
 

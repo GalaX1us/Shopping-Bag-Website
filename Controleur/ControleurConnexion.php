@@ -142,7 +142,7 @@ class ControleurConnexion
             {
                 if ($donnees['password'] == $password) {
                     $_SESSION['estConnecte'] = true;
-                    $_SESSION['id'] = $donnees['id'];
+                    $_SESSION['id'] = $donnees['customer_id'];
                     $this->msg ="";
 
                     // On va voir s'il a une commande en cours pour récupérer son panier
