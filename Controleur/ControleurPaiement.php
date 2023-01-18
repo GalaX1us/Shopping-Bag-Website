@@ -38,6 +38,7 @@ class ControleurPaiement
             if($_POST['paypal']) $typePaiement = "paypal";
             else $typePaiement = "cheque";
 
+
             // Finalisation de la commande dans la BD
             if(isset($_SESSION['estConnecte']) && $_SESSION['estConnecte']) {
                 $order = new Order();
@@ -51,10 +52,43 @@ class ControleurPaiement
                 $order->createOrder($idCommande, $_SESSION['id'], date('Y-m-d'), session_id());
             }
             else {
+                if (isset($_SESSION["name"]) && isset($_SESSION["surname"]) && isset($_SESSION["add1"]) && isset($_SESSION["city"])
+                && isset($_SESSION["code"]) && isset($_SESSION["phone"]) && isset($_SESSION["email"])) {
 
-                // TODO
-                
+                    // Création du customer
+                    $signup = new SignUp();
+                    $signup->connect();
+                    $idClient = $signup->maxId()+1;
+                    $signup->createAccount($idClient, $_SESSION["name"], $_SESSION["surname"], $_SESSION["add1"], 
+                    $_SESSION["add2"], $_SESSION["city"], $_SESSION["code"], $_SESSION["phone"], $_SESSION["email"], 0);
+
+                    // Création de la delivery_address
+                    $delAdrr = new Delivery_adress();
+                    $delAdrr->connect();
+                    $addId = $delAdrr->creatDeliveryAddress($_SESSION['name'], $_SESSION['surname'], $_SESSION['add1'], 
+                    $_SESSION['add2'], $_SESSION['city'], $_SESSION['code'], $_SESSION['phone'], $_SESSION['email']);
+
+                    // Création de l'order
+                    $order = new Order();
+                    $order->connect();
+                    $idCommande = $order->getNextId();
+                    $order->createOrder($idCommande, $idClient, date('Y-m-d'), session_id(), 0);
+                    $order->setDeliveryAddress($idCommande, $addId);
+                    $order->updateOrderPaiement($idCommande, $typePaiement, $this->prix, date('Y-m-d'), session_id());
+
+                    // Ajout de tous les produits de la commande dans OrderItems
+                    $orderitem = new Orderitem();
+                    $orderitem->connect();
+                    foreach($_SESSION['produits'] as $produit) {
+                        $idOrderItem = $orderitem->getNextId();
+                        $orderitem->ajoutPanier($idOrderItem, $idCommande, $produit['idprod'], $produit['qte']);
+                    }
+                }
+                else {
+                    throw new Exception("Erreur lors du paiement.");
+                }
             }
+
             if(isset($_SESSION['produits'])) unset($_SESSION['produits']);
         }
 
@@ -82,7 +116,7 @@ class ControleurPaiement
             if ((isset($_SESSION['estConnecte']) && $_SESSION['estConnecte'])) {
                 $delAdrr = new Delivery_adress();
                 $delAdrr->connect();
-                $addId = $delAdrr->creatDeliveryAddress($_SESSION['name'], $_SESSION['surename'], $_SESSION['add1'], $_SESSION['add2'], $_SESSION['city'], $_SESSION['code'], $_SESSION['phone'], $_SESSION['email']);
+                $addId = $delAdrr->creatDeliveryAddress($_SESSION['name'], $_SESSION['surname'], $_SESSION['add1'], $_SESSION['add2'], $_SESSION['city'], $_SESSION['code'], $_SESSION['phone'], $_SESSION['email']);
 
                 $order = new Order();
                 $order->connect();

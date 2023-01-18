@@ -39,10 +39,10 @@ class Order extends Modele
         else throw new Exception("Erreur lors de l'ajout au panier.");
     }
 
-    public function createOrder($idOrder, $idCustomer, $date, $idSession) {
+    public function createOrder($idOrder, $idCustomer, $date, $idSession, $registered = 1) {
         $sql = 'INSERT INTO orders (id, customer_id, registered, delivery_add_id, payment_type, date, status, session, total)'
-              .'VALUES (?, ?, 1, null, null, ?, 0, ?, null)';
-        $this->executerRequete($sql, array($idOrder, $idCustomer, $date, $idSession));
+              .'VALUES (?, ?, ?, null, null, ?, 0, ?, null)';
+        $this->executerRequete($sql, array($idOrder, $idCustomer, $registered, $date, $idSession));
     }
 
     public function setDeliveryAddress($idOrder, $idAddress) {
