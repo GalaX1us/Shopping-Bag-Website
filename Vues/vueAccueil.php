@@ -1,7 +1,6 @@
 <?php $titre = 'ISIWEB4SHOP - Accueil'; ?>
 
 <?php ob_start(); ?>
-
     <span class="d-flex justify-content-center"><h2>Bienvenue sur ISIWEB4SHOP</h2>
 </span>
 <span class="d-flex justify-content-center"><h5>Vous trouverez ici une sélection gourmande de produits pour se régaler pendant les fêtes</h5>

@@ -36,7 +36,7 @@ class Order extends Modele
         $sql = 'select id from orders'
             . ' where customer_id=? and status=2';
         $order = $this->executerRequete($sql, array($idCustomer));
-        if ($order->rowCount() >= 1) return $order->fetch();
+        if ($order->rowCount() >= 1) return $order->fetchAll();
         // Accès à la première ligne de résultat
         else return -1;
     }

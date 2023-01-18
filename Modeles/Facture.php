@@ -37,7 +37,8 @@ class Facture extends fpdf
         
         $cmd = new Order();
         $cmd->connect();
-        $idPanier = $cmd->getFinishedIdOrder($_SESSION['id'])[0];
+        $idPanier = $cmd->getFinishedIdOrder($_SESSION['id']);
+        $idPanier = end($idPanier)[0];
         $panier = $cmd->getPanier($idPanier);
         $commande = $cmd->getOrder($idPanier);
 
