@@ -6,7 +6,7 @@ class Order extends Modele
     {
         $sql = 'select id, username, password from orders'
             . ' order by BIL_ID desc';
-        $orders = $this->executerRequete($sql);
+        $orders = $this->executerRequete($sql)->fetch();
         return $orders;
     }
     // Renvoie les informations sur une order
@@ -39,10 +39,10 @@ class Order extends Modele
         else throw new Exception("Erreur lors de l'ajout au panier.");
     }
 
-    public function createOrder($idOrder, $idCustomer, $date, $idSession) {
+    public function createOrder($idOrder, $idCustomer, $date, $idSession, $registered = 1) {
         $sql = 'INSERT INTO orders (id, customer_id, registered, delivery_add_id, payment_type, date, status, session, total)'
-              .'VALUES (?, ?, 1, null, null, ?, 0, ?, null)';
-        $this->executerRequete($sql, array($idOrder, $idCustomer, $date, $idSession));
+              .'VALUES (?, ?, ?, null, null, ?, 0, ?, null)';
+        $this->executerRequete($sql, array($idOrder, $idCustomer, $registered, $date, $idSession));
     }
 
     public function setDeliveryAddress($idOrder, $idAddress) {
@@ -53,5 +53,10 @@ class Order extends Modele
     public function changeStatus($idOrder, $status) {
         $sql = 'UPDATE orders SET status = ? WHERE id=?';
         $this->executerRequete($sql, array($status, $idOrder));
+    }
+
+    public function updateOrderPaiement($idOrder, $typePaiement, $total, $date, $idSession) {
+        $sql = 'UPDATE orders SET status = 2, payment_type=?, total=?, date=?, session=?  WHERE id=?';
+        $this->executerRequete($sql, array($typePaiement, $total, $date, $idSession, $idOrder));
     }
 }

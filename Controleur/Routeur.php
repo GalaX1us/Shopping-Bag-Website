@@ -75,6 +75,9 @@ class Routeur
                     case 'ActionCommande':
                         $this->ctrlAdmin->actionCommande();
                         break;
+                    case 'GererStocks':
+                        $this->ctrlAdmin->gererStocks();
+                        break; 
                     default:
                         throw new Exception("Action non valide.");
                 }

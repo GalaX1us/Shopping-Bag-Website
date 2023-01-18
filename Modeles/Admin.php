@@ -35,11 +35,31 @@ class Admin extends Modele
             throw new Exception("Aucune commande n'a été trouvée");
         }
     }
+    public function getAllProduits()
+    {
+        $sql = 'SELECT * FROM products';
+        $produits = $this->executerRequete($sql, array());
+        if($produits->rowCount() > 0)
+        {
+            return $produits->fetchAll(); 
+        }
+        else
+        {
+            throw new Exception("Aucun produit n'a été trouvé");
+        }
+    }
 
     public function validerCommande($id)
     {
+        
         $sql = 'UPDATE orders SET status = 10 WHERE id = ?';
         $this->executerRequete($sql, array($id));
+
+    }
+    public function changerStocks($id, $qte)
+    {
+        $sql = 'UPDATE products SET quantity = ? WHERE id = ?';
+        $this->executerRequete($sql, array($qte, $id));
     }
 
 

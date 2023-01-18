@@ -44,7 +44,7 @@
         <?php } ?>
         <div class="card-body p-0">
             <p>
-                <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
+                <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-controls="collapseExample">
                     <span class="fw-bold">Nouvelle Adresse</span>
                 </a>
             </p>

@@ -10,17 +10,31 @@
           echo '<hr class="bg-primary border-3 border-top border-primary">';
           echo '<h2> Vous êtes administrateur </h2>';
         }
+
           ?> 
         <br />
-        <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
+        <form method="post" action="index.php?action=Connexion"> 
           <button name="bouton" value="deconnexion" class="btn btn-primary btn-lg btn-block">Se déconnecter</button>
         </form>
+        <br />
+        <php? 
+        <?php if (!$admin)
+          { ?>
+        <br />
+          <form method="post" action="index.php?"> 
+          <button name="bouton" class="btn btn-primary btn-lg btn-block">Continuer mes achats</button>
+        </form>
+        <?php } ?>
     <?php 
       if ($admin)
       { ?>
       <br />
       <form method="post" action="index.php?action=Admin"> <!-- bien creer le fichier au bon endroit -->
-          <button name="bouton"  class="btn btn-primary btn-lg btn-block">Accéder à la page administrateur</button>
+          <button name="bouton" value="commandes" class="btn btn-primary btn-lg btn-block">Accéder aux commandes</button>
+      </form>
+      <br />
+      <form method="post" action="index.php?action=GererStocks"> <!-- bien creer le fichier au bon endroit -->
+          <button name="boutonBis" value="stocks"  class="btn btn-primary btn-lg btn-block">Gérer les stocks </button>
       </form>
         
 
