@@ -1,6 +1,6 @@
 
 <?php 
-$titre = 'ISIWEB4SHOP - Admin'; ?>
+$titre = 'ISIWEB4SHOP - commande à traiter'; ?>
 
 <?php ob_start(); 
 

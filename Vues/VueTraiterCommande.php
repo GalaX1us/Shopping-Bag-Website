@@ -31,7 +31,7 @@ foreach ($produits as $produits) { ?>
 <div class="row">
     <div>
         <form method="post" action="index.php?action=ActionCommande&id=<?=$id?>">
-            <button class="btn btn-primary mt-3" name="valider" value="valider" >Valider la commande</button>
+            <button class="btn btn-primary mt-3" name="valider" value="valider">Valider la commande</button>
         </form>
     </div>
 </div>

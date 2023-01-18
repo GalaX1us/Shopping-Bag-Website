@@ -29,7 +29,6 @@ foreach ($produits as $produits) { ?>
                 <button type="submit" class="btn btn-primary mt-3" >Changer le stock </button>
     
             </form>
-        <!-- <p>Quantité : <?= $produits['quantity']?></p> -->
     </div>
     </div>
 

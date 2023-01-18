@@ -29,11 +29,11 @@
       if ($admin)
       { ?>
       <br />
-      <form method="post" action="index.php?action=Admin"> <!-- bien creer le fichier au bon endroit -->
+      <form method="post" action="index.php?action=Admin">
           <button name="bouton" value="commandes" class="btn btn-primary btn-lg btn-block">Accéder aux commandes</button>
       </form>
       <br />
-      <form method="post" action="index.php?action=GererStocks"> <!-- bien creer le fichier au bon endroit -->
+      <form method="post" action="index.php?action=GererStocks">
           <button name="boutonBis" value="stocks"  class="btn btn-primary btn-lg btn-block">Gérer les stocks </button>
       </form>
         

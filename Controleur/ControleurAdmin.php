@@ -12,34 +12,31 @@ class ControleurAdmin
 
     }
 
-    // Affiche la page d'accueil du blog
     public function admin()
     {
         
         if (isset($_SESSION['admin']) && ($_SESSION['admin']==true))
         {
-            if (isset($_POST['bouton'])&& $_POST['bouton'] == "commandes") 
+            
+            $vue = new Vue("Admin");
+            $Admin = new Admin();
+            $Admin->connect();
+            $exist = 1;
+            $commandes = array();
+            
+            try
             {
-                $vue = new Vue("Admin");
-                $Admin = new Admin();
-                $Admin->connect();
-                $exist = 1;
-                $commandes = array();
-                
-                try
-                {
-                    $commandes = $Admin->getCommandes();
-                }
-                catch (Exception $e)
-                {
-
-                    $exist = 0;
-                    //$this->erreur("Aucune commande n'a été trouvée");
-                } 
-                
-                
-                $vue->generer(array("commandes" => $commandes , "exist" => $exist));
+                $commandes = $Admin->getCommandes();
             }
+            catch (Exception $e)
+            {
+
+                $exist = 0;
+            } 
+            
+            
+            $vue->generer(array("commandes" => $commandes , "exist" => $exist));
+            
         }
         else 
         {
@@ -84,6 +81,7 @@ class ControleurAdmin
                 
                 $Admin->validerCommande($_GET['id']);
                 header('Location: index.php?action=Admin');
+
             }
             else
             {
