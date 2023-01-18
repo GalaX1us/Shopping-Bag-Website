@@ -12,8 +12,12 @@
         }
           ?> 
         <br />
-        <form method="post" action="index.php?action=Connexion"> <!-- bien creer le fichier au bon endroit -->
+        <form method="post" action="index.php?action=Connexion"> 
           <button name="bouton" value="deconnexion" class="btn btn-primary btn-lg btn-block">Se déconnecter</button>
+        </form>
+        <br />
+        <form method="post" action="index.php?"> 
+          <button name="bouton" value="deconnexion" class="btn btn-primary btn-lg btn-block">Continuer mes achats</button>
         </form>
     <?php 
       if ($admin)
