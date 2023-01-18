@@ -105,7 +105,6 @@ class ControleurAdmin
 
         if (isset($_POST["qte"]))
         {
-            $this->erreur("id = ".$_GET['id']." qte = ".$_POST["qte"]."");
             $Admin->changerStocks($_GET['id'], $_POST["qte"]);
         }
 
