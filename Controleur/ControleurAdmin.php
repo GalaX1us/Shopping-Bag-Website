@@ -99,26 +99,34 @@ class ControleurAdmin
     }
     public function gererStocks()
     {
-        $vue = new Vue("GererStocks");
-        $Admin = new Admin();
-        $Admin->connect();
 
-        if (isset($_POST["qte"]))
+        if (isset($_SESSION['admin']) && ($_SESSION['admin']==true))
         {
-            $Admin->changerStocks($_GET['id'], $_POST["qte"]);
-        }
+            $vue = new Vue("GererStocks");
+            $Admin = new Admin();
+            $Admin->connect();
 
-       
-        $produits = array();
-        try
-        {
-            $produits = $Admin->getAllProduits();
+            if (isset($_POST["qte"]))
+            {
+                $Admin->changerStocks($_GET['id'], $_POST["qte"]);
+            }
+
+        
+            $produits = array();
+            try
+            {
+                $produits = $Admin->getAllProduits();
+            }
+            catch (Exception $e)
+            {
+                $this->erreur("Aucun produit n'a été trouvé");
+            }
+            $vue->generer(array("produits" => $produits));
         }
-        catch (Exception $e)
+        else 
         {
-            $this->erreur("Aucun produit n'a été trouvé");
+            $this->erreur("Vous n'êtes pas connecté en tant qu'administrateur");
         }
-        $vue->generer(array("produits" => $produits));
     }
     // Affiche une erreur
     private function erreur($msgErreur)
