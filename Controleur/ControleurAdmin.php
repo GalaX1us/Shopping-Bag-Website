@@ -12,12 +12,11 @@ class ControleurAdmin
 
     }
 
+    // Affiche la page administrateur
     public function admin()
     {
-        
         if (isset($_SESSION['admin']) && ($_SESSION['admin']==true))
         {
-            
             $vue = new Vue("Admin");
             $Admin = new Admin();
             $Admin->connect();
@@ -30,10 +29,8 @@ class ControleurAdmin
             }
             catch (Exception $e)
             {
-
                 $exist = 0;
             } 
-            
             
             $vue->generer(array("commandes" => $commandes , "exist" => $exist));
             
@@ -42,11 +39,9 @@ class ControleurAdmin
         {
             $this->erreur("Vous n'êtes pas connecté en tant qu'administrateur");
         }
-        
-        
-       
     }
     
+    // Affiche la vue qui permet de valider les commandes en tant qu'admin
     public function TraiterCommande()
     {
         if (isset($_SESSION['admin']) && ($_SESSION['admin']==true))
@@ -69,6 +64,8 @@ class ControleurAdmin
             $this->erreur("Vous n'êtes pas connecté en tant qu'administrateur");
         }
     }
+
+    // Valide une commande
     public function actionCommande()
     {
         if (isset($_SESSION['admin']) && ($_SESSION['admin']==true))
@@ -78,23 +75,21 @@ class ControleurAdmin
             $Admin->connect();
             if (isset($_POST['valider']) && $_POST['valider'] == "valider")
             {
-                
                 $Admin->validerCommande($_GET['id']);
                 header('Location: index.php?action=Admin');
-
             }
             else
             {
                 $this->erreur("Aucune action n'a été choisie");
-            }
-
-                
+            }   
         }
         else 
         {
             $this->erreur("Vous n'êtes pas connecté en tant qu'administrateur");
         }
     }
+
+    //Affiche la page de gestion des stocks
     public function gererStocks()
     {
 
@@ -109,7 +104,6 @@ class ControleurAdmin
                 $Admin->changerStocks($_GET['id'], $_POST["qte"]);
             }
 
-        
             $produits = array();
             try
             {
@@ -126,11 +120,11 @@ class ControleurAdmin
             $this->erreur("Vous n'êtes pas connecté en tant qu'administrateur");
         }
     }
+
     // Affiche une erreur
     private function erreur($msgErreur)
     {
         $vue = new Vue("Erreur");
         $vue->generer(array('msgErreur' => $msgErreur));
-        
     }
 }

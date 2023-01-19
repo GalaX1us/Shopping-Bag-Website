@@ -7,18 +7,19 @@ require_once 'Vues/Vue.php';
 require_once 'Modeles/Logins.php';
 require_once './Modeles/Orders.php';
 require_once './Controleur/ControleurPanier.php';
+
 class ControleurConnexion
 {
     private $msg = "";
+
     public function __construct()
     {
 
     }
 
-    // Affiche la page de connexion du blog
+    // Affiche la page de connexion
     public function connexion()
     {
-      
         if (isset($_POST['username']) && isset($_POST['password'])) 
         {
             $username = $_POST['username'];
@@ -44,21 +45,17 @@ class ControleurConnexion
         $donnees = array ('connecte' => $connecte, 'nom' => $nom, 'msgErreur' => $this->msg, 'admin' => $admin); 
         $vue->generer($donnees); 
     }
-    // Affiche une erreur
-    private function erreur($msgErreur)
-    {
-        $vue = new Vue("Erreur");
-        $vue->generer(array('msgErreur' => $msgErreur));
-    }
-    
+
+    // Déconnecte l'utilisateur
     private function deconnecter()
     {
         $_SESSION['connecte'] = FALSE;
         //detruire la session 
         session_destroy();
-        }
+    }
 
-    public function est_connecte(): bool // fonction qui vérifie si l'utilisateur est connecté
+    // Vérifie si l'utilisateur est connecté
+    public function est_connecte(): bool
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -68,7 +65,9 @@ class ControleurConnexion
         } else {
             return false;
         }
-      }
+    }
+
+    // Renvoie le nom du client s'il est connecté
     public function get_nom() 
     {
         if($this->est_connecte() == false)
@@ -103,7 +102,6 @@ class ControleurConnexion
                         $result = "Vous n'êtes pas connecté";
                     }
                 }
-                
             }
             catch (Exception $e)
             {
@@ -121,11 +119,8 @@ class ControleurConnexion
                     $_SESSION['name'] = $donnees['forname'];
                     return $donnees['forname'];
                 }
-        
             }
         }
-        
-
     }
 
     public function connecter($username, $password)
@@ -193,5 +188,12 @@ class ControleurConnexion
        
 
         
+    }
+
+    // Affiche une erreur
+    private function erreur($msgErreur)
+    {
+        $vue = new Vue("Erreur");
+        $vue->generer(array('msgErreur' => $msgErreur));
     }
 }

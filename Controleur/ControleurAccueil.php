@@ -6,12 +6,13 @@ class ControleurAccueil
 
     }
 
-    // Affiche la page d'accueil du blog
+    // Affiche la page d'accueil
     public function accueil()
     {
         $vue = new Vue("Accueil"); 
         $vue->generer(array());
     }
+
     // Affiche une erreur
     private function erreur($msgErreur)
     {
