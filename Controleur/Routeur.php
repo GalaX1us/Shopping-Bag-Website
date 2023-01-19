@@ -5,9 +5,10 @@ require_once 'ControleurConnexion.php';
 require_once 'ControleurPanier.php';
 require_once 'ControleurCreerCompte.php';
 require_once 'ControleurAdresse.php';
-require_once 'Vues/Vue.php';
 require_once 'ControleurPaiement.php';
 require_once 'ControleurAdmin.php';
+require_once 'Vues/Vue.php';
+
 class Routeur
 {
     private $ctrlAccueil;
@@ -30,6 +31,7 @@ class Routeur
         $this->ctrlPaiement = new ControleurPaiement();
         $this->ctrlAdmin = new ControleurAdmin();
     }
+    
     // Traite une requête entrante
     public function routerRequete()
     {

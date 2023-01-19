@@ -123,6 +123,7 @@ class ControleurConnexion
         }
     }
 
+    // Gère la connexion de l'utilisateur
     public function connecter($username, $password)
     {   
         $msg = "";
@@ -161,7 +162,6 @@ class ControleurConnexion
                 else {
                     $this->msg = "identifiant ou mot de passe incorrect";
                 }
-             
             }
         }
         else
@@ -183,11 +183,7 @@ class ControleurConnexion
                     }
                 }
             }
-
         }
-       
-
-        
     }
 
     // Affiche une erreur

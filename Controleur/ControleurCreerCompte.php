@@ -23,7 +23,7 @@ class ControleurCreerCompte
         
     }
 
-    // Affiche la page de connexion du blog
+    // Affiche la page de création de compte
     public function creerCompte()
     {
         if (isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['add1']) && isset($_POST['city']) && isset($_POST['code']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']))
@@ -59,22 +59,13 @@ class ControleurCreerCompte
                             "email" => $this->email,
                             "username" => $this->username,
                             "password" => $this->password
-
                         );
         $vue->generer($donnees);
-        
-    }
-    // Affiche une erreur
-    private function erreur($msgErreur)
-    {
-        $vue = new Vue("Erreur");
-        $donnees = (array('msgErreur' => $msgErreur));
-        $vue->generer($donnees);
     }
 
+    // Crée un compte dans la BD
     private function creationDecompte($name, $surname, $add1, $add2, $city, $code, $phone, $email, $username, $password)
     {
-
         $signUp = new SignUp();
         $signUp->connect();
         if ($signUp->checkUsername($username)) {
@@ -94,9 +85,13 @@ class ControleurCreerCompte
         $_SESSION['id'] = $custId;
 
         header('Location: index.php');
-        
-
     }
 
-  
+    // Affiche une erreur
+    private function erreur($msgErreur)
+    {
+        $vue = new Vue("Erreur");
+        $donnees = (array('msgErreur' => $msgErreur));
+        $vue->generer($donnees);
+    }
 }

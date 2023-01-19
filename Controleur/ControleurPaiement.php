@@ -9,6 +9,7 @@ require_once 'Modeles/SignUp.php';
 require_once 'Modeles/Facture.php';
 require_once './Modeles/Orders.php';
 require_once './Modeles/Products.php';
+
 class ControleurPaiement
 {
     private $name; 
@@ -28,7 +29,7 @@ class ControleurPaiement
         $this->prix = 0; 
     }
 
-    // Affiche la page d'accueil du blog
+    // Affiche la page de paiement
     public function Paiement()
     {   
         if (isset($_SESSION['total_general']))
@@ -55,7 +56,7 @@ class ControleurPaiement
                 $idCommande = $order->getNextId();
                 $order->createOrder($idCommande, $_SESSION['id'], date('Y-m-d'), session_id());
             }
-            else {
+            else { // Si l'on est pas connecté, il faut tout ajouter à la BD
                 if (isset($_SESSION["name"]) && isset($_SESSION["surname"]) && isset($_SESSION["add1"]) && isset($_SESSION["city"])
                 && isset($_SESSION["code"]) && isset($_SESSION["phone"]) && isset($_SESSION["email"])) {
 
@@ -108,21 +109,19 @@ class ControleurPaiement
                 $fac = new Facture();
                 $fac->generer_facture();
             }
-
         }
 
         $vue = new Vue("Paiement");
         $donnees = array("prix" => $this->prix, "paye" => $this->paye);
         $vue->generer($donnees);
     }
-    // Affiche une erreur
+
+    // Ajoute l'adresse à la variable de session et à la BD
     public function ProcessAddress()
     {
-
         if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["add1"]) && isset($_POST["city"])
-            && isset($_POST["code"]) && isset($_POST["phone"]) && isset($_POST["email"])
-        ){
-
+            && isset($_POST["code"]) && isset($_POST["phone"]) && isset($_POST["email"]))
+        {
             $_SESSION['name']    = $_POST['name'];
             $_SESSION['surname'] = $_POST['surname'];
             $_SESSION['add1']    = $_POST['add1'];
@@ -145,19 +144,19 @@ class ControleurPaiement
                     $order->changeStatus($idCommande[0], 1);
                 }
             }
-                $this->Paiement();
+            $this->Paiement();
 
-            } else {
-                $this->erreur("Certains champs d'adresse requis n'ont pas été remplis");
-            }
-
+        } else {
+            $this->erreur("Certains champs d'adresse requis n'ont pas été remplis");
         }
+    }
 
     public function CheckPaiement()
     {
 
     }
 
+    // Affiche une erreur
     private function erreur($msgErreur)
     {
         $vue = new Vue("Erreur");

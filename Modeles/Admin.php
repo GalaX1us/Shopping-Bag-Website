@@ -18,6 +18,7 @@ class Admin extends Modele
                 throw new Exception("Aucune commande n'a été trouvée.");
             }
     }
+
     // Renvoie les informations sur une commande
     public function getProduits($id)
     {
@@ -35,6 +36,8 @@ class Admin extends Modele
             throw new Exception("Aucune commande n'a été trouvée");
         }
     }
+
+    // Renvoie tous les produits de la BD
     public function getAllProduits()
     {
         $sql = 'SELECT * FROM products';
@@ -49,6 +52,7 @@ class Admin extends Modele
         }
     }
 
+    // Valide une commande
     public function validerCommande($id)
     {
         
@@ -56,13 +60,11 @@ class Admin extends Modele
         $this->executerRequete($sql, array($id));
 
     }
+
+    // Modifie le stock d'un produit
     public function changerStocks($id, $qte)
     {
         $sql = 'UPDATE products SET quantity = ? WHERE id = ?';
         $this->executerRequete($sql, array($qte, $id));
     }
-
-
-
-
 }
