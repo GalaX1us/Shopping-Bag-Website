@@ -71,6 +71,7 @@ class Order extends Modele
         $sql = 'UPDATE orders SET status = 2, payment_type=?, total=?, date=?, session=?  WHERE id=?';
         $this->executerRequete($sql, array($typePaiement, $total, $date, $idSession, $idOrder));
     }
+    
     public function getPanier($id)
     {
         $sql = 'select P.cat_id, P.id, P.name, P.description, P.image, P.price, OI.quantity from orders O '

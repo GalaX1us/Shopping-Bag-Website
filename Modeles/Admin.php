@@ -15,7 +15,7 @@ class Admin extends Modele
             }
             else
             {
-                throw new Exception();
+                throw new Exception("Aucune commande n'a été trouvée.");
             }
     }
     // Renvoie les informations sur une commande

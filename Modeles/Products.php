@@ -39,4 +39,9 @@ class ProduitsMulti extends Modele
         // Accès à la première ligne de résultat
         else throw new Exception("Aucun produit ne correspond à l'id '$id'");
     }
+
+    public function updateQte($id, $qte) {
+        $sql = 'UPDATE products SET quantity = ? WHERE id=?';
+        $this->executerRequete($sql, array($qte, $id));
+    }
 }

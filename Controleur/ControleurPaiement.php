@@ -7,6 +7,8 @@ require_once './Vues/Vue.php';
 require_once 'Modeles/Delivery_addresses.php';
 require_once 'Modeles/SignUp.php';
 require_once 'Modeles/Facture.php';
+require_once './Modeles/Orders.php';
+require_once './Modeles/Products.php';
 class ControleurPaiement
 {
     private $name; 
@@ -91,6 +93,15 @@ class ControleurPaiement
                 }
             }
 
+            // Changements stocks des produits dans la BD
+            if(isset($_SESSION['produits'])) {
+                $product = new ProduitsMulti();
+                $product->connect();
+                foreach($_SESSION['produits'] as $produit) {
+                    $product->updateQte($produit['idprod'], $produit['qte']);
+                }
+            }
+
             if(isset($_SESSION['produits'])) unset($_SESSION['produits']);
 
             if ($typePaiement == 'cheque'){
@@ -112,14 +123,14 @@ class ControleurPaiement
             && isset($_POST["code"]) && isset($_POST["phone"]) && isset($_POST["email"])
         ){
 
-            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['name']    = $_POST['name'];
             $_SESSION['surname'] = $_POST['surname'];
-            $_SESSION['add1'] = $_POST['add1'];
-            $_SESSION['add2'] = $_POST['add2'];
-            $_SESSION['city'] = $_POST['city'];
-            $_SESSION['code'] = $_POST['code'];
-            $_SESSION['phone'] = $_POST['phone'];
-            $_SESSION['email'] = $_POST['email'];
+            $_SESSION['add1']    = $_POST['add1'];
+            $_SESSION['add2']    = $_POST['add2'];
+            $_SESSION['city']    = $_POST['city'];
+            $_SESSION['code']    = $_POST['code'];
+            $_SESSION['phone']   = $_POST['phone'];
+            $_SESSION['email']   = $_POST['email'];
 
             if ((isset($_SESSION['estConnecte']) && $_SESSION['estConnecte'])) {
                 $delAdrr = new Delivery_adress();
