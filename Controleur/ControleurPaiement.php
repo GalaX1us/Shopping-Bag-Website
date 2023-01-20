@@ -12,14 +12,6 @@ require_once './Modeles/Products.php';
 
 class ControleurPaiement
 {
-    private $name; 
-    private $surname; 
-    private $add1; 
-    private $add2; 
-    private $city;
-    private $code;
-    private $phone;
-    private $email;
     private $paye;
     private $prix;
     
@@ -149,11 +141,6 @@ class ControleurPaiement
         } else {
             $this->erreur("Certains champs d'adresse requis n'ont pas été remplis");
         }
-    }
-
-    public function CheckPaiement()
-    {
-
     }
 
     // Affiche une erreur

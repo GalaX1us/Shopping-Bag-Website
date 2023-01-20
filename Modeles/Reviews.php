@@ -1,6 +1,5 @@
 <?php require_once 'Modele.php';
 
-///////////////////////////////////////////////////////////// A MODIFIER
 class Review extends Modele
 {
     // Renvoie les review d'un produit

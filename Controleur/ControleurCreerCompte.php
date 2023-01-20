@@ -84,7 +84,8 @@ class ControleurCreerCompte
         $_SESSION['estConnecte'] = true;
         $_SESSION['id'] = $custId;
 
-        header('Location: index.php');
+        $vue = new Vue("CreerCompte");
+        $vue->generer(array('compteCree' => $this->compteCree));
     }
 
     // Affiche une erreur

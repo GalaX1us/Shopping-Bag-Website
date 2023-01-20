@@ -5,7 +5,6 @@ class Modele
 	// Définir les propriétés de la classe
 	private $user = "root";
 	private $pass = ""; // attention selon la config il faut mettre root ou rien
-	private $dbname = "web4shop";
 	private $bdd = null;
 
 	// Méthode pour établir une connexion à la base de données

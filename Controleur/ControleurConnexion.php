@@ -57,9 +57,6 @@ class ControleurConnexion
     // Vérifie si l'utilisateur est connecté
     public function est_connecte(): bool
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
         if (isset($_SESSION['estConnecte'])) {
             return $_SESSION['estConnecte'];
         } else {
@@ -126,7 +123,6 @@ class ControleurConnexion
     // Gère la connexion de l'utilisateur
     public function connecter($username, $password)
     {   
-        $msg = "";
         $login = new Logins();
         $login->connect();
         $result = $login->getLogin($username);

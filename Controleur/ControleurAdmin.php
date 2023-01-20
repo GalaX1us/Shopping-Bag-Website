@@ -76,7 +76,17 @@ class ControleurAdmin
             if (isset($_POST['valider']) && $_POST['valider'] == "valider")
             {
                 $Admin->validerCommande($_GET['id']);
-                header('Location: index.php?action=Admin');
+                $exist = 1;
+                $commandes = array();
+                try
+                {
+                    $commandes = $Admin->getCommandes();
+                }
+                catch (Exception $e)
+                {
+                    $exist = 0;
+                } 
+                $vue->generer(array("commandes" => $commandes , "exist" => $exist));
             }
             else
             {
