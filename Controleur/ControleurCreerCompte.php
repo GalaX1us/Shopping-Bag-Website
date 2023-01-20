@@ -78,7 +78,7 @@ class ControleurCreerCompte
         $logId = $signUp->nextLoginId();
 
         $signUp->createAccount($custId, $name, $surname, $add1, $add2, $city, $code, $phone, $email);
-        $signUp->createLog($logId,$custId, $username, $password);
+        $signUp->createLog($logId,$custId, $username, sha1(iconv("UTF-8", "ASCII", $password)));
 
         $this->compteCree = true;
         $_SESSION['estConnecte'] = true;

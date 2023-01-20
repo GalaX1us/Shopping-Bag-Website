@@ -21,12 +21,11 @@ class Order extends Modele
         else return false;
     }
 
-    // Renvoie les commandes qui ont été payées (mais pas validées)
-    public function getFinishedIdOrder($idCustomer)
+    public function getIdOrderByStatus($idCustomer, $status)
     {
         $sql = 'select id from orders'
-            . ' where customer_id=? and status=2';
-        $order = $this->executerRequete($sql, array($idCustomer));
+            . ' where customer_id=? and status=?';
+        $order = $this->executerRequete($sql, array($idCustomer, $status));
         if ($order->rowCount() >= 1) return $order->fetchAll();
         else return -1;
     }

@@ -126,38 +126,35 @@ class ControleurConnexion
         $login = new Logins();
         $login->connect();
         $result = $login->getLogin($username);
-
+        $hashedPassword = sha1(iconv("UTF-8", "ASCII", $password));
         
         if (!empty($result))
-        {
-            foreach ($result as $donnees)   
-            {
-                if ($donnees['password'] == $password) {
-                    $_SESSION['estConnecte'] = true;
-                    $_SESSION['id'] = $donnees['customer_id'];
-                    $this->msg ="";
+        {       
+            if ($result['password'] == $hashedPassword) {
+                $_SESSION['estConnecte'] = true;
+                $_SESSION['id'] = $result['customer_id'];
+                $this->msg ="";
 
-                    // On va voir s'il a une commande en cours pour récupérer son panier
-                    if(isset($_SESSION['produits'])) unset($_SESSION['produits']);
-                    $order = new Order();
-                    $order->connect();
-                    $idCommande = $order->getIdOrder($_SESSION['id']);
-                    if($idCommande === false) { // Si on n'a pas de commande en cours on en crée une nouvelle
-                        $idCommande = $order->getNextId();
-                        $order->createOrder($idCommande, $_SESSION['id'], date('Y-m-d'), session_id());               
-                    }
-                    else $idCommande = $idCommande[0];
-                    $orderitem = new Orderitem();
-                    $orderitem->connect();
-                    $produitsCommande = $orderitem->getProduitsCommande($idCommande);
-                    $ctrlPanier = new ControleurPanier();
-                    foreach ($produitsCommande as $produit) {
-                        $ctrlPanier->ajoutProduit($produit['product_id'], $produit['quantity']);
-                    }
-                } 
-                else {
-                    $this->msg = "identifiant ou mot de passe incorrect";
+                // On va voir s'il a une commande en cours pour récupérer son panier
+                if(isset($_SESSION['produits'])) unset($_SESSION['produits']);
+                $order = new Order();
+                $order->connect();
+                $idCommande = $order->getIdOrder($_SESSION['id']);
+                if($idCommande === false) { // Si on n'a pas de commande en cours on en crée une nouvelle
+                    $idCommande = $order->getNextId();
+                    $order->createOrder($idCommande, $_SESSION['id'], date('Y-m-d'), session_id());               
                 }
+                else $idCommande = $idCommande[0];
+                $orderitem = new Orderitem();
+                $orderitem->connect();
+                $produitsCommande = $orderitem->getProduitsCommande($idCommande);
+                $ctrlPanier = new ControleurPanier();
+                foreach ($produitsCommande as $produit) {
+                    $ctrlPanier->ajoutProduit($produit['product_id'], $produit['quantity']);
+                }
+            } 
+            else {
+                $this->msg = "identifiant ou mot de passe incorrect";
             }
         }
         else
@@ -165,18 +162,15 @@ class ControleurConnexion
             $result = $login->getAdminByUser($username);
             if (!empty($result))
             {
-                foreach ($result as $donnees)   
-                {
-                    if ($donnees['password'] == $password) {
+                if ($result['password'] == $hashedPassword) {
 
-                        $_SESSION['estConnecte'] = true;
-                        $_SESSION['id'] = $donnees['id'];
-                        $_SESSION['admin'] = true;
-                        $this->msg ="";
-                    } 
-                    else {
-                        $this->msg = "identifiant ou mot de passe incorrect";
-                    }
+                    $_SESSION['estConnecte'] = true;
+                    $_SESSION['id'] = $result['customer_id'];
+                    $_SESSION['admin'] = true;
+                    $this->msg ="";
+                } 
+                else {
+                    $this->msg = "identifiant ou mot de passe incorrect";
                 }
             }
         }
