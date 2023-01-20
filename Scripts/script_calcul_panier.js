@@ -1,4 +1,4 @@
-// recalcule le panier à chauqe fois qu'une quantité est modifiée
+// Recalcule le panier à chauqe fois qu'une quantité est modifiée
 function recalculerPanier() {
   var total = 0;
   var produits = document.getElementsByName("produit");
@@ -12,7 +12,7 @@ function recalculerPanier() {
   document.getElementById("total").innerHTML = "Total de la commande : " + formatagePrix(total);
 }
 
-// formate le prix : 2.5 -> '2,50€'
+// Formate le prix : 2.5 -> '2,50€'
 function formatagePrix(prix_nombre) {
     var prix_str = String(prix_nombre.toFixed(2)).replace(',', ' ').replace('.', ',') + '€';
     return prix_str;

@@ -1,6 +1,8 @@
-<?php require_once './Vues/Vue.php';
+<?php 
+require_once './Vues/Vue.php';
 require_once 'Modeles/Products.php';
 require_once 'Modeles/Reviews.php';
+
 class ControleurProduitsMulti
 {  
     public function __construct()
@@ -8,7 +10,7 @@ class ControleurProduitsMulti
 
     }
 
-    // Affiche la page avec tous le sproduits d'un même type
+    // Affiche la page avec tous les produits d'un même type
     public function ProduitsMulti($cat)
     {
         $type = '0';
@@ -36,6 +38,7 @@ class ControleurProduitsMulti
         $vue->generer(array('produitsInfos'=>$results, 'cat'=>$cat, 'nomCategorie'=>$name));
     }
 
+    // Affiche la page d'un produit
     public function Produit()
     {
         if(isset($_GET['prod_id'])) {

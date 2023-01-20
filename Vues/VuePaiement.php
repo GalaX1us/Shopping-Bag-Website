@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center">
-                            <form method="post" action="index.php?action=Paiement"> 
+                            <form method="post" action="index.php?action=Paiement">
                                 <button name="paypal" value=true class="btn btn-primary btn-lg btn-block">Payer</button>
                             </form>
                         </div>
@@ -37,35 +37,30 @@
                     </div>
                 </div>
             </div>
-        <div class="card-body p-0">
-            <p>
-                <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
-                    <span class="fw-bold">Payement par chèque</span>
-                </a>
-            </p>
-            <div class="collapse show p-3 pt-0 " id="collapseExample">
+            <div class="card-body p-0">
+                <p>
+                    <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
+                        <span class="fw-bold">Payement par chèque</span>
+                    </a>
+                </p>
+                <div class="collapse show p-3 pt-0 " id="collapseExample">
 
-                <p class="mb-0"><span class="fw-bold">Prix :</span><span class="c-green"> <?= $prix ?> €
+                    <p class="mb-0"><span class="fw-bold">Prix :</span><span class="c-green"> <?= $prix ?> €
 
-                        <p> Veuillez envoyer votre chèque à l'adresse suivante : </p>
-                        <p> 1 rue de la paix </p>
-                        <p> 75000 Paris </p>
-                        <div class="d-flex justify-content-center">
-                            <form method="post" action="index.php?action=Paiement">
-                                <button name="cheque" value=true class="btn btn-primary btn-lg btn-block">Générer la facture</button>
-                            </form>
-                        </div>
-                    </span></p>
+                            <p> Veuillez envoyer votre chèque à l'adresse suivante : </p>
+                            <p> 1 rue de la paix </p>
+                            <p> 75000 Paris </p>
+                            <div class="d-flex justify-content-center">
+                                <form method="post" action="index.php?action=Paiement">
+                                    <button name="cheque" value=true class="btn btn-primary btn-lg btn-block">Générer la facture</button>
+                                </form>
+                            </div>
+                        </span></p>
+                </div>
             </div>
+            </p>
         </div>
-        </p>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
 <?php } ?>
 
 <?php $contenu = ob_get_clean(); ?>

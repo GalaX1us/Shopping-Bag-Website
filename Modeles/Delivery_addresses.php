@@ -10,12 +10,12 @@ class Delivery_adress extends Modele
         if ($delivery_adress->rowCount() == 1) {
             return $delivery_adress->fetch()[0];
         }
-        // Accès à la première ligne de résultat
         else{
             return -1;
         }
     }   
 
+    // Crée une nouvelle adresse
     public function creatDeliveryAddress($name, $surname, $add1, $add2, $city, $postcode, $phone, $email)
     {
         $id = $this->deliveryAdressExist($name, $surname, $add1, $add2, $city, $postcode, $phone, $email);
@@ -29,14 +29,15 @@ class Delivery_adress extends Modele
         return $id;
     }
 
+    // Renvoie le prochain ID non utilisé
     public function getNextId() {
         $sql = 'select max(id) from delivery_addresses';
         $deli = $this->executerRequete($sql);
         if ($deli->rowCount() == 1) return $deli->fetch()[0]+1;
-        // Accès à la première ligne de résultat
         else throw new Exception("Erreur lors de l'ajout au panier.");
     }
 
+    // Renvoie l'adresse corresponadant à un ID
     public function getDeliveryAddress($id)
     {
         $sql = 'select * from delivery_addresses where id=?';
@@ -46,6 +47,7 @@ class Delivery_adress extends Modele
         else throw new Exception("Erreur, pas d'adresse correspondant à l'id : ".$id);
     }
 
+    // Renvoie l'adresse corresponadant à un ID de commande
     public function getDeliveryAddressFromOrder($id)
     {
         $sql = 'select delivery_add_id from orders where id=?';
@@ -56,7 +58,4 @@ class Delivery_adress extends Modele
         }
         else throw new Exception("Erreur, pas de commande correspondant à l'id : ".$id);
     }
-
-
-
 }

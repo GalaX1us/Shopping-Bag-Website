@@ -3,7 +3,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-
 require_once 'Modele.php';
 require_once 'Delivery_addresses.php';
 require_once 'Orders.php';
@@ -21,10 +20,9 @@ class Facture extends fpdf
     function __construct()
     {
         parent::__construct();
-
     }
 
-
+    // Génère la facture de la commande
     public function generer_facture(){
 
         $date = date('Y-m-d');
@@ -82,7 +80,7 @@ class Facture extends fpdf
     }
 
 
-    //Fonction pour écrire l'adresse sur le PDF 
+    // Fonction pour écrire l'adresse sur le PDF 
     function ecritEnteteFacture($adresse, $info_commande, $hauteur = 40, $s_ligne = 6){
         //formatage des paramètres :
         $adresse = $this->c_tab($adresse);

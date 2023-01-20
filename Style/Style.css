@@ -1,50 +1,49 @@
 .dynamic-width {
-    text-align: center;
-    min-height: 100%;
+	text-align: center;
+	min-height: 100%;
 }
 
 .table-bordered {
-  border-collapse:collapse;
-  background-color:initial;
+	border-collapse: collapse;
+	background-color: initial;
 }
 
 .card-1 {
-  border: none;
-    border-radius: 10px;
-    width: 100%;
+	border: none;
+	border-radius: 10px;
+	width: 100%;
 }
 
-input[type='number']{
-  width: 50px;
-  text-align:center;
-} 
+input[type='number'] {
+	width: 50px;
+	text-align: center;
+}
 
-/* Small devices */
+/* Petit écran */
 @media (min-width: 576px) {
-    .dynamic-width {
-      width: 100%;
-    }
-  }
-  
-  /* Medium devices */
-  @media (min-width: 768px) {
-    .dynamic-width {
-      width: 100%;
-    }
-  }
-  
-  /* Large devices */
-  @media (min-width: 992px) {
-    .dynamic-width {
-      width: 80%;
-    }
-  }
-  
-  /* Extra large devices */
-  @media (min-width: 1200px) {
-    .dynamic-width {
-      width: 60%;
-    }
-  
-  }
+	.dynamic-width {
+		width: 100%;
+	}
+}
 
+/* Moyen écran */
+@media (min-width: 768px) {
+	.dynamic-width {
+		width: 100%;
+	}
+}
+
+/* Grand écran */
+@media (min-width: 992px) {
+	.dynamic-width {
+		width: 80%;
+	}
+}
+
+/* Très grand écran */
+@media (min-width: 1200px) {
+	.dynamic-width {
+		width: 60%;
+	}
+
+}

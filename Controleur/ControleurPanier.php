@@ -2,10 +2,12 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 require_once './Vues/Vue.php';
 require_once 'Modeles/Orderitems.php';
 require_once 'Modeles/Orders.php';
 require_once 'Modeles/Products.php';
+
 class ControleurPanier
 {
     public function __construct()
