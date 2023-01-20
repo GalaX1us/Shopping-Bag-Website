@@ -18,6 +18,7 @@ Site de e-commerce permettant d'acheter des biscuits, boissons et fruits secs.
 - Paiement 
 	- Paiement par chèque 
 	- Paiement par Paypal
+	- Génération de facture
 
 ### Les fonctionnalités en détails 
 
@@ -36,6 +37,10 @@ Site de e-commerce permettant d'acheter des biscuits, boissons et fruits secs.
 	- Si l'utilisateur ajoute deux fois le même produit à son panier, les quantités des deux ajouts sont additionnées (sans dépasser le stock du produit), afin qu'il n'y ait qu'une seule fois le produit dans son panier.
 	- En cliquant sur l'image ou le nom d'un produit, l'utilisateur peut retourner sur la page du produit s'il le souhaite.
 	- Lorsque l'utilisateur ajoute un produit à son panier, il peut retourner sur la page de catégorie d'où il venait en cliquant sur le bouton retour en haut à gauche afin de continuer ses achats.
+
+- Les pages produit permettent de visualiser toutes les informations d'un produit en particulier. Ces pages disposent de quelque fonctionnalités :
+	- On ne peut pas ajouter au panier une quantité supérieur au stock restant.
+	- Si il n'y a plus de produit en stock une rupture de stock s'affichera et le bouton ajouter au panier sera désactivé.  
 
 
 
