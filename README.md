@@ -2,6 +2,7 @@
 
 ## Description 
 Site de e-commerce permettant d'acheter des biscuits, boissons et fruits secs.
+
 L'ensemble du site est optimisé pour tout format d'écran.
 
 ## Plan du site
