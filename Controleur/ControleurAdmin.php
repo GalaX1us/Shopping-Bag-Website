@@ -80,6 +80,7 @@ class ControleurAdmin
             {
                 
                 $Admin->validerCommande($_GET['id']);
+                
                 header('Location: index.php?action=Admin');
 
             }

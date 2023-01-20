@@ -134,15 +134,13 @@ class ControleurConnexion
         $login = new Logins();
         $login->connect();
         $result = $login->getLogin($username);
-
+        $hashedPassword = sha1(iconv("UTF-8", "ASCII", $password));
         
         if (!empty($result))
-        {
-            foreach ($result as $donnees)   
-            {
-                if ($donnees['password'] == $password) {
+        {       
+                if ($result['password'] == $hashedPassword) {
                     $_SESSION['estConnecte'] = true;
-                    $_SESSION['id'] = $donnees['customer_id'];
+                    $_SESSION['id'] = $result['customer_id'];
                     $this->msg ="";
 
                     // On va voir s'il a une commande en cours pour récupérer son panier
@@ -166,26 +164,21 @@ class ControleurConnexion
                 else {
                     $this->msg = "identifiant ou mot de passe incorrect";
                 }
-             
-            }
         }
         else
         {
             $result = $login->getAdminByUser($username);
             if (!empty($result))
             {
-                foreach ($result as $donnees)   
-                {
-                    if ($donnees['password'] == $password) {
+                if ($result['password'] == $hashedPassword) {
 
-                        $_SESSION['estConnecte'] = true;
-                        $_SESSION['id'] = $donnees['id'];
-                        $_SESSION['admin'] = true;
-                        $this->msg ="";
-                    } 
-                    else {
-                        $this->msg = "identifiant ou mot de passe incorrect";
-                    }
+                    $_SESSION['estConnecte'] = true;
+                    $_SESSION['id'] = $result['customer_id'];
+                    $_SESSION['admin'] = true;
+                    $this->msg ="";
+                } 
+                else {
+                    $this->msg = "identifiant ou mot de passe incorrect";
                 }
             }
 

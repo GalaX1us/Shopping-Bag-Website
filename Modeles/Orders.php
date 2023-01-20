@@ -31,11 +31,11 @@ class Order extends Modele
         else return false;
     }
 
-    public function getFinishedIdOrder($idCustomer)
+    public function getIdOrderByStatus($idCustomer, $status)
     {
         $sql = 'select id from orders'
-            . ' where customer_id=? and status=2';
-        $order = $this->executerRequete($sql, array($idCustomer));
+            . ' where customer_id=? and status=?';
+        $order = $this->executerRequete($sql, array($idCustomer, $status));
         if ($order->rowCount() >= 1) return $order->fetchAll();
         // Accès à la première ligne de résultat
         else return -1;

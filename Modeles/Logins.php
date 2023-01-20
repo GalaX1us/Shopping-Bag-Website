@@ -16,17 +16,17 @@ class Logins extends Modele
         $sql = 'select customer_id, username, password from logins'
             . ' where username=?';
         $login = $this->executerRequete($sql, array($user));
-        if ($login->rowCount() == 1) return $login;
+        if ($login->rowCount() == 1) return $login->fetch();
         // Accès à la première ligne de résultat
         //else throw new Exception("Aucun login ne correspond à l'identifiant '$user'");
     }
 
     public function getAdminByUser($user)
     {
-        $sql = 'select id, username, password from admin'
+        $sql = 'select * from admin'
             . ' where username=?';
         $login = $this->executerRequete($sql, array($user));
-        if ($login->rowCount() == 1) return $login;
+        if ($login->rowCount() == 1) return $login->fetch();
     }
 
 
