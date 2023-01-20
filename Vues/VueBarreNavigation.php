@@ -1,6 +1,7 @@
-<?php if (session_status() == PHP_SESSION_NONE) {
-            session_start();
+<?php   if (session_status() == PHP_SESSION_NONE) {
+            session_start(); 
         } ?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3 p-1">
     <a class="navbar-brand" href="index.php">
     <h4 class="ps-2">ISIWEB4SHOP</h4>

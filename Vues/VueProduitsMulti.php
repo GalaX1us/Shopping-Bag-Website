@@ -1,6 +1,7 @@
 <?php $titre = 'ISIWEB4SHOP - ' . $nomCategorie .''; ?>
 
 <?php ob_start(); ?>
+
     <h2><?= $nomCategorie?></h2 >
     <?php
     foreach ($produitsInfos as $produit) {?>
@@ -21,7 +22,6 @@
         </div>
     </div>
     
-
     <?php }?>
      
 <?php $contenu = ob_get_clean(); ?> 

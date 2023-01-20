@@ -1,11 +1,8 @@
+<?php $titre = 'ISIWEB4SHOP - commande à traiter'; ?>
 
-<?php 
-$titre = 'ISIWEB4SHOP - commande à traiter'; ?>
+<?php ob_start(); ?>
 
-<?php ob_start(); 
-
-
-?><h1>Liste des commandes à traiter</h1>
+<h1>Liste des commandes à traiter</h1>
 <?php 
 if ($exist == 0)
 {
@@ -14,8 +11,7 @@ if ($exist == 0)
 }
 else
 {
-foreach ($commandes as $c) {
-?>
+foreach ($commandes as $c) { ?>
     <div class="Commande">
     <hr class="bg-primary border-3 border-top border-primary">
         <div>
@@ -34,10 +30,4 @@ foreach ($commandes as $c) {
     </div>
 <?php }} ?>
 
-
-
-
-
-   
-     
 <?php $contenu = ob_get_clean(); ?> 

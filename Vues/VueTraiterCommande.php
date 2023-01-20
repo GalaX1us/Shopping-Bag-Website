@@ -8,7 +8,6 @@
 foreach ($produits as $produits) { ?>
     <hr class="bg-primary border-3 border-top border-primary">
 
-
     <div class="row my-2" >
 
     <div class="col-6 col-md-3">
@@ -20,13 +19,10 @@ foreach ($produits as $produits) { ?>
         <p>Quantité : <?= $produits['quantity']?></p>
     </div>
     </div>
-
-
-    
+ 
 <?php } ?>
 </div>
 <hr class="bg-primary border-3 border-top border-primary">
-
 
 <div class="row">
     <div>
